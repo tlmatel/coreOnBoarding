@@ -1,0 +1,139 @@
+@{
+    ViewData["Title"] = "Actividad de usuario";
+}
+
+<h2>8.4 Actividad de usuario</h2>
+<p class="lead mb-5">Cada acción de cada usuario queda registrada. Esto permite entender cómo se usa el sistema, detectar problemas individuales, y ofrecer un soporte preciso y contextualizado.</p>
+
+<!-- QUÉ SE REGISTRA -->
+<h4 class="fw-bold mb-4">¿Qué se registra de cada usuario?</h4>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-6 col-lg-4">
+        <div class="card topic-card h-100 p-4">
+            <h6 class="fw-semibold"><i class="bi bi-cursor-fill me-2 text-primary"></i>Navegación</h6>
+            <p class="text-muted small mb-0">Qué módulos visita, en qué orden, cuánto tiempo permanece en cada sección. Permite entender flujos de trabajo reales.</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="card topic-card h-100 p-4">
+            <h6 class="fw-semibold"><i class="bi bi-pencil-square me-2 text-success"></i>Operaciones</h6>
+            <p class="text-muted small mb-0">Creaciones, ediciones, eliminaciones, aprobaciones. Toda operación de negocio con timestamp, datos anteriores y posteriores.</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="card topic-card h-100 p-4">
+            <h6 class="fw-semibold"><i class="bi bi-search me-2 text-warning"></i>Búsquedas y consultas</h6>
+            <p class="text-muted small mb-0">Qué busca el usuario, qué filtros aplica, qué informes genera. Revela necesidades de información no cubiertas.</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="card topic-card h-100 p-4">
+            <h6 class="fw-semibold"><i class="bi bi-key me-2 text-danger"></i>Accesos y sesiones</h6>
+            <p class="text-muted small mb-0">Inicio/cierre de sesión, dispositivo, ubicación, duración de sesión, intentos fallidos de acceso.</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="card topic-card h-100 p-4">
+            <h6 class="fw-semibold"><i class="bi bi-exclamation-circle me-2 text-info"></i>Errores encontrados</h6>
+            <p class="text-muted small mb-0">Errores que ve el usuario, formularios que fallan, timeouts. Vinculados a su sesión específica para diagnóstico inmediato.</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="card topic-card h-100 p-4">
+            <h6 class="fw-semibold"><i class="bi bi-download me-2" style="color: #6f42c1;"></i>Exportaciones e informes</h6>
+            <p class="text-muted small mb-0">Qué datos exporta, en qué formato, con qué frecuencia. Indicador de qué información es crítica para su día a día.</p>
+        </div>
+    </div>
+</div>
+
+<!-- CASO DE USO: SOPORTE -->
+<h4 class="fw-bold mb-4">Casos de uso prácticos</h4>
+
+<div class="row g-4 mb-5">
+    <div class="col-lg-6">
+        <div class="card border-primary h-100" style="border-width: 2px;">
+            <div class="card-body p-4">
+                <h5 class="fw-bold mb-3"><i class="bi bi-headset me-2 text-primary"></i>Para Soporte</h5>
+                <p class="text-muted mb-3">Cuando un usuario llama reportando un problema:</p>
+                <div class="bg-light rounded p-3">
+                    <p class="small mb-2"><strong>1.</strong> Buscar al usuario en Grafana</p>
+                    <p class="small mb-2"><strong>2.</strong> Ver su timeline de actividad de los últimos minutos</p>
+                    <p class="small mb-2"><strong>3.</strong> Identificar exactamente dónde ocurrió el error</p>
+                    <p class="small mb-2"><strong>4.</strong> Ver el trace completo de la petición que falló</p>
+                    <p class="small mb-0"><strong>5.</strong> Resolver o escalar con toda la información necesaria</p>
+                </div>
+                <p class="text-muted small mt-3 mb-0"><i class="bi bi-clock me-1"></i> Tiempo medio de diagnóstico: de <strong>15-30 min</strong> (preguntando al usuario) a <strong>2-3 min</strong> (consultando Grafana).</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card border-success h-100" style="border-width: 2px;">
+            <div class="card-body p-4">
+                <h5 class="fw-bold mb-3"><i class="bi bi-briefcase me-2 text-success"></i>Para Consultoría</h5>
+                <p class="text-muted mb-3">Al preparar una sesión de seguimiento con el cliente:</p>
+                <div class="bg-light rounded p-3">
+                    <p class="small mb-2"><strong>1.</strong> Ver qué usuarios están activos y cuáles no</p>
+                    <p class="small mb-2"><strong>2.</strong> Identificar módulos infrautilizados</p>
+                    <p class="small mb-2"><strong>3.</strong> Detectar usuarios que usan workarounds innecesarios</p>
+                    <p class="small mb-2"><strong>4.</strong> Proponer formación específica basada en datos reales</p>
+                    <p class="small mb-0"><strong>5.</strong> Demostrar al cliente el valor que está obteniendo</p>
+                </div>
+                <p class="text-muted small mt-3 mb-0"><i class="bi bi-graph-up me-1"></i> Resultado: sesiones de seguimiento basadas en datos, no en suposiciones.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TIMELINE DE USUARIO -->
+<h4 class="fw-bold mb-3">Ejemplo: Timeline de actividad</h4>
+<p class="text-muted mb-4">Así se vería la actividad de un usuario concreto en Grafana. Cada evento está registrado con timestamp, módulo, acción y resultado.</p>
+
+<div class="border rounded p-4 mb-5" style="background: #fafbfc;">
+    <div class="d-flex align-items-center mb-4">
+        <div class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 48px; height: 48px;">
+            <i class="bi bi-person-fill text-primary fs-5"></i>
+        </div>
+        <div>
+            <strong>María García</strong> <span class="text-muted small">— Electricidad López S.L.</span>
+            <div class="text-muted small">Rol: Responsable de compras · Última sesión: hoy 10:34</div>
+        </div>
+    </div>
+
+    <div class="ps-4 border-start border-2 border-primary">
+        <div class="mb-3 position-relative">
+            <span class="position-absolute bg-success rounded-circle" style="width: 10px; height: 10px; left: -25px; top: 5px;"></span>
+            <span class="text-muted small">10:34</span> — <span class="badge bg-light text-dark">Login</span> desde Chrome / Windows
+        </div>
+        <div class="mb-3 position-relative">
+            <span class="position-absolute bg-primary rounded-circle" style="width: 10px; height: 10px; left: -25px; top: 5px;"></span>
+            <span class="text-muted small">10:35</span> — <span class="badge bg-light text-dark">Navegación</span> Módulo Compras → Pedidos pendientes
+        </div>
+        <div class="mb-3 position-relative">
+            <span class="position-absolute bg-primary rounded-circle" style="width: 10px; height: 10px; left: -25px; top: 5px;"></span>
+            <span class="text-muted small">10:36</span> — <span class="badge bg-light text-dark">Consulta</span> Filtro: proveedor="SCHNEIDER" + estado="pendiente"
+        </div>
+        <div class="mb-3 position-relative">
+            <span class="position-absolute bg-success rounded-circle" style="width: 10px; height: 10px; left: -25px; top: 5px;"></span>
+            <span class="text-muted small">10:38</span> — <span class="badge bg-success text-white">Operación</span> Aprobación pedido #4521 (3.240€)
+        </div>
+        <div class="mb-3 position-relative">
+            <span class="position-absolute bg-warning rounded-circle" style="width: 10px; height: 10px; left: -25px; top: 5px;"></span>
+            <span class="text-muted small">10:39</span> — <span class="badge bg-warning text-dark">Error</span> Intento de exportar PDF → timeout (3.2s)
+        </div>
+        <div class="position-relative">
+            <span class="position-absolute bg-info rounded-circle" style="width: 10px; height: 10px; left: -25px; top: 5px;"></span>
+            <span class="text-muted small">10:40</span> — <span class="badge bg-light text-dark">Exportación</span> Reintento exitoso → descargado pedidos_pendientes.xlsx
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-light border">
+    <div class="d-flex align-items-start">
+        <i class="bi bi-shield-lock text-primary me-3 fs-5"></i>
+        <div>
+            <strong>Privacidad y GDPR</strong>
+            <p class="mb-0 text-muted mt-1">Toda esta trazabilidad cumple con la normativa de protección de datos. Los datos de actividad se utilizan exclusivamente para la mejora del servicio, el soporte técnico y la auditoría de seguridad. Los clientes pueden solicitar la exportación o eliminación de sus datos en cualquier momento.</p>
+        </div>
+    </div>
+</div>

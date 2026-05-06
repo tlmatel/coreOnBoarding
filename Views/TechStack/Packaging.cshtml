@@ -1,0 +1,114 @@
+@{
+    ViewData["Title"] = "Empaquetado Helm Charts";
+}
+
+<h2>7.2 Empaquetado Helm Charts</h2>
+<p class="lead mb-5">Existen dos repositorios de charts Helm. Ambos flujos empaquetan y publican como paquetes OCI al hacer push a main.</p>
+
+<div class="row g-5 mb-5">
+    <div class="col-lg-6">
+        <div class="card border-primary h-100" style="border-width: 2px;">
+            <div class="card-body p-4">
+                <h5 class="fw-bold mb-3">
+                    <i class="bi bi-box-seam me-2 text-primary"></i>Core Helm Repo
+                </h5>
+                <p class="mb-4">Repositorio principal de charts Helm para los microservicios core de la plataforma.</p>
+
+                <div class="d-flex align-items-center flex-wrap gap-2 mb-3">
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-folder me-2"></i>
+                        <span class="small fw-semibold">Core Helm Repo</span>
+                    </div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="text-center small text-muted">commit main</div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-gear me-2"></i>
+                        <span class="small fw-semibold">GitHub Actions</span>
+                    </div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="text-center small text-muted">push package</div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-archive me-2"></i>
+                        <span class="small fw-semibold">OCI Registry</span>
+                    </div>
+                </div>
+
+                <div class="alert alert-primary mb-0">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Los desarrolladores gestionan este repositorio con los charts de los servicios principales.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card border-warning h-100" style="border-width: 2px;">
+            <div class="card-body p-4">
+                <h5 class="fw-bold mb-3">
+                    <i class="bi bi-box-seam me-2 text-warning"></i>Core Edge Repo
+                </h5>
+                <p class="mb-4">Repositorio de charts para componentes edge y servicios auxiliares. Gestionado por DevOps.</p>
+
+                <div class="d-flex align-items-center flex-wrap gap-2 mb-3">
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-folder me-2"></i>
+                        <span class="small fw-semibold">Core Edge Repo</span>
+                    </div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="text-center small text-muted">commit main</div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-gear me-2"></i>
+                        <span class="small fw-semibold">GitHub Actions</span>
+                    </div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="text-center small text-muted">push package</div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-archive me-2"></i>
+                        <span class="small fw-semibold">OCI Registry</span>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning mb-0">
+                    <i class="bi bi-person-badge me-2"></i>
+                    <strong>DevOps</strong> gestiona el push al Core Edge Repo.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 class="fw-bold mb-3">Resumen del empaquetado</h4>
+
+<div class="table-responsive">
+    <table class="table table-bordered align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Repositorio</th>
+                <th>Responsable</th>
+                <th>Trigger</th>
+                <th>Destino</th>
+                <th>Tipo de chart</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Core Helm Repo</strong></td>
+                <td>Desarrolladores</td>
+                <td><code>commit main</code></td>
+                <td>OCI Registry</td>
+                <td>Helm chart (servicios core)</td>
+            </tr>
+            <tr>
+                <td><strong>Core Edge Repo</strong></td>
+                <td>DevOps</td>
+                <td><code>commit main</code></td>
+                <td>OCI Registry</td>
+                <td>Edge chart (servicios auxiliares)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

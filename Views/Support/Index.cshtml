@@ -1,0 +1,179 @@
+@{
+    ViewData["Title"] = "Observabilidad y Soporte";
+}
+
+<h2>8. Observabilidad y Soporte</h2>
+<p class="lead mb-5">En Core, cada acción, cada consulta, cada proceso queda registrado y trazado. Toda esa información se explota a través de Grafana, ofreciendo visibilidad total sobre lo que ocurre en la plataforma, usuario por usuario, tenant por tenant.</p>
+
+<div class="alert border-0 p-4 mb-5" style="background: linear-gradient(135deg, rgba(13,110,253,0.06) 0%, rgba(111,66,193,0.06) 100%);">
+    <div class="d-flex align-items-start">
+        <i class="bi bi-lightbulb text-primary me-3" style="font-size: 1.8rem; margin-top: 2px;"></i>
+        <div>
+            <h5 class="fw-bold mb-2">La filosofía: si no se mide, no se puede mejorar</h5>
+            <p class="mb-2" style="font-size: 1.05rem;">Core ha sido diseñado desde el día cero con observabilidad nativa. No es un añadido posterior: cada microservicio, cada endpoint, cada operación de negocio emite trazas, métricas y logs estructurados que se almacenan, indexan y quedan disponibles para su explotación.</p>
+            <p class="mb-0" style="font-size: 1.05rem;">Esto permite que cualquier departamento — soporte, consultoría, ventas, dirección — pueda tener respuestas basadas en datos reales sobre cómo se usa el producto, dónde hay cuellos de botella y qué clientes necesitan atención.</p>
+        </div>
+    </div>
+</div>
+
+<h4 class="fw-bold mb-4">Los pilares de la observabilidad en Core</h4>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-6 col-lg-4">
+        <a asp-action="Traceability" class="text-decoration-none">
+            <div class="card topic-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <span class="section-badge me-3" style="background-color: #0d6efd;">
+                        <i class="bi bi-diagram-3"></i>
+                    </span>
+                    <h5 class="fw-bold mb-0 text-dark">Trazabilidad completa</h5>
+                </div>
+                <p class="text-muted mb-0">Cada petición atraviesa todos los microservicios con un ID de traza único. Desde el click del usuario hasta la respuesta final, todo queda registrado.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <a asp-action="Grafana" class="text-decoration-none">
+            <div class="card topic-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <span class="section-badge me-3" style="background-color: #fd7e14;">
+                        <i class="bi bi-bar-chart-line"></i>
+                    </span>
+                    <h5 class="fw-bold mb-0 text-dark">Grafana</h5>
+                </div>
+                <p class="text-muted mb-0">La plataforma de visualización donde toda la telemetría cobra sentido: dashboards, alertas, exploración y análisis en tiempo real.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <a asp-action="TenantMonitoring" class="text-decoration-none">
+            <div class="card topic-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <span class="section-badge me-3" style="background-color: #198754;">
+                        <i class="bi bi-buildings"></i>
+                    </span>
+                    <h5 class="fw-bold mb-0 text-dark">Monitorización por tenant</h5>
+                </div>
+                <p class="text-muted mb-0">Cada cliente es un mundo. La monitorización por tenant permite ver el consumo, rendimiento y actividad de cada empresa de forma aislada.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <a asp-action="UserActivity" class="text-decoration-none">
+            <div class="card topic-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <span class="section-badge me-3" style="background-color: #6f42c1;">
+                        <i class="bi bi-person-lines-fill"></i>
+                    </span>
+                    <h5 class="fw-bold mb-0 text-dark">Actividad de usuario</h5>
+                </div>
+                <p class="text-muted mb-0">Quién hizo qué, cuándo y desde dónde. Registro completo de actividad por usuario para auditoría, soporte y análisis de uso.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <a asp-action="Diagnostics" class="text-decoration-none">
+            <div class="card topic-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <span class="section-badge me-3" style="background-color: #dc3545;">
+                        <i class="bi bi-wrench-adjustable"></i>
+                    </span>
+                    <h5 class="fw-bold mb-0 text-dark">Diagnóstico y soporte</h5>
+                </div>
+                <p class="text-muted mb-0">Herramientas y metodología para que el equipo de soporte identifique y resuelva incidencias de forma rápida y eficaz.</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+<h4 class="fw-bold mb-4">El flujo de la telemetría</h4>
+
+<style>
+    .telemetry-step {
+        background: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem;
+        padding: 1rem 1.5rem;
+        text-align: center;
+        min-width: 140px;
+    }
+    .telemetry-step .step-icon { font-size: 1.6rem; display: block; margin-bottom: 0.25rem; }
+    .telemetry-step .step-label { font-size: 0.85rem; font-weight: 600; }
+    .telemetry-step .step-sub { font-size: 0.7rem; color: #6c757d; }
+</style>
+
+<div class="border rounded p-4 mb-5" style="background: #fafbfc;">
+    <div class="d-flex flex-wrap align-items-center justify-content-center gap-3">
+        <div class="telemetry-step" style="border-color: #0d6efd; border-width: 2px;">
+            <i class="bi bi-person-fill step-icon text-primary"></i>
+            <span class="step-label">Usuario</span>
+            <span class="step-sub">realiza acción</span>
+        </div>
+        <i class="bi bi-chevron-right text-muted fs-5"></i>
+        <div class="telemetry-step">
+            <i class="bi bi-hdd-rack-fill step-icon text-success"></i>
+            <span class="step-label">Microservicio</span>
+            <span class="step-sub">procesa + emite trazas</span>
+        </div>
+        <i class="bi bi-chevron-right text-muted fs-5"></i>
+        <div class="telemetry-step">
+            <i class="bi bi-collection-fill step-icon text-info"></i>
+            <span class="step-label">Collector</span>
+            <span class="step-sub">agrega telemetría</span>
+        </div>
+        <i class="bi bi-chevron-right text-muted fs-5"></i>
+        <div class="telemetry-step">
+            <i class="bi bi-database-fill step-icon" style="color: #6f42c1;"></i>
+            <span class="step-label">Storage</span>
+            <span class="step-sub">métricas + logs + trazas</span>
+        </div>
+        <i class="bi bi-chevron-right text-muted fs-5"></i>
+        <div class="telemetry-step" style="border-color: #fd7e14; border-width: 2px;">
+            <i class="bi bi-bar-chart-line-fill step-icon" style="color: #fd7e14;"></i>
+            <span class="step-label">Grafana</span>
+            <span class="step-sub">dashboards + alertas</span>
+        </div>
+    </div>
+    <p class="text-muted small mt-3 text-center mb-0">Toda acción del usuario genera telemetría que fluye automáticamente hasta los dashboards de Grafana.</p>
+</div>
+
+<h4 class="fw-bold mb-3">¿Qué gana cada departamento?</h4>
+
+<div class="table-responsive mb-5">
+    <table class="table table-bordered align-middle">
+        <thead class="table-light">
+            <tr>
+                <th style="width: 20%;">Departamento</th>
+                <th>Qué puede saber</th>
+                <th style="width: 30%;">Ejemplo práctico</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong><i class="bi bi-headset me-2 text-danger"></i>Soporte</strong></td>
+                <td>Qué error vio el usuario, cuándo, qué request falló, qué microservicio respondió mal, con qué datos.</td>
+                <td class="text-muted small">"El usuario X del tenant Y reporta que no puede crear pedidos desde las 10:15. Voy a Grafana y veo que el servicio de ventas está devolviendo 500 en ese tenant."</td>
+            </tr>
+            <tr>
+                <td><strong><i class="bi bi-briefcase me-2 text-primary"></i>Consultoría</strong></td>
+                <td>Qué módulos usa cada cliente, cuánto los usa, qué funcionalidades están infrautilizadas, dónde hay oportunidades.</td>
+                <td class="text-muted small">"El cliente Z tiene el módulo de CRM pero solo ha creado 3 oportunidades en 2 meses. Deberíamos ofrecer formación."</td>
+            </tr>
+            <tr>
+                <td><strong><i class="bi bi-megaphone me-2 text-success"></i>Ventas</strong></td>
+                <td>Datos reales de uso para argumentar: tiempos de respuesta, uptime, volumen de transacciones, adopción.</td>
+                <td class="text-muted small">"Nuestros clientes procesan una media de 2.400 pedidos diarios con un tiempo de respuesta medio de 180ms."</td>
+            </tr>
+            <tr>
+                <td><strong><i class="bi bi-code-square me-2" style="color: #6f42c1;"></i>R&D</strong></td>
+                <td>Rendimiento real de cada servicio, cuellos de botella, queries lentas, patrones de uso, errores recurrentes.</td>
+                <td class="text-muted small">"El endpoint de búsqueda de artículos supera los 500ms en tenants con más de 50K productos. Hay que optimizar."</td>
+            </tr>
+            <tr>
+                <td><strong><i class="bi bi-graph-up-arrow me-2 text-warning"></i>Dirección</strong></td>
+                <td>KPIs de plataforma: clientes activos, crecimiento de uso, SLA, tendencias, costes por tenant.</td>
+                <td class="text-muted small">"Este trimestre hemos pasado de 45 a 62 tenants activos y el uptime ha sido del 99.97%."</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

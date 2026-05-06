@@ -1,0 +1,215 @@
+@{
+    ViewData["Title"] = "Grafana";
+}
+
+<h2>8.2 Grafana</h2>
+<p class="lead mb-5">La plataforma de visualización que convierte toda la telemetría del sistema en dashboards accionables para cada equipo de la organización.</p>
+
+<!-- QUÉ ES GRAFANA -->
+<div class="row g-4 mb-5">
+    <div class="col-lg-8">
+        <h4 class="fw-bold mb-3">¿Qué es Grafana y por qué lo usamos?</h4>
+        <p>Grafana es la plataforma open-source líder en observabilidad y visualización de datos. En Core, actúa como la <strong>ventana única</strong> donde cualquier persona de la organización puede consultar qué está pasando en el sistema en tiempo real.</p>
+        <p>No es una herramienta solo para técnicos. Los dashboards están diseñados para que <strong>soporte, consultoría, ventas y dirección</strong> puedan extraer la información que necesitan sin depender del equipo de desarrollo.</p>
+        <p class="mb-0">Cada interacción, cada proceso, cada error queda registrado y es consultable. Grafana es donde toda esa información cobra vida visual.</p>
+    </div>
+    <div class="col-lg-4">
+        <div class="card border-0 bg-light h-100 p-4 text-center">
+            <i class="bi bi-bar-chart-line" style="font-size: 4rem; color: #ff6600;"></i>
+            <h5 class="fw-bold mt-3">Grafana</h5>
+            <p class="text-muted small mb-0">Dashboards en tiempo real para toda la organización</p>
+        </div>
+    </div>
+</div>
+
+<!-- TIPOS DE DASHBOARDS -->
+<h4 class="fw-bold mb-4">Dashboards disponibles por equipo</h4>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-6 col-lg-4">
+        <div class="card topic-card h-100 p-4">
+            <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-headset fs-4 me-3 text-primary"></i>
+                <h6 class="fw-bold mb-0">Soporte</h6>
+            </div>
+            <ul class="text-muted small mb-0 list-unstyled">
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Errores en tiempo real por tenant</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Tiempos de respuesta por endpoint</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Usuarios activos por cliente</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Alertas de degradación de servicio</li>
+                <li><i class="bi bi-check2 me-2 text-success"></i>Historial de incidencias por tenant</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="card topic-card h-100 p-4">
+            <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-briefcase fs-4 me-3 text-success"></i>
+                <h6 class="fw-bold mb-0">Consultoría</h6>
+            </div>
+            <ul class="text-muted small mb-0 list-unstyled">
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Uso de módulos por cliente</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Funcionalidades más/menos utilizadas</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Patrones de adopción post-implantación</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Comparativa de uso entre clientes</li>
+                <li><i class="bi bi-check2 me-2 text-success"></i>Detección de oportunidades de formación</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="card topic-card h-100 p-4">
+            <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-megaphone fs-4 me-3 text-danger"></i>
+                <h6 class="fw-bold mb-0">Ventas / Dirección</h6>
+            </div>
+            <ul class="text-muted small mb-0 list-unstyled">
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Métricas de adopción global</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>SLAs cumplidos por cliente</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Crecimiento de uso (usuarios, transacciones)</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Health score por tenant</li>
+                <li><i class="bi bi-check2 me-2 text-success"></i>ROI de funcionalidades implementadas</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="card topic-card h-100 p-4">
+            <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-code-slash fs-4 me-3" style="color: #6f42c1;"></i>
+                <h6 class="fw-bold mb-0">Desarrollo / DevOps</h6>
+            </div>
+            <ul class="text-muted small mb-0 list-unstyled">
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Rendimiento de microservicios</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Latencias P50/P95/P99</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Tasa de errores por servicio</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Consumo de recursos (CPU, RAM, disco)</li>
+                <li><i class="bi bi-check2 me-2 text-success"></i>Despliegues y su impacto en métricas</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="card topic-card h-100 p-4">
+            <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-shield-check fs-4 me-3 text-warning"></i>
+                <h6 class="fw-bold mb-0">Seguridad / Compliance</h6>
+            </div>
+            <ul class="text-muted small mb-0 list-unstyled">
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Intentos de acceso no autorizado</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Auditoría de cambios en datos sensibles</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Cumplimiento GDPR (accesos, exportaciones)</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Sesiones activas por ubicación</li>
+                <li><i class="bi bi-check2 me-2 text-success"></i>Alertas de comportamiento anómalo</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="card topic-card h-100 p-4">
+            <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-person-check fs-4 me-3 text-info"></i>
+                <h6 class="fw-bold mb-0">Customer Success</h6>
+            </div>
+            <ul class="text-muted small mb-0 list-unstyled">
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Engagement score por cliente</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Detección temprana de churn</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Evolución de uso mensual</li>
+                <li class="mb-2"><i class="bi bi-check2 me-2 text-success"></i>Nuevos usuarios vs activos vs inactivos</li>
+                <li><i class="bi bi-check2 me-2 text-success"></i>Tickets vs satisfacción</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- STACK DE OBSERVABILIDAD -->
+<h4 class="fw-bold mb-4">Stack de observabilidad integrado con Grafana</h4>
+
+<div class="border rounded p-4 mb-5" style="background: #fafbfc;">
+    <div class="row g-4 text-center">
+        <div class="col-md-3">
+            <div class="bg-white border rounded p-3 h-100">
+                <i class="bi bi-journal-text fs-3 text-primary d-block mb-2"></i>
+                <strong class="d-block">Logs</strong>
+                <span class="text-muted small">Loki / Promtail</span>
+                <p class="text-muted small mt-2 mb-0">Todos los eventos del sistema centralizados y consultables.</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="bg-white border rounded p-3 h-100">
+                <i class="bi bi-graph-up fs-3 text-success d-block mb-2"></i>
+                <strong class="d-block">Métricas</strong>
+                <span class="text-muted small">Prometheus</span>
+                <p class="text-muted small mt-2 mb-0">Contadores, gauges e histogramas de todos los servicios.</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="bg-white border rounded p-3 h-100">
+                <i class="bi bi-diagram-3 fs-3" style="color: #6f42c1;"></i>
+                <strong class="d-block mt-2">Traces</strong>
+                <span class="text-muted small">Tempo / OpenTelemetry</span>
+                <p class="text-muted small mt-2 mb-0">Trazas distribuidas de cada petición end-to-end.</p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="bg-white border rounded p-3 h-100" style="border-color: #ff6600 !important; border-width: 2px !important;">
+                <i class="bi bi-bar-chart-line fs-3 d-block mb-2" style="color: #ff6600;"></i>
+                <strong class="d-block">Visualización</strong>
+                <span class="text-muted small">Grafana</span>
+                <p class="text-muted small mt-2 mb-0">Dashboards unificados que consumen las tres fuentes.</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-3">
+        <span class="text-muted small"><i class="bi bi-info-circle me-1"></i> Logs + Métricas + Traces = Observabilidad completa, todo visible en Grafana</span>
+    </div>
+</div>
+
+<!-- ALERTAS -->
+<h4 class="fw-bold mb-3">Sistema de alertas</h4>
+<p class="mb-4">Grafana no solo muestra datos: genera alertas proactivas cuando algo requiere atención. El equipo de soporte puede actuar <strong>antes de que el cliente reporte un problema</strong>.</p>
+
+<div class="table-responsive mb-5">
+    <table class="table table-bordered align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Tipo de alerta</th>
+                <th>Ejemplo</th>
+                <th>Destinatario</th>
+                <th>Canal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="badge bg-danger">Crítica</span></td>
+                <td>Servicio caído para un tenant &gt; 2 min</td>
+                <td>DevOps + Soporte</td>
+                <td>Slack + PagerDuty</td>
+            </tr>
+            <tr>
+                <td><span class="badge bg-warning text-dark">Alta</span></td>
+                <td>Tasa de error &gt; 5% en un microservicio</td>
+                <td>DevOps</td>
+                <td>Slack + Email</td>
+            </tr>
+            <tr>
+                <td><span class="badge bg-info">Media</span></td>
+                <td>Latencia P95 &gt; 3s en módulo de ventas</td>
+                <td>Desarrollo</td>
+                <td>Slack</td>
+            </tr>
+            <tr>
+                <td><span class="badge bg-secondary">Informativa</span></td>
+                <td>Tenant sin actividad en 7 días</td>
+                <td>Customer Success</td>
+                <td>Email resumen semanal</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="alert alert-light border">
+    <div class="d-flex align-items-start">
+        <i class="bi bi-lightbulb text-warning me-3 fs-5"></i>
+        <div>
+            <strong>Filosofía de monitorización proactiva</strong>
+            <p class="mb-0 text-muted mt-1">El objetivo no es reaccionar a incidencias, sino detectarlas antes de que impacten al usuario. Grafana nos permite pasar de un soporte reactivo a uno predictivo, mejorando la calidad del servicio y la satisfacción del cliente.</p>
+        </div>
+    </div>
+</div>

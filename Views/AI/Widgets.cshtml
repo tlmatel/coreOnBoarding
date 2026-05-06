@@ -1,0 +1,118 @@
+@{
+    ViewData["Title"] = "Widgets y gráficos con IA";
+}
+
+<h1 class="mb-3">Widgets y Gráficos con <span class="text-primary">Agentes IA</span></h1>
+<p class="lead">
+    Los usuarios pueden crear <strong>dashboards personalizados</strong> y visualizaciones de datos
+    simplemente pidiendo al agente lo que necesitan ver. Sin configuraciones complejas,
+    sin conocimientos técnicos.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Ejemplos de peticiones</h3>
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "Hazme un gráfico de barras con las ventas mensuales del último año comparado con el anterior"
+            </div>
+            <p class="small text-muted mb-0"><i class="bi bi-bar-chart text-primary"></i> Genera un bar chart comparativo con doble serie temporal.</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "Quiero un widget con el top 10 de clientes por facturación este trimestre, con un pie chart"
+            </div>
+            <p class="small text-muted mb-0"><i class="bi bi-pie-chart text-primary"></i> Crea un widget de ranking con gráfico circular interactivo.</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "Muéstrame la evolución del stock valorado por familia de producto, en formato línea temporal"
+            </div>
+            <p class="small text-muted mb-0"><i class="bi bi-graph-up text-primary"></i> Genera un line chart multi-serie con filtro por familia.</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "Ponme un KPI grande con el margen medio de este mes y una flecha que indique si sube o baja respecto al mes pasado"
+            </div>
+            <p class="small text-muted mb-0"><i class="bi bi-speedometer text-primary"></i> Crea un widget KPI con indicador de tendencia.</p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Tipos de visualización soportados</h3>
+<div class="row g-3">
+    <div class="col-6 col-lg-2">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-bar-chart-fill fs-2 text-primary"></i>
+            <div class="small mt-2">Barras</div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-2">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-graph-up fs-2 text-success"></i>
+            <div class="small mt-2">Líneas</div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-2">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-pie-chart-fill fs-2 text-warning"></i>
+            <div class="small mt-2">Circular</div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-2">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-speedometer2 fs-2 text-danger"></i>
+            <div class="small mt-2">KPIs</div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-2">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-table fs-2 text-info"></i>
+            <div class="small mt-2">Tablas</div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-2">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-geo-alt-fill fs-2 text-secondary"></i>
+            <div class="small mt-2">Mapas</div>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Características</h3>
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-palette text-primary"></i> Personalización total</h5>
+            <ul class="small mb-0">
+                <li>Colores, tamaños y disposición configurables por voz</li>
+                <li>Widgets arrastrables y redimensionables</li>
+                <li>Dashboards privados o compartidos por equipo/rol</li>
+                <li>Datos en tiempo real con refresco automático</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-arrow-repeat text-success"></i> Iteración natural</h5>
+            <ul class="small mb-0">
+                <li>"Cámbialo a gráfico circular" — Cambia tipo al instante</li>
+                <li>"Añade el año anterior para comparar" — Agrega serie</li>
+                <li>"Filtra solo la delegación de Madrid" — Aplica filtro</li>
+                <li>"Ponlo más grande y en la parte de arriba" — Reubica</li>
+            </ul>
+        </div>
+    </div>
+</div>

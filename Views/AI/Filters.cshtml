@@ -1,0 +1,96 @@
+@{
+    ViewData["Title"] = "Diseño de filtros con IA";
+}
+
+<h1 class="mb-3">Diseño de Filtros con <span class="text-primary">Agentes IA</span></h1>
+<p class="lead">
+    En cualquier listado o vista del ERP, el usuario puede <strong>describir en lenguaje natural</strong>
+    los criterios de filtrado que necesita. El agente traduce la petición a filtros estructurados
+    y los aplica al instante.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Ejemplos de filtrado natural</h3>
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
+            <h6><i class="bi bi-people text-primary"></i> Vista de clientes</h6>
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "Muéstrame solo los clientes de Barcelona que compren más de 50.000€/año y tengan alguna factura pendiente"
+            </div>
+            <p class="small text-muted mb-0">Aplica: provincia = Barcelona AND facturación anual > 50K AND saldo pendiente > 0.</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
+            <h6><i class="bi bi-box-seam text-primary"></i> Vista de artículos</h6>
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "Filtra los artículos de la familia Climatización con stock bajo mínimo y que tengan pedido de compra en curso"
+            </div>
+            <p class="small text-muted mb-0">Aplica: familia = Climatización AND stock < stock_min AND pedido_compra_activo = true.</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
+            <h6><i class="bi bi-receipt text-primary"></i> Vista de pedidos</h6>
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "Quiero ver los pedidos de esta semana que superen los 2.000€ y no estén expedidos"
+            </div>
+            <p class="small text-muted mb-0">Aplica: fecha >= lunes AND importe > 2000 AND estado != expedido.</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
+            <h6><i class="bi bi-truck text-primary"></i> Vista de proveedores</h6>
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "Proveedores internacionales con plazo de entrega mayor a 15 días y que no hayan servido en los últimos 3 meses"
+            </div>
+            <p class="small text-muted mb-0">Aplica: país != España AND lead_time > 15 AND última_recepción < hace 3 meses.</p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Funcionalidades</h3>
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-save text-primary"></i> Filtros guardados</h5>
+            <ul class="small mb-0">
+                <li>"Guárdame este filtro como <em>Clientes VIP morosos</em>"</li>
+                <li>Acceso rápido desde un selector de filtros guardados</li>
+                <li>Compartir filtros con el equipo</li>
+                <li>Filtros privados o públicos por rol</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-magic text-warning"></i> Refinamiento iterativo</h5>
+            <ul class="small mb-0">
+                <li>"Añade también los de Valencia" — Amplía criterio</li>
+                <li>"Quita los que facturen menos de 10K" — Restringe</li>
+                <li>"Ordénalos por fecha de último pedido" — Cambia orden</li>
+                <li>"Muéstrame solo las columnas nombre, ciudad y saldo" — Ajusta vista</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Ventajas frente a filtros tradicionales</h3>
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr><th>Aspecto</th><th>Filtros tradicionales</th><th>Filtros con IA</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>Curva de aprendizaje</td><td>Media — hay que conocer los campos</td><td>Nula — se describe en lenguaje natural</td></tr>
+        <tr><td>Combinaciones complejas</td><td>Difícil — múltiples selectores</td><td>Fácil — una frase lo resuelve</td></tr>
+        <tr><td>Campos calculados</td><td>No disponible sin desarrollo</td><td>El agente los genera al vuelo</td></tr>
+        <tr><td>Velocidad</td><td>Varios clics y selecciones</td><td>Una frase, resultado inmediato</td></tr>
+        <tr><td>Reutilización</td><td>Manual (guardar configuración)</td><td>"Guárdamelo como..." y listo</td></tr>
+    </tbody>
+</table>

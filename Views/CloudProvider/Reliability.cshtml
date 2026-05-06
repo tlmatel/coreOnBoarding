@@ -1,0 +1,94 @@
+@{
+    ViewData["Title"] = "Redundancia y Alta Disponibilidad";
+}
+
+<h1 class="mb-3">Redundancia y <span class="text-primary">Alta Disponibilidad</span></h1>
+<p class="lead">
+    La arquitectura de Core OnBoarding está diseñada para tolerar fallos a nivel de zona, nodo y pod,
+    garantizando un SLA de disponibilidad del <strong>99.95%</strong> en producción.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Niveles de redundancia</h3>
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="topic-card h-100 text-center">
+            <i class="bi bi-geo-alt fs-1 text-primary"></i>
+            <h5 class="mt-2">Multi-zona</h5>
+            <p class="small">
+                El cluster GKE se despliega en <strong>3 zonas</strong> dentro de la misma región.
+                Si una zona cae, los pods se redistribuyen automáticamente.
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="topic-card h-100 text-center">
+            <i class="bi bi-hdd-rack fs-1 text-warning"></i>
+            <h5 class="mt-2">Multi-nodo</h5>
+            <p class="small">
+                Cada servicio tiene mínimo <strong>3 réplicas</strong> distribuidas con
+                <code>topologySpreadConstraints</code> para evitar concentración.
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="topic-card h-100 text-center">
+            <i class="bi bi-globe fs-1 text-success"></i>
+            <h5 class="mt-2">Multi-región (DR)</h5>
+            <p class="small">
+                Región secundaria en <strong>europe-west3</strong> (Frankfurt) con cluster
+                en standby y réplica de datos asíncrona.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Componentes de HA</h3>
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr><th>Capa</th><th>Solución</th><th>Failover</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>Load Balancer</td><td>Global HTTP(S) LB</td><td>Automático entre backends</td></tr>
+        <tr><td>Ingress</td><td>NGINX con múltiples réplicas</td><td>&lt; 5 segundos</td></tr>
+        <tr><td>Aplicación</td><td>Deployments multi-réplica</td><td>Inmediato (K8s scheduler)</td></tr>
+        <tr><td>Base de datos</td><td>Cloud SQL HA (regional)</td><td>&lt; 60 segundos (failover automático)</td></tr>
+        <tr><td>Cache</td><td>Memorystore HA (Standard Tier)</td><td>&lt; 30 segundos</td></tr>
+        <tr><td>Storage</td><td>Cloud Storage (multi-regional)</td><td>Transparente</td></tr>
+        <tr><td>DNS</td><td>Cloud DNS (100% SLA)</td><td>Anycast global</td></tr>
+    </tbody>
+</table>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Disaster Recovery</h3>
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="topic-card">
+            <h5><i class="bi bi-clock text-danger"></i> Objetivos definidos</h5>
+            <table class="table table-sm table-bordered mb-0">
+                <tbody>
+                    <tr><td><strong>RPO</strong> (Recovery Point Objective)</td><td>≤ 1 hora</td></tr>
+                    <tr><td><strong>RTO</strong> (Recovery Time Objective)</td><td>≤ 4 horas</td></tr>
+                    <tr><td><strong>Frecuencia de pruebas DR</strong></td><td>Trimestral</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card">
+            <h5><i class="bi bi-list-check text-success"></i> Procedimiento de failover</h5>
+            <ol class="small mb-0">
+                <li>Detección de caída en región primaria (alertas automáticas)</li>
+                <li>Validación manual o automática del estado</li>
+                <li>Promoción del cluster DR a producción</li>
+                <li>Actualización de DNS global al nuevo endpoint</li>
+                <li>Verificación de integridad de datos</li>
+                <li>Notificación a clientes afectados</li>
+            </ol>
+        </div>
+    </div>
+</div>

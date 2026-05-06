@@ -1,0 +1,143 @@
+@{
+    ViewData["Title"] = "Integraciones con Bancos de Datos";
+}
+
+<h1 class="mb-3">Integraciones con <span class="text-primary">Bancos de Datos</span></h1>
+<p class="lead">
+    Core OnBoarding se integra con los principales bancos de datos del sector para mantener
+    el catálogo de productos <strong>actualizado diariamente</strong> con la información publicada
+    por los fabricantes: tarifas, descripciones, imágenes, fichas técnicas y datos logísticos.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Fuentes de datos integradas</h3>
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-lightning-charge text-warning"></i> eDam / Electronet</h5>
+            <p class="small">
+                Base de datos del sector electrotécnico creada conjuntamente por más de 200 fabricantes
+                y distribuidores. Estándar del sector eléctrico en España.
+            </p>
+            <ul class="small mb-2">
+                <li>Material eléctrico, iluminación, automatización</li>
+                <li>Formato estandarizado BMEcat</li>
+                <li>Actualización directa del fabricante sin intermediarios</li>
+            </ul>
+            <a asp-action="Edam" class="btn btn-sm btn-outline-primary">Ver detalle →</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-droplet text-primary"></i> GO!Catalog</h5>
+            <p class="small">
+                Más de 6 millones de referencias de 1.200+ marcas. Catálogo de referencia para
+                fontanería, climatización, construcción y también electricidad.
+            </p>
+            <ul class="small mb-2">
+                <li>Fontanería, climatización, construcción, electricidad</li>
+                <li>Operado por Telematel (desde 1988)</li>
+                <li>Usado por +2.000 distribuidores profesionales</li>
+            </ul>
+            <a asp-action="GoCatalog" class="btn btn-sm btn-outline-primary">Ver detalle →</a>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Proceso de actualización diaria</h3>
+<div class="p-4 rounded" style="background:#f8fafe; border:1px solid #e0eaf5;">
+    <div class="row text-center">
+        <div class="col">
+            <div class="p-3 rounded" style="background:#fd7e14; color:#fff; border-radius:8px;">
+                <i class="bi bi-cloud-download fs-4"></i>
+                <div class="small mt-1"><strong>Descarga</strong></div>
+            </div>
+            <div class="small text-muted mt-1">03:00 AM</div>
+        </div>
+        <div class="col-auto d-flex align-items-center"><i class="bi bi-arrow-right text-muted"></i></div>
+        <div class="col">
+            <div class="p-3 rounded" style="background:#6f42c1; color:#fff; border-radius:8px;">
+                <i class="bi bi-funnel fs-4"></i>
+                <div class="small mt-1"><strong>Normalización</strong></div>
+            </div>
+            <div class="small text-muted mt-1">Parsing + ETIM</div>
+        </div>
+        <div class="col-auto d-flex align-items-center"><i class="bi bi-arrow-right text-muted"></i></div>
+        <div class="col">
+            <div class="p-3 rounded" style="background:#0d6efd; color:#fff; border-radius:8px;">
+                <i class="bi bi-arrow-left-right fs-4"></i>
+                <div class="small mt-1"><strong>Comparación</strong></div>
+            </div>
+            <div class="small text-muted mt-1">Detecta cambios</div>
+        </div>
+        <div class="col-auto d-flex align-items-center"><i class="bi bi-arrow-right text-muted"></i></div>
+        <div class="col">
+            <div class="p-3 rounded" style="background:#198754; color:#fff; border-radius:8px;">
+                <i class="bi bi-check-circle fs-4"></i>
+                <div class="small mt-1"><strong>Aplicación</strong></div>
+            </div>
+            <div class="small text-muted mt-1">Actualiza catálogo</div>
+        </div>
+        <div class="col-auto d-flex align-items-center"><i class="bi bi-arrow-right text-muted"></i></div>
+        <div class="col">
+            <div class="p-3 rounded" style="background:#20c997; color:#fff; border-radius:8px;">
+                <i class="bi bi-bell fs-4"></i>
+                <div class="small mt-1"><strong>Notificación</strong></div>
+            </div>
+            <div class="small text-muted mt-1">Alerta al usuario</div>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">¿Qué se actualiza?</h3>
+<div class="row g-3">
+    <div class="col-md-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-currency-euro fs-2 text-success"></i>
+            <h6 class="mt-2">Tarifas PVP</h6>
+            <p class="small mb-0">Precios de tarifa del fabricante actualizados al día.</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-image fs-2 text-primary"></i>
+            <h6 class="mt-2">Imágenes</h6>
+            <p class="small mb-0">Fotos de producto, esquemas y planos técnicos.</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-file-text fs-2 text-warning"></i>
+            <h6 class="mt-2">Fichas técnicas</h6>
+            <p class="small mb-0">PDFs, manuales y documentación del fabricante.</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-upc-scan fs-2 text-danger"></i>
+            <h6 class="mt-2">Datos logísticos</h6>
+            <p class="small mb-0">EAN, peso, volumen, unidades de embalaje.</p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Beneficios para el distribuidor</h3>
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr><th>Sin integración</th><th>Con Core OnBoarding</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>Actualización manual de tarifas (días de trabajo)</td><td>Automático cada noche, sin intervención</td></tr>
+        <tr><td>Errores de precio por tarifas desactualizadas</td><td>Siempre al día con el fabricante</td></tr>
+        <tr><td>Catálogo sin imágenes ni fichas</td><td>Contenido rico descargado automáticamente</td></tr>
+        <tr><td>Alta manual de nuevos productos</td><td>Nuevas referencias disponibles al día siguiente</td></tr>
+        <tr><td>Productos descatalogados sin detectar</td><td>Alerta automática de descatalogación</td></tr>
+    </tbody>
+</table>

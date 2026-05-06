@@ -1,0 +1,175 @@
+@{
+    ViewData["Title"] = "Monitorización por tenant";
+}
+
+<h2>8.3 Monitorización por tenant</h2>
+<p class="lead mb-5">Cada cliente (tenant) tiene su propio universo de datos aislado y monitorizable de forma independiente. Esto permite ofrecer un servicio personalizado y detectar problemas específicos sin ruido.</p>
+
+<!-- CONCEPTO -->
+<div class="row g-4 mb-5">
+    <div class="col-lg-7">
+        <h4 class="fw-bold mb-3">¿Qué significa monitorizar por tenant?</h4>
+        <p>En una arquitectura multi-tenant como Core, cada cliente opera en un entorno lógicamente aislado. Esto significa que podemos <strong>medir, trazar y alertar de forma independiente para cada uno</strong>.</p>
+        <p>No es lo mismo que un cliente tenga un problema puntual a que haya una degradación general. La monitorización por tenant nos permite:</p>
+        <ul>
+            <li><strong>Identificar exactamente quién está afectado</strong> sin asumir que un problema es global</li>
+            <li><strong>Comparar métricas entre clientes</strong> para detectar anomalías (¿por qué este cliente tiene 10x más errores?)</li>
+            <li><strong>Ofrecer SLAs reales y medibles</strong> con datos por cliente, no promedios globales</li>
+            <li><strong>Planificar capacidad</strong> cliente a cliente según su crecimiento real</li>
+            <li><strong>Priorizar soporte</strong> basándose en datos objetivos de impacto</li>
+        </ul>
+    </div>
+    <div class="col-lg-5">
+        <div class="card border-0 bg-light p-4">
+            <h6 class="fw-bold mb-3"><i class="bi bi-buildings me-2 text-primary"></i>Ejemplo práctico</h6>
+            <div class="border rounded bg-white p-3 mb-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="fw-semibold small">Tenant: Electricidad López S.L.</span>
+                    <span class="badge bg-success">Saludable</span>
+                </div>
+                <div class="row g-2 text-center">
+                    <div class="col-4">
+                        <div class="small text-muted">Usuarios activos</div>
+                        <strong>23</strong>
+                    </div>
+                    <div class="col-4">
+                        <div class="small text-muted">Latencia P95</div>
+                        <strong class="text-success">240ms</strong>
+                    </div>
+                    <div class="col-4">
+                        <div class="small text-muted">Errores/h</div>
+                        <strong class="text-success">0.2</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="border rounded bg-white p-3">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="fw-semibold small">Tenant: Fontanería García e Hijos</span>
+                    <span class="badge bg-warning text-dark">Atención</span>
+                </div>
+                <div class="row g-2 text-center">
+                    <div class="col-4">
+                        <div class="small text-muted">Usuarios activos</div>
+                        <strong>8</strong>
+                    </div>
+                    <div class="col-4">
+                        <div class="small text-muted">Latencia P95</div>
+                        <strong class="text-warning">1.8s</strong>
+                    </div>
+                    <div class="col-4">
+                        <div class="small text-muted">Errores/h</div>
+                        <strong class="text-danger">12.4</strong>
+                    </div>
+                </div>
+            </div>
+            <p class="text-muted small mt-3 mb-0"><i class="bi bi-arrow-right me-1"></i> Sin monitorización por tenant, estos dos clientes serían un promedio: todo parecería "normal".</p>
+        </div>
+    </div>
+</div>
+
+<!-- MÉTRICAS POR TENANT -->
+<h4 class="fw-bold mb-4">Métricas disponibles por tenant</h4>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-6">
+        <div class="card topic-card h-100 p-4">
+            <h6 class="fw-semibold"><i class="bi bi-speedometer2 me-2 text-primary"></i>Rendimiento</h6>
+            <ul class="text-muted small mb-0">
+                <li>Tiempo de respuesta medio y percentiles (P50, P95, P99)</li>
+                <li>Throughput (peticiones/segundo)</li>
+                <li>Tiempo de carga de páginas principales</li>
+                <li>Queries lentas específicas del tenant</li>
+                <li>Consumo de recursos asignados</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card topic-card h-100 p-4">
+            <h6 class="fw-semibold"><i class="bi bi-exclamation-triangle me-2 text-danger"></i>Errores y fiabilidad</h6>
+            <ul class="text-muted small mb-0">
+                <li>Tasa de errores (4xx, 5xx) por módulo</li>
+                <li>Errores de negocio (validaciones, conflictos)</li>
+                <li>Disponibilidad efectiva (uptime por tenant)</li>
+                <li>Intentos fallidos de operaciones críticas</li>
+                <li>Degradaciones parciales (módulos lentos)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card topic-card h-100 p-4">
+            <h6 class="fw-semibold"><i class="bi bi-people me-2 text-success"></i>Uso y adopción</h6>
+            <ul class="text-muted small mb-0">
+                <li>Usuarios activos diarios/semanales/mensuales</li>
+                <li>Módulos más utilizados</li>
+                <li>Funcionalidades nunca usadas (oportunidad de formación)</li>
+                <li>Picos de uso (horarios, días de la semana)</li>
+                <li>Evolución de uso mes a mes</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card topic-card h-100 p-4">
+            <h6 class="fw-semibold"><i class="bi bi-database me-2 text-info"></i>Datos y almacenamiento</h6>
+            <ul class="text-muted small mb-0">
+                <li>Volumen de datos almacenados</li>
+                <li>Crecimiento de datos mensual</li>
+                <li>Documentos/adjuntos subidos</li>
+                <li>Registros creados por módulo</li>
+                <li>Proyección de almacenamiento futuro</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- HEALTH SCORE -->
+<h4 class="fw-bold mb-3">Health Score del tenant</h4>
+<p class="mb-4">Cada tenant tiene un <strong>Health Score</strong> calculado automáticamente que resume en un solo indicador el estado general del servicio para ese cliente. Se alimenta de todas las métricas anteriores.</p>
+
+<div class="table-responsive mb-5">
+    <table class="table table-bordered align-middle text-center">
+        <thead class="table-light">
+            <tr>
+                <th>Score</th>
+                <th>Estado</th>
+                <th>Significado</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="badge bg-success fs-6">90-100</span></td>
+                <td>Excelente</td>
+                <td>Todo funciona de forma óptima</td>
+                <td>Ninguna</td>
+            </tr>
+            <tr>
+                <td><span class="badge bg-primary fs-6">70-89</span></td>
+                <td>Bueno</td>
+                <td>Rendimiento correcto, pequeñas áreas de mejora</td>
+                <td>Revisión en próximo ciclo</td>
+            </tr>
+            <tr>
+                <td><span class="badge bg-warning text-dark fs-6">50-69</span></td>
+                <td>Atención</td>
+                <td>Degradación visible, posible impacto en usuario</td>
+                <td>Investigación proactiva</td>
+            </tr>
+            <tr>
+                <td><span class="badge bg-danger fs-6">0-49</span></td>
+                <td>Crítico</td>
+                <td>Problemas serios afectando al cliente</td>
+                <td>Intervención inmediata</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="alert alert-light border">
+    <div class="d-flex align-items-start">
+        <i class="bi bi-trophy text-warning me-3 fs-5"></i>
+        <div>
+            <strong>Ventaja competitiva real</strong>
+            <p class="mb-0 text-muted mt-1">La mayoría de ERPs del mercado no ofrecen visibilidad por cliente. Nosotros podemos demostrar con datos que cada tenant recibe un servicio de calidad, y actuar proactivamente cuando algo se degrada. Esto se traduce en menor churn, mayor satisfacción y un argumento de venta demoledor.</p>
+        </div>
+    </div>
+</div>

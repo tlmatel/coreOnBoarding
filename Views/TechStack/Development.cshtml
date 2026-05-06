@@ -1,0 +1,117 @@
+@{
+    ViewData["Title"] = "Desarrollo & CI";
+}
+
+<h2>7.1 Desarrollo & CI</h2>
+<p class="lead mb-5">Los desarrolladores trabajan en los microservicios. Según el tipo de evento en Git, se disparan distintos workflows de GitHub Actions.</p>
+
+<div class="row g-5 mb-5">
+    <div class="col-lg-6">
+        <div class="card border-primary h-100" style="border-width: 2px;">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <span class="badge bg-primary rounded-pill px-3 py-2 me-2">Flujo por Tag</span>
+                </div>
+                <p class="mb-4">Cuando un desarrollador crea un <strong>tag</strong> en el repositorio de microservicios, se dispara el pipeline de CI que actualiza la configuración de desarrollo.</p>
+
+                <div class="d-flex align-items-center flex-wrap gap-2">
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-person me-2"></i>
+                        <span class="small fw-semibold">Dev</span>
+                    </div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="text-center small text-muted">push tag</div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-folder me-2"></i>
+                        <span class="small fw-semibold">Repos Microservices</span>
+                    </div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-gear me-2"></i>
+                        <span class="small fw-semibold">GitHub Actions</span>
+                    </div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-file-earmark-text me-2"></i>
+                        <span class="small fw-semibold">Deployment Repo</span>
+                    </div>
+                </div>
+
+                <div class="alert alert-primary mt-4 mb-0">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Genera <code>values-dev.yaml</code> en el deployment repo con la configuración de desarrollo.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card border-success h-100" style="border-width: 2px;">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <span class="badge bg-success rounded-pill px-3 py-2 me-2">Flujo por Commit</span>
+                </div>
+                <p class="mb-4">Cuando se hace <strong>push de un commit</strong> al repositorio, se dispara el pipeline de CI que actualiza la configuración de producción.</p>
+
+                <div class="d-flex align-items-center flex-wrap gap-2">
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-person me-2"></i>
+                        <span class="small fw-semibold">Dev</span>
+                    </div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="text-center small text-muted">push commit</div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-folder me-2"></i>
+                        <span class="small fw-semibold">Repos Microservices</span>
+                    </div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-gear me-2"></i>
+                        <span class="small fw-semibold">GitHub Actions</span>
+                    </div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-file-earmark-text me-2"></i>
+                        <span class="small fw-semibold">Deployment Repo</span>
+                    </div>
+                </div>
+
+                <div class="alert alert-success mt-4 mb-0">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Genera <code>values.yaml</code> en el deployment repo con la configuración de producción.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 class="fw-bold mb-3">Resumen del flujo</h4>
+
+<div class="table-responsive">
+    <table class="table table-bordered align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Evento Git</th>
+                <th>Trigger</th>
+                <th>Acción CI</th>
+                <th>Resultado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>push tag</code></td>
+                <td>GitHub Actions</td>
+                <td>Build + push imagen + actualizar config</td>
+                <td><code>values-dev.yaml</code> en Deployment Repo</td>
+            </tr>
+            <tr>
+                <td><code>push commit</code></td>
+                <td>GitHub Actions</td>
+                <td>Build + push imagen + actualizar config</td>
+                <td><code>values.yaml</code> en Deployment Repo</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

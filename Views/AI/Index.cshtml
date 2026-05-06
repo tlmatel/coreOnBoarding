@@ -1,0 +1,125 @@
+@{
+    ViewData["Title"] = "Inteligencia Artificial";
+}
+
+<h1 class="mb-3">Inteligencia <span class="text-primary">Artificial</span></h1>
+<p class="lead">
+    Core OnBoarding integra <strong>agentes de IA conversacionales</strong> que permiten a los usuarios
+    realizar operaciones complejas usando <strong>lenguaje natural</strong>. No se necesitan conocimientos
+    técnicos: basta describir lo que se quiere hacer y el agente lo ejecuta.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Capacidades IA integradas</h3>
+<div class="row g-4">
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-pencil-square text-primary"></i> Cambios masivos</h5>
+            <p class="small">
+                Modifica miles de registros a la vez describiendo la operación en lenguaje natural.
+                El agente interpreta, valida y ejecuta.
+            </p>
+            <a asp-action="MassiveChanges" class="btn btn-sm btn-outline-primary">Ver más →</a>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-bar-chart-line text-primary"></i> Widgets y gráficos</h5>
+            <p class="small">
+                Crea dashboards personalizados pidiendo al agente el gráfico que necesitas.
+                Se genera al instante sin programar.
+            </p>
+            <a asp-action="Widgets" class="btn btn-sm btn-outline-primary">Ver más →</a>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-file-earmark-text text-primary"></i> Reports y formularios</h5>
+            <p class="small">
+                Diseña informes y formularios describiendo la estructura, campos y formato
+                que necesitas. El agente lo construye por ti.
+            </p>
+            <a asp-action="Reports" class="btn btn-sm btn-outline-primary">Ver más →</a>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-funnel text-primary"></i> Diseño de filtros</h5>
+            <p class="small">
+                Configura filtros avanzados en cualquier vista simplemente describiendo
+                los criterios que necesitas aplicar.
+            </p>
+            <a asp-action="Filters" class="btn btn-sm btn-outline-primary">Ver más →</a>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-plug text-primary"></i> MCP</h5>
+            <p class="small">
+                Model Context Protocol: el estándar abierto que permite a los agentes IA
+                conectarse con las herramientas y datos del ERP de forma segura.
+            </p>
+            <a asp-action="Mcp" class="btn btn-sm btn-outline-primary">Ver más →</a>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4 text-center d-flex flex-column justify-content-center">
+            <i class="bi bi-lightbulb fs-1 text-warning"></i>
+            <h6 class="mt-2 mb-1">Filosofía</h6>
+            <p class="small mb-0">
+                "Si puedes describirlo, el sistema puede hacerlo."
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-5">
+
+<h3 class="mb-3">¿Cómo funciona?</h3>
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="p-4 rounded" style="background:#f8fafe; border:1px solid #e0eaf5;">
+            <div class="d-flex align-items-start mb-3">
+                <span class="badge bg-primary me-3 mt-1" style="min-width:28px;">1</span>
+                <div>
+                    <strong>El usuario describe la acción</strong>
+                    <p class="small text-muted mb-0">"Sube un 5% el precio de todos los productos de la familia Fontanería que lleven más de 6 meses sin venta"</p>
+                </div>
+            </div>
+            <div class="d-flex align-items-start mb-3">
+                <span class="badge bg-primary me-3 mt-1" style="min-width:28px;">2</span>
+                <div>
+                    <strong>El agente interpreta y planifica</strong>
+                    <p class="small text-muted mb-0">Analiza la petición, identifica los registros afectados y propone un plan de ejecución.</p>
+                </div>
+            </div>
+            <div class="d-flex align-items-start mb-3">
+                <span class="badge bg-primary me-3 mt-1" style="min-width:28px;">3</span>
+                <div>
+                    <strong>Validación y confirmación</strong>
+                    <p class="small text-muted mb-0">Muestra un resumen: "Se van a modificar 342 productos. ¿Confirmas?" — El usuario aprueba o ajusta.</p>
+                </div>
+            </div>
+            <div class="d-flex align-items-start">
+                <span class="badge bg-success me-3 mt-1" style="min-width:28px;">4</span>
+                <div>
+                    <strong>Ejecución controlada</strong>
+                    <p class="small text-muted mb-0">Se aplica el cambio con trazabilidad completa, opción de rollback y log de auditoría.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-shield-check text-success"></i> Seguridad</h5>
+            <ul class="small mb-0">
+                <li>Los agentes respetan los permisos del usuario</li>
+                <li>No se ejecuta nada sin confirmación explícita</li>
+                <li>Cada acción queda en el log de auditoría</li>
+                <li>Rollback disponible para operaciones masivas</li>
+                <li>Los datos nunca salen del sistema</li>
+            </ul>
+        </div>
+    </div>
+</div>

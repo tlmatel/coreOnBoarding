@@ -1,0 +1,126 @@
+@{
+    ViewData["Title"] = "Kubernetes (GKE)";
+}
+
+<h1 class="mb-3">Kubernetes — <span class="text-primary">Google Kubernetes Engine</span></h1>
+<p class="lead">
+    Core OnBoarding se despliega sobre <strong>GKE (Google Kubernetes Engine)</strong>, el servicio
+    gestionado de Kubernetes más maduro del mercado. GKE se encarga de la gestión del plano de control,
+    actualizaciones de seguridad y autoescalado, permitiendo al equipo centrarse en el producto.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Arquitectura del cluster</h3>
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="p-4 rounded" style="background:#f8fafe; border:1px solid #e0eaf5;">
+            <table class="table table-sm table-bordered mb-0">
+                <thead class="table-light">
+                    <tr><th>Componente</th><th>Configuración</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Tipo de cluster</td><td>Regional (multi-zona)</td></tr>
+                    <tr><td>Versión K8s</td><td>Release channel: Stable</td></tr>
+                    <tr><td>Node pools</td><td>System pool + Application pool + Jobs pool</td></tr>
+                    <tr><td>Máquinas</td><td>e2-standard-4 (app) / e2-standard-8 (jobs)</td></tr>
+                    <tr><td>Autoescalado</td><td>Cluster Autoscaler + HPA por deployment</td></tr>
+                    <tr><td>Networking</td><td>VPC-native (alias IP)</td></tr>
+                    <tr><td>Ingress</td><td>NGINX Ingress Controller + cert-manager</td></tr>
+                    <tr><td>Service Mesh</td><td>Istio (opcional, para mTLS inter-servicio)</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="topic-card h-100">
+            <h5><i class="bi bi-layers text-primary"></i> Namespaces</h5>
+            <p>Cada tenant tiene su propio namespace con:</p>
+            <ul class="small">
+                <li>ResourceQuotas (CPU, memoria)</li>
+                <li>LimitRanges por pod</li>
+                <li>NetworkPolicies de aislamiento</li>
+                <li>ServiceAccount dedicado</li>
+                <li>Secrets propios (cifrados con KMS)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Workloads desplegados</h3>
+<div class="row g-3">
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h6><i class="bi bi-app text-primary"></i> API Backend</h6>
+            <p class="small mb-1">Deployment con 3+ réplicas, HPA basado en CPU/requests.</p>
+            <code class="small">Deployment / HPA / Service / Ingress</code>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h6><i class="bi bi-window text-primary"></i> Frontend SPA</h6>
+            <p class="small mb-1">Servido desde Cloud CDN + bucket o NGINX pod.</p>
+            <code class="small">Deployment / Service / Ingress</code>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h6><i class="bi bi-clock-history text-primary"></i> Workers / Jobs</h6>
+            <p class="small mb-1">CronJobs para tareas programadas y Jobs para procesos batch.</p>
+            <code class="small">CronJob / Job / ConfigMap</code>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h6><i class="bi bi-database text-primary"></i> PostgreSQL</h6>
+            <p class="small mb-1">Cloud SQL conectado vía Cloud SQL Auth Proxy (sidecar).</p>
+            <code class="small">Sidecar / Secret / ServiceEntry</code>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h6><i class="bi bi-lightning text-primary"></i> Redis Cache</h6>
+            <p class="small mb-1">Memorystore accesible desde la VPC, sin exposición pública.</p>
+            <code class="small">ExternalName Service</code>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h6><i class="bi bi-graph-up text-primary"></i> Monitoring Stack</h6>
+            <p class="small mb-1">Prometheus + Grafana desplegados en namespace monitoring.</p>
+            <code class="small">StatefulSet / DaemonSet / Service</code>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Estrategia de despliegue</h3>
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="topic-card">
+            <h5><i class="bi bi-arrow-left-right text-success"></i> Rolling Update</h5>
+            <p>Actualización progresiva sin downtime:</p>
+            <ul class="small">
+                <li><code>maxSurge: 1</code> — máximo 1 pod extra durante el rollout</li>
+                <li><code>maxUnavailable: 0</code> — nunca menos pods de los deseados</li>
+                <li>Readiness probes validan que el pod está listo antes de recibir tráfico</li>
+                <li>Rollback automático si el health check falla</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card">
+            <h5><i class="bi bi-arrows-expand text-primary"></i> Autoescalado</h5>
+            <p>Dos niveles de escalado automático:</p>
+            <ul class="small">
+                <li><strong>HPA</strong> — Escala pods según CPU, memoria o métricas custom</li>
+                <li><strong>Cluster Autoscaler</strong> — Añade/elimina nodos según demanda de pods</li>
+                <li>Pod Disruption Budgets para mantener mínimos durante mantenimiento</li>
+                <li>Escalado predictivo opcional con métricas históricas</li>
+            </ul>
+        </div>
+    </div>
+</div>

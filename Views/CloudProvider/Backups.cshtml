@@ -1,0 +1,113 @@
+@{
+    ViewData["Title"] = "Copias de seguridad";
+}
+
+<h1 class="mb-3">Copias de Seguridad y <span class="text-primary">Recuperación</span></h1>
+<p class="lead">
+    Se implementan múltiples niveles de backup para garantizar la integridad de los datos
+    y la capacidad de restauración ante cualquier escenario de pérdida.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Estrategia de backups</h3>
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="topic-card h-100">
+            <h5><i class="bi bi-database text-primary"></i> Base de datos (Cloud SQL)</h5>
+            <table class="table table-sm table-bordered mb-0">
+                <tbody>
+                    <tr><td><strong>Backups automáticos</strong></td><td>Diarios, ventana de 02:00-06:00 UTC</td></tr>
+                    <tr><td><strong>Retención</strong></td><td>30 días (automáticos)</td></tr>
+                    <tr><td><strong>Point-in-Time Recovery</strong></td><td>Últimos 7 días con WAL logs</td></tr>
+                    <tr><td><strong>Backups manuales</strong></td><td>Pre-release y pre-migración</td></tr>
+                    <tr><td><strong>Replicación</strong></td><td>Cross-region a europe-west3</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card h-100">
+            <h5><i class="bi bi-folder text-primary"></i> Almacenamiento (Cloud Storage)</h5>
+            <table class="table table-sm table-bordered mb-0">
+                <tbody>
+                    <tr><td><strong>Versionado</strong></td><td>Activado en todos los buckets</td></tr>
+                    <tr><td><strong>Retención</strong></td><td>90 días (versiones anteriores)</td></tr>
+                    <tr><td><strong>Clase de storage</strong></td><td>Standard (activo) + Nearline (archivo)</td></tr>
+                    <tr><td><strong>Replicación</strong></td><td>Dual-region (europe-west1 + west3)</td></tr>
+                    <tr><td><strong>Object Lock</strong></td><td>Para backups críticos (inmutabilidad)</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Backups de Kubernetes</h3>
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="topic-card">
+            <h5><i class="bi bi-box text-primary"></i> Velero + GCS</h5>
+            <p>Se utiliza <strong>Velero</strong> para respaldar el estado del cluster:</p>
+            <ul class="small">
+                <li>Backup diario de todos los recursos (deployments, configmaps, secrets, etc.)</li>
+                <li>Almacenamiento en bucket dedicado con retención de 14 días</li>
+                <li>Backup incremental de Persistent Volumes vía snapshots</li>
+                <li>Restauración selectiva por namespace, recurso o label</li>
+                <li>Pruebas de restauración mensuales en entorno de staging</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="p-4 rounded h-100" style="background:#fff8e6; border:1px solid #f0d060;">
+            <h6><i class="bi bi-exclamation-triangle text-warning"></i> Importante</h6>
+            <p class="small mb-0">
+                Los <strong>Secrets</strong> se respaldan cifrados con Cloud KMS.
+                Las claves de cifrado tienen rotación automática cada 90 días.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Política de retención</h3>
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr><th>Tipo</th><th>Frecuencia</th><th>Retención</th><th>Ubicación</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>DB — automático</td><td>Diario</td><td>30 días</td><td>Misma región</td></tr>
+        <tr><td>DB — cross-region</td><td>Diario</td><td>14 días</td><td>europe-west3</td></tr>
+        <tr><td>DB — PITR (WAL)</td><td>Continuo</td><td>7 días</td><td>Misma región</td></tr>
+        <tr><td>Storage — versionado</td><td>Por cambio</td><td>90 días</td><td>Dual-region</td></tr>
+        <tr><td>K8s — Velero</td><td>Diario</td><td>14 días</td><td>GCS bucket</td></tr>
+        <tr><td>K8s — PV snapshots</td><td>Diario</td><td>7 días</td><td>Misma región</td></tr>
+    </tbody>
+</table>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Pruebas de restauración</h3>
+<div class="topic-card">
+    <div class="row">
+        <div class="col-md-6">
+            <h6>Frecuencia</h6>
+            <ul class="small mb-0">
+                <li><strong>Mensual</strong> — Restauración de DB en entorno aislado</li>
+                <li><strong>Trimestral</strong> — Simulacro completo de DR</li>
+                <li><strong>Post-incidente</strong> — Verificación tras cualquier fallo</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h6>Métricas monitorizadas</h6>
+            <ul class="small mb-0">
+                <li>Tiempo de restauración efectivo vs RTO objetivo</li>
+                <li>Integridad de datos post-restauración</li>
+                <li>Tamaño y crecimiento de backups</li>
+                <li>Alertas por backup fallido (&lt; 5 min para resolver)</li>
+            </ul>
+        </div>
+    </div>
+</div>

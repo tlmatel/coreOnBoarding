@@ -1,0 +1,130 @@
+@{
+    ViewData["Title"] = "Infraestructura GCP";
+}
+
+<h1 class="mb-3">Infraestructura — <span class="text-primary">Google Cloud Platform</span></h1>
+<p class="lead">
+    La infraestructura de Core OnBoarding aprovecha la red global de Google para ofrecer
+    baja latencia, alta disponibilidad y aislamiento de recursos entre tenants.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Topología de red</h3>
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="p-4 rounded" style="background:#f8fafe; border:1px solid #e0eaf5;">
+            <div class="text-center mb-3">
+                <div style="display:inline-block; padding:12px 24px; background:#4285f4; color:#fff; border-radius:8px; font-weight:600;">
+                    Internet / Usuarios
+                </div>
+                <div class="my-2"><i class="bi bi-arrow-down fs-4 text-primary"></i></div>
+                <div style="display:inline-block; padding:12px 24px; background:#34a853; color:#fff; border-radius:8px; font-weight:600;">
+                    Cloud Load Balancer (Global)
+                </div>
+                <div class="my-2"><i class="bi bi-arrow-down fs-4 text-success"></i></div>
+                <div style="display:inline-block; padding:12px 24px; background:#fbbc04; color:#333; border-radius:8px; font-weight:600;">
+                    Cloud Armor (WAF + DDoS)
+                </div>
+                <div class="my-2"><i class="bi bi-arrow-down fs-4 text-warning"></i></div>
+                <div style="display:inline-block; padding:12px 24px; background:#ea4335; color:#fff; border-radius:8px; font-weight:600;">
+                    VPC Privada — GKE Cluster
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="topic-card h-100">
+            <h5>Componentes principales</h5>
+            <ul class="mb-0">
+                <li><strong>VPC</strong> — Red privada aislada</li>
+                <li><strong>Subnets</strong> — Segmentación por entorno</li>
+                <li><strong>Cloud NAT</strong> — Salida controlada</li>
+                <li><strong>Cloud DNS</strong> — Resolución privada</li>
+                <li><strong>Firewall Rules</strong> — Zero-trust</li>
+                <li><strong>Private Google Access</strong> — APIs sin Internet</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Servicios GCP utilizados</h3>
+<div class="row g-3">
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h6><i class="bi bi-hdd-stack text-primary"></i> Compute</h6>
+            <ul class="small mb-0">
+                <li>GKE (Kubernetes Engine)</li>
+                <li>Cloud Run (jobs auxiliares)</li>
+                <li>Compute Engine (bastion hosts)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h6><i class="bi bi-database text-primary"></i> Datos</h6>
+            <ul class="small mb-0">
+                <li>Cloud SQL (PostgreSQL gestionado)</li>
+                <li>Cloud Storage (objetos/blobs)</li>
+                <li>Memorystore (Redis cache)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h6><i class="bi bi-shield-lock text-primary"></i> Seguridad</h6>
+            <ul class="small mb-0">
+                <li>Cloud Armor (WAF)</li>
+                <li>Secret Manager</li>
+                <li>Cloud KMS (cifrado)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h6><i class="bi bi-diagram-2 text-primary"></i> Networking</h6>
+            <ul class="small mb-0">
+                <li>Cloud Load Balancing</li>
+                <li>Cloud CDN</li>
+                <li>Cloud Interconnect</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h6><i class="bi bi-eye text-primary"></i> Observabilidad</h6>
+            <ul class="small mb-0">
+                <li>Cloud Logging</li>
+                <li>Cloud Monitoring</li>
+                <li>Cloud Trace</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h6><i class="bi bi-gear text-primary"></i> DevOps</h6>
+            <ul class="small mb-0">
+                <li>Artifact Registry (imágenes)</li>
+                <li>Cloud Build (CI opcional)</li>
+                <li>Cloud Deploy (CD opcional)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Entornos desplegados</h3>
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr><th>Entorno</th><th>Proyecto GCP</th><th>Región</th><th>Propósito</th></tr>
+    </thead>
+    <tbody>
+        <tr><td><span class="badge bg-info">DEV</span></td><td>core-onboarding-dev</td><td>europe-west1</td><td>Desarrollo y pruebas internas</td></tr>
+        <tr><td><span class="badge bg-warning text-dark">STAGING</span></td><td>core-onboarding-stg</td><td>europe-west1</td><td>Pre-producción, validación cliente</td></tr>
+        <tr><td><span class="badge bg-success">PROD</span></td><td>core-onboarding-prod</td><td>europe-west1</td><td>Producción multi-tenant</td></tr>
+        <tr><td><span class="badge bg-danger">DR</span></td><td>core-onboarding-dr</td><td>europe-west3</td><td>Disaster Recovery (pasivo)</td></tr>
+    </tbody>
+</table>

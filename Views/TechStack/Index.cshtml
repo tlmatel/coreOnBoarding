@@ -1,0 +1,342 @@
+@{
+    ViewData["Title"] = "Core Updates Pipeline";
+}
+
+<h2>7. Core Updates Pipeline</h2>
+<p class="lead mb-5">Proceso completo de CI/CD con GitOps para el despliegue de microservicios: desde el código fuente hasta producción, pasando por empaquetado Helm y sincronización con ArgoCD.</p>
+
+<!-- LAS 4 FASES -->
+<h4 class="fw-bold mb-4">Las 4 fases del pipeline</h4>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-6 col-lg-3">
+        <div class="card topic-card h-100 p-4">
+            <div class="d-flex align-items-center mb-3">
+                <span class="section-badge bg-primary me-3" style="font-size: 1.2rem;">1</span>
+                <h6 class="fw-bold mb-0">Desarrollo</h6>
+            </div>
+            <p class="text-muted mb-3">Los desarrolladores hacen push al repositorio de microservicios. Tags y commits disparan distintos flujos de CI.</p>
+            <a asp-action="Development" class="btn btn-outline-primary btn-sm mt-auto align-self-start">Ver detalle</a>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card topic-card h-100 p-4">
+            <div class="d-flex align-items-center mb-3">
+                <span class="section-badge bg-success me-3" style="font-size: 1.2rem;">2</span>
+                <h6 class="fw-bold mb-0">Empaquetado</h6>
+            </div>
+            <p class="text-muted mb-3">GitHub Actions empaqueta Helm charts y los publica como paquetes OCI en registries dedicados.</p>
+            <a asp-action="Packaging" class="btn btn-outline-success btn-sm mt-auto align-self-start">Ver detalle</a>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card topic-card h-100 p-4">
+            <div class="d-flex align-items-center mb-3">
+                <span class="section-badge me-3" style="background-color: #6f42c1; font-size: 1.2rem;">3</span>
+                <h6 class="fw-bold mb-0">Despliegue</h6>
+            </div>
+            <p class="text-muted mb-3">ArgoCD detecta cambios en los charts y en el deployment repo, y sincroniza el estado con el cluster CORE.</p>
+            <a asp-action="Deployment" class="btn btn-outline-secondary btn-sm mt-auto align-self-start" style="border-color: #6f42c1; color: #6f42c1;">Ver detalle</a>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="card topic-card h-100 p-4">
+            <div class="d-flex align-items-center mb-3">
+                <span class="section-badge bg-warning text-dark me-3" style="font-size: 1.2rem;">4</span>
+                <h6 class="fw-bold mb-0">Operaciones</h6>
+            </div>
+            <p class="text-muted mb-3">El Control Panel permite gestionar versiones, actualizaciones de clientes, DNS y migraciones de base de datos.</p>
+            <a asp-action="Operations" class="btn btn-outline-warning btn-sm mt-auto align-self-start">Ver detalle</a>
+        </div>
+    </div>
+</div>
+
+<!-- TECNOLOGÍAS -->
+<h4 class="fw-bold mb-4">Tecnologías del pipeline</h4>
+
+<div class="row g-3 mb-5">
+    <div class="col-md-4">
+        <div class="d-flex align-items-center p-3 bg-light rounded">
+            <i class="bi bi-github me-3 fs-4"></i>
+            <div>
+                <strong>GitHub</strong>
+                <div class="text-muted small">Repositorios & Actions</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="d-flex align-items-center p-3 bg-light rounded">
+            <i class="bi bi-box-seam me-3 fs-4 text-primary"></i>
+            <div>
+                <strong>Helm</strong>
+                <div class="text-muted small">Empaquetado de charts</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="d-flex align-items-center p-3 bg-light rounded">
+            <i class="bi bi-archive me-3 fs-4 text-success"></i>
+            <div>
+                <strong>OCI Registry</strong>
+                <div class="text-muted small">Almacén de artefactos</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="d-flex align-items-center p-3 bg-light rounded">
+            <i class="bi bi-arrow-repeat me-3 fs-4" style="color: #6f42c1;"></i>
+            <div>
+                <strong>ArgoCD</strong>
+                <div class="text-muted small">GitOps & despliegue</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="d-flex align-items-center p-3 bg-light rounded">
+            <i class="bi bi-database me-3 fs-4 text-info"></i>
+            <div>
+                <strong>PostgreSQL</strong>
+                <div class="text-muted small">Base de datos</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="d-flex align-items-center p-3 bg-light rounded">
+            <i class="bi bi-sliders me-3 fs-4 text-warning"></i>
+            <div>
+                <strong>Control Panel</strong>
+                <div class="text-muted small">Gestión operativa</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DIAGRAMA DE FLUJO -->
+<h4 class="fw-bold mb-4">Diagrama de flujo completo</h4>
+
+<style>
+    .pipeline-box {
+        background: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem;
+        padding: 0.75rem 1.25rem;
+        text-align: center;
+        min-width: 120px;
+    }
+    .pipeline-box.highlight-blue { border: 2px solid #0d6efd; }
+    .pipeline-box.highlight-green { border: 2px solid #198754; }
+    .pipeline-box.highlight-purple { border: 2px solid #6f42c1; }
+    .pipeline-box.highlight-orange { border: 2px solid #fd7e14; }
+    .pipeline-box .box-icon { font-size: 1.4rem; display: block; margin-bottom: 0.25rem; }
+    .pipeline-box .box-label { font-size: 0.85rem; font-weight: 600; }
+    .pipeline-box .box-sub { font-size: 0.7rem; color: #6c757d; }
+    .pipeline-arrow { color: #adb5bd; font-size: 1.2rem; }
+    .pipeline-connector { font-size: 0.75rem; color: #6c757d; white-space: nowrap; }
+    .pipeline-lane {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        padding: 1.25rem 0;
+    }
+    .pipeline-lane-header {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #6c757d;
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+        display: inline-block;
+        margin-bottom: 0.5rem;
+    }
+</style>
+
+<div class="border rounded" style="background: #fafbfc;">
+
+    <!-- Fase 1 -->
+    <div class="p-4 border-bottom" style="border-color: #eee !important;">
+        <span class="pipeline-lane-header" style="background: rgba(13,110,253,0.08); color: #0d6efd;">
+            <i class="bi bi-circle-fill me-1" style="font-size: 0.4rem;"></i> Fase 1 — Desarrollo & CI
+        </span>
+        <div class="pipeline-lane">
+            <div class="pipeline-box">
+                <i class="bi bi-person-fill box-icon text-primary"></i>
+                <span class="box-label">Dev</span>
+                <span class="box-sub">push</span>
+            </div>
+            <i class="bi bi-chevron-right pipeline-arrow"></i>
+            <div class="pipeline-box">
+                <i class="bi bi-folder-fill box-icon text-warning"></i>
+                <span class="box-label">Repos Microservices</span>
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <span class="badge bg-primary rounded-pill px-2" style="font-size: 0.65rem;">tag</span>
+                <i class="bi bi-chevron-right pipeline-arrow"></i>
+                <span class="badge bg-success rounded-pill px-2" style="font-size: 0.65rem;">commit</span>
+            </div>
+            <div class="pipeline-box highlight-blue">
+                <i class="bi bi-gear-fill box-icon text-primary"></i>
+                <span class="box-label">GitHub Actions</span>
+                <span class="box-sub">CI pipeline</span>
+            </div>
+            <div class="d-flex flex-column align-items-center">
+                <code class="text-primary" style="font-size: 0.7rem;">values-dev.yaml</code>
+                <i class="bi bi-chevron-right pipeline-arrow"></i>
+                <code class="text-success" style="font-size: 0.7rem;">values.yaml</code>
+            </div>
+            <div class="pipeline-box">
+                <i class="bi bi-file-earmark-code-fill box-icon text-success"></i>
+                <span class="box-label">Deployment Repo</span>
+                <span class="box-sub">configuración</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fase 2 -->
+    <div class="p-4 border-bottom" style="border-color: #eee !important;">
+        <span class="pipeline-lane-header" style="background: rgba(25,135,84,0.08); color: #198754;">
+            <i class="bi bi-circle-fill me-1" style="font-size: 0.4rem;"></i> Fase 2 — Empaquetado Helm Charts
+        </span>
+
+        <div class="pipeline-lane mb-2">
+            <div class="pipeline-box">
+                <i class="bi bi-person-fill box-icon text-primary"></i>
+                <span class="box-label">Dev</span>
+                <span class="box-sub">push</span>
+            </div>
+            <i class="bi bi-chevron-right pipeline-arrow"></i>
+            <div class="pipeline-box">
+                <i class="bi bi-box-seam-fill box-icon text-primary"></i>
+                <span class="box-label">Core Helm Repo</span>
+            </div>
+            <span class="pipeline-connector">commit main</span>
+            <i class="bi bi-chevron-right pipeline-arrow"></i>
+            <div class="pipeline-box highlight-blue">
+                <i class="bi bi-gear-fill box-icon text-primary"></i>
+                <span class="box-label">GitHub Actions</span>
+                <span class="box-sub">build chart</span>
+            </div>
+            <span class="pipeline-connector">push package</span>
+            <i class="bi bi-chevron-right pipeline-arrow"></i>
+            <div class="pipeline-box highlight-green">
+                <i class="bi bi-archive-fill box-icon text-success"></i>
+                <span class="box-label">OCI Registry</span>
+                <span class="box-sub">helm chart</span>
+            </div>
+        </div>
+
+        <div class="pipeline-lane">
+            <div class="pipeline-box">
+                <i class="bi bi-person-badge-fill box-icon text-warning"></i>
+                <span class="box-label">DevOps</span>
+                <span class="box-sub">push</span>
+            </div>
+            <i class="bi bi-chevron-right pipeline-arrow"></i>
+            <div class="pipeline-box">
+                <i class="bi bi-box-seam-fill box-icon text-warning"></i>
+                <span class="box-label">Core Edge Repo</span>
+            </div>
+            <span class="pipeline-connector">commit main</span>
+            <i class="bi bi-chevron-right pipeline-arrow"></i>
+            <div class="pipeline-box highlight-blue">
+                <i class="bi bi-gear-fill box-icon text-primary"></i>
+                <span class="box-label">GitHub Actions</span>
+                <span class="box-sub">build chart</span>
+            </div>
+            <span class="pipeline-connector">push package</span>
+            <i class="bi bi-chevron-right pipeline-arrow"></i>
+            <div class="pipeline-box highlight-green">
+                <i class="bi bi-archive-fill box-icon text-success"></i>
+                <span class="box-label">OCI Registry</span>
+                <span class="box-sub">edge chart</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fase 3 -->
+    <div class="p-4 border-bottom" style="border-color: #eee !important;">
+        <span class="pipeline-lane-header" style="background: rgba(111,66,193,0.08); color: #6f42c1;">
+            <i class="bi bi-circle-fill me-1" style="font-size: 0.4rem;"></i> Fase 3 — Despliegue con ArgoCD
+        </span>
+        <div class="pipeline-lane">
+            <div class="d-flex flex-column gap-2 align-items-center">
+                <div class="pipeline-box highlight-green">
+                    <i class="bi bi-archive-fill box-icon text-success"></i>
+                    <span class="box-label">OCI Registry</span>
+                    <span class="box-sub">charts</span>
+                </div>
+                <div class="pipeline-box">
+                    <i class="bi bi-file-earmark-code-fill box-icon text-success"></i>
+                    <span class="box-label">Deployment Repo</span>
+                    <span class="box-sub">app config</span>
+                </div>
+            </div>
+            <i class="bi bi-chevron-right pipeline-arrow"></i>
+            <div class="pipeline-box highlight-purple" style="padding: 1rem 1.5rem;">
+                <i class="bi bi-arrow-repeat box-icon" style="font-size: 2rem; color: #6f42c1;"></i>
+                <span class="box-label" style="font-size: 1rem;">ArgoCD</span>
+                <span class="box-sub">GitOps sync</span>
+            </div>
+            <span class="pipeline-connector">deploys</span>
+            <i class="bi bi-chevron-right pipeline-arrow fs-4"></i>
+            <div class="pipeline-box" style="background: #212529; border-color: #212529; padding: 1rem 1.5rem;">
+                <i class="bi bi-hdd-rack-fill box-icon text-white" style="font-size: 2rem;"></i>
+                <span class="box-label text-white" style="font-size: 1rem;">CORE</span>
+                <span class="box-sub" style="color: rgba(255,255,255,0.5);">producción</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fase 4 -->
+    <div class="p-4">
+        <span class="pipeline-lane-header" style="background: rgba(253,126,20,0.08); color: #fd7e14;">
+            <i class="bi bi-circle-fill me-1" style="font-size: 0.4rem;"></i> Fase 4 — Operaciones vía Control Panel
+        </span>
+        <div class="pipeline-lane">
+            <div class="pipeline-box">
+                <i class="bi bi-person-fill box-icon text-muted"></i>
+                <span class="box-label">User</span>
+            </div>
+            <i class="bi bi-chevron-right pipeline-arrow"></i>
+            <div class="pipeline-box highlight-orange">
+                <i class="bi bi-sliders box-icon" style="color: #fd7e14;"></i>
+                <span class="box-label">Control Panel</span>
+            </div>
+            <i class="bi bi-chevron-right pipeline-arrow"></i>
+            <div class="pipeline-box">
+                <i class="bi bi-arrow-repeat box-icon text-info"></i>
+                <span class="box-label">Job</span>
+            </div>
+            <i class="bi bi-chevron-right pipeline-arrow"></i>
+            <div class="d-flex flex-column gap-3">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge rounded-pill px-3 py-1" style="background: rgba(13,110,253,0.1); color: #0d6efd; font-size: 0.75rem;">new version</span>
+                    <i class="bi bi-chevron-right pipeline-arrow" style="font-size: 0.9rem;"></i>
+                    <div class="pipeline-box" style="min-width: auto; padding: 0.5rem 1rem;">
+                        <span class="box-label">Deployment Repo</span>
+                    </div>
+                    <i class="bi bi-chevron-right pipeline-arrow" style="font-size: 0.9rem;"></i>
+                    <div class="pipeline-box" style="min-width: auto; padding: 0.5rem 1rem;">
+                        <span class="box-label">ArgoCD → CORE</span>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge rounded-pill px-3 py-1" style="background: rgba(253,126,20,0.1); color: #fd7e14; font-size: 0.75rem;">customer update</span>
+                    <i class="bi bi-chevron-right pipeline-arrow" style="font-size: 0.9rem;"></i>
+                    <div class="pipeline-box" style="min-width: auto; padding: 0.5rem 1rem;">
+                        <span class="box-label">update DNS</span>
+                    </div>
+                    <span class="text-muted">+</span>
+                    <div class="pipeline-box" style="min-width: auto; padding: 0.5rem 1rem;">
+                        <i class="bi bi-database-fill me-1 text-info" style="font-size: 0.8rem;"></i>
+                        <span class="box-label">PostgreSQL migrate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<p class="text-muted small mt-2 text-center">Flujo completo: desde el push del desarrollador hasta el despliegue en producción y las operaciones del Control Panel.</p>

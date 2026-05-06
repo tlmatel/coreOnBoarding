@@ -1,0 +1,99 @@
+@{
+    ViewData["Title"] = "eDam / Electronet";
+}
+
+<h1 class="mb-3">eDam / <span class="text-primary">Electronet</span></h1>
+<p class="lead">
+    <strong>Electronet</strong> es la base de datos de referencia del sector electrotécnico en España,
+    creada y mantenida conjuntamente por más de <strong>200 fabricantes y distribuidores</strong>.
+    Es el estándar de facto para el intercambio de información de producto en el sector eléctrico.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">¿Qué es Electronet?</h3>
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="topic-card p-4">
+            <p>
+                Electronet es una plataforma colaborativa donde los fabricantes de material eléctrico
+                publican directamente su catálogo de productos sin intermediarios. Los distribuidores
+                acceden a esta información para mantener sus sistemas actualizados.
+            </p>
+            <table class="table table-sm table-bordered mb-0">
+                <tbody>
+                    <tr><td><strong>Sector</strong></td><td>Material eléctrico, iluminación, automatización industrial</td></tr>
+                    <tr><td><strong>Fabricantes</strong></td><td>+200 (Schneider, Legrand, ABB, Philips, Siemens...)</td></tr>
+                    <tr><td><strong>Formato</strong></td><td>BMEcat (estándar europeo de catálogo electrónico)</td></tr>
+                    <tr><td><strong>Clasificación</strong></td><td>ETIM (European Technical Information Model)</td></tr>
+                    <tr><td><strong>Actualización</strong></td><td>Directa por el fabricante, sin intermediarios</td></tr>
+                    <tr><td><strong>Acceso</strong></td><td>Web (sin instalación), API para integración</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-box-seam text-warning"></i> Contenido por producto</h5>
+            <ul class="small mb-0">
+                <li>Referencia del fabricante</li>
+                <li>Descripción corta y larga</li>
+                <li>Tarifa PVP vigente</li>
+                <li>Códigos EAN / GTIN</li>
+                <li>Clasificación ETIM (atributos técnicos)</li>
+                <li>Imágenes de producto</li>
+                <li>Fichas técnicas (PDF)</li>
+                <li>Datos logísticos (peso, embalaje)</li>
+                <li>Estado: activo / descatalogado / sustituto</li>
+                <li>Producto sustituto recomendado</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Integración con Core OnBoarding</h3>
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-arrow-repeat text-primary"></i> Sincronización automática</h5>
+            <p class="small">Proceso nocturno (03:00 AM) que ejecuta:</p>
+            <ol class="small mb-0">
+                <li>Conexión al servicio Electronet vía API BMEcat</li>
+                <li>Descarga incremental de cambios desde última sincronización</li>
+                <li>Parsing y normalización al modelo de datos de Core</li>
+                <li>Detección de cambios: nuevos productos, modificaciones de tarifa, descatalogaciones</li>
+                <li>Aplicación automática según reglas configuradas por el distribuidor</li>
+                <li>Generación de informe de cambios para revisión</li>
+            </ol>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-sliders text-success"></i> Reglas configurables</h5>
+            <p class="small">El distribuidor define cómo se aplican los cambios:</p>
+            <ul class="small mb-0">
+                <li><strong>Tarifas:</strong> Aplicar automáticamente / Requiere aprobación / Solo notificar</li>
+                <li><strong>Nuevos productos:</strong> Alta automática / Cola de revisión</li>
+                <li><strong>Descatalogados:</strong> Desactivar auto / Marcar para revisión</li>
+                <li><strong>Imágenes:</strong> Siempre actualizar / Solo si no tiene propia</li>
+                <li><strong>Sustituciones:</strong> Notificar a comerciales afectados</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Marcas principales disponibles</h3>
+<div class="row g-2">
+    @foreach (var marca in new[] { "Schneider Electric", "Legrand", "ABB", "Siemens", "Philips Lighting", "Hager", "General Electric", "Gewiss", "Simon", "Circutor", "Weidmüller", "Phoenix Contact" })
+    {
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="p-2 rounded text-center small" style="background:#f8f8f8; border:1px solid #eee;">
+                <i class="bi bi-check-circle text-success me-1"></i> @marca
+            </div>
+        </div>
+    }
+</div>

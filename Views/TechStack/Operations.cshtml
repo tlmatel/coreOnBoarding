@@ -1,0 +1,129 @@
+@{
+    ViewData["Title"] = "Operaciones vía Control Panel";
+}
+
+<h2>7.4 Operaciones vía Control Panel</h2>
+<p class="lead mb-5">Los usuarios pueden realizar acciones operativas a través del Control Panel, que lanza Jobs automatizados para gestionar versiones, clientes y base de datos.</p>
+
+<div class="row g-5 mb-5">
+    <div class="col-lg-6">
+        <div class="card border-primary h-100" style="border-width: 2px;">
+            <div class="card-body p-4">
+                <h5 class="fw-bold mb-3">
+                    <i class="bi bi-rocket-takeoff me-2 text-primary"></i>Despliegue de nueva versión
+                </h5>
+                <p class="mb-4">Cuando hay una nueva versión disponible, el usuario la despliega desde el Control Panel.</p>
+
+                <div class="d-flex align-items-center flex-wrap gap-2 mb-3">
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-person me-2"></i>
+                        <span class="small fw-semibold">User</span>
+                    </div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-sliders me-2"></i>
+                        <span class="small fw-semibold">Control Panel</span>
+                    </div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="text-center small text-muted">new version</div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-arrow-repeat me-2"></i>
+                        <span class="small fw-semibold">Job</span>
+                    </div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-file-earmark-text me-2"></i>
+                        <span class="small fw-semibold">Deployment Repo</span>
+                    </div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-hdd-rack me-2"></i>
+                        <span class="small fw-semibold">ArgoCD → CORE</span>
+                    </div>
+                </div>
+
+                <div class="alert alert-primary mb-0">
+                    <i class="bi bi-info-circle me-2"></i>
+                    El Job actualiza el Deployment Repo con la nueva versión y ArgoCD sincroniza automáticamente el cluster.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card border-warning h-100" style="border-width: 2px;">
+            <div class="card-body p-4">
+                <h5 class="fw-bold mb-3">
+                    <i class="bi bi-people me-2 text-warning"></i>Actualización de cliente
+                </h5>
+                <p class="mb-4">Cuando se necesita actualizar un cliente específico, el proceso incluye actualización de DNS y migración de base de datos.</p>
+
+                <div class="d-flex align-items-center flex-wrap gap-2 mb-3">
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-person me-2"></i>
+                        <span class="small fw-semibold">User</span>
+                    </div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-sliders me-2"></i>
+                        <span class="small fw-semibold">Control Panel</span>
+                    </div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="text-center small text-muted">customer update</div>
+                    <i class="bi bi-arrow-right text-muted"></i>
+                    <div class="d-flex align-items-center bg-light rounded px-3 py-2">
+                        <i class="bi bi-arrow-repeat me-2"></i>
+                        <span class="small fw-semibold">Job</span>
+                    </div>
+                </div>
+
+                <div class="row g-2 mt-2">
+                    <div class="col-6">
+                        <div class="bg-light rounded p-2 text-center">
+                            <i class="bi bi-file-earmark-text me-1"></i>
+                            <span class="small">Deployment Repo</span>
+                            <div class="text-muted" style="font-size: 0.75rem;">update DNS</div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="bg-light rounded p-2 text-center">
+                            <i class="bi bi-database me-1"></i>
+                            <span class="small">PostgreSQL</span>
+                            <div class="text-muted" style="font-size: 0.75rem;">migrate database</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h4 class="fw-bold mb-3">Acciones disponibles en el Control Panel</h4>
+
+<div class="table-responsive">
+    <table class="table table-bordered align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Acción</th>
+                <th>Disparado por</th>
+                <th>Qué hace el Job</th>
+                <th>Sistemas afectados</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Nueva versión</strong></td>
+                <td>Usuario / Admin</td>
+                <td>Actualiza la versión en el Deployment Repo</td>
+                <td>Deployment Repo → ArgoCD → CORE</td>
+            </tr>
+            <tr>
+                <td><strong>Actualización de cliente</strong></td>
+                <td>Usuario / Admin</td>
+                <td>Actualiza DNS + migra base de datos</td>
+                <td>Deployment Repo + PostgreSQL</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

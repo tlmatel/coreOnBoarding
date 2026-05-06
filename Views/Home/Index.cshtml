@@ -1,0 +1,148 @@
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<div class="row g-4">
+    <div class="col-md-6 col-lg-4">
+        <a asp-controller="ProductOverview" asp-action="Platform" class="text-decoration-none">
+            <div class="card topic-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-eye fs-4 text-primary me-3"></i>
+                    <h5 class="fw-bold mb-0 text-dark">Visión General</h5>
+                </div>
+                <p class="text-muted mb-0">Qué es, para quién, propuesta de valor y conceptos clave del producto.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <a asp-controller="Architecture" asp-action="Modules" class="text-decoration-none">
+            <div class="card topic-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-diagram-3 fs-4 text-primary me-3"></i>
+                    <h5 class="fw-bold mb-0 text-dark">Arquitectura Funcional</h5>
+                </div>
+                <p class="text-muted mb-0">Módulos, flujos entre áreas, navegación, roles y perfiles de usuario.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <a asp-controller="TechnicalConcepts" asp-action="Saas" class="text-decoration-none">
+            <div class="card topic-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-cpu fs-4 text-primary me-3"></i>
+                    <h5 class="fw-bold mb-0 text-dark">Conceptos Técnicos</h5>
+                </div>
+                <p class="text-muted mb-0">SaaS, arquitectura, seguridad, integraciones y rendimiento explicados para todos.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <a asp-controller="FunctionalGuide" asp-action="Index" class="text-decoration-none">
+            <div class="card topic-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-book fs-4 text-primary me-3"></i>
+                    <h5 class="fw-bold mb-0 text-dark">Guía Funcional</h5>
+                </div>
+                <p class="text-muted mb-0">Detalle por módulo: funcionalidades, flujos, pantallas, KPIs y roadmap.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <a asp-controller="Sales" asp-action="ElevatorPitch" class="text-decoration-none">
+            <div class="card topic-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-megaphone fs-4 text-primary me-3"></i>
+                    <h5 class="fw-bold mb-0 text-dark">Argumentario Comercial</h5>
+                </div>
+                <p class="text-muted mb-0">Elevator pitch, argumentos, objeciones, competidores y casos de éxito.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <a asp-controller="Implementation" asp-action="Methodology" class="text-decoration-none">
+            <div class="card topic-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-gear fs-4 text-primary me-3"></i>
+                    <h5 class="fw-bold mb-0 text-dark">Implantación</h5>
+                </div>
+                <p class="text-muted mb-0">Metodología, configuración inicial y migración de datos.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <a asp-controller="TechStack" asp-action="Index" class="text-decoration-none">
+            <div class="card topic-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-stack fs-4 text-primary me-3"></i>
+                    <h5 class="fw-bold mb-0 text-dark">Stack Tecnológico</h5>
+                </div>
+                <p class="text-muted mb-0">Tecnologías, herramientas y decisiones técnicas de la plataforma.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <a asp-controller="Support" asp-action="Diagnostics" class="text-decoration-none">
+            <div class="card topic-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-activity fs-4 text-primary me-3"></i>
+                    <h5 class="fw-bold mb-0 text-dark">Observabilidad y Soporte</h5>
+                </div>
+                <p class="text-muted mb-0">Trazabilidad, Grafana, monitorización por tenant y usuario, y diagnóstico.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <a asp-controller="CloudProvider" asp-action="Index" class="text-decoration-none">
+            <div class="card topic-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-cloud fs-4 text-primary me-3"></i>
+                    <h5 class="fw-bold mb-0 text-dark">Proveedor Cloud</h5>
+                </div>
+                <p class="text-muted mb-0">Google Cloud Platform: infraestructura, Kubernetes, redundancia, backups y seguridad.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <a asp-controller="AI" asp-action="Index" class="text-decoration-none">
+            <div class="card topic-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-robot fs-4 text-primary me-3"></i>
+                    <h5 class="fw-bold mb-0 text-dark">Inteligencia Artificial</h5>
+                </div>
+                <p class="text-muted mb-0">Agentes IA con lenguaje natural: cambios masivos, widgets, reports, filtros y MCP.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <a asp-controller="DataBanks" asp-action="Index" class="text-decoration-none">
+            <div class="card topic-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-database-gear fs-4 text-primary me-3"></i>
+                    <h5 class="fw-bold mb-0 text-dark">Bancos de Datos</h5>
+                </div>
+                <p class="text-muted mb-0">Integración con eDam/Electronet y GO!Catalog: tarifas actualizadas diariamente.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <a asp-controller="Releases" asp-action="Index" class="text-decoration-none">
+            <div class="card topic-card h-100 p-4">
+                <div class="d-flex align-items-center mb-3">
+                    <i class="bi bi-rocket-takeoff fs-4 text-primary me-3"></i>
+                    <h5 class="fw-bold mb-0 text-dark">Despliegue y Versiones</h5>
+                </div>
+                <p class="text-muted mb-0">Entornos compartidos, flujo de Beta a Stable, hotfixes y actualizaciones continuas.</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="mt-5 p-4 bg-light rounded border">
+    <div class="d-flex align-items-start">
+        <i class="bi bi-info-circle text-primary me-3" style="font-size: 1.5rem; margin-top: 2px;"></i>
+        <div>
+            <h5 class="fw-bold mb-1">Este portal está en construcción</h5>
+            <p class="mb-0 text-muted" style="font-size: 1.05rem;">Cada sección contiene la estructura de contenido prevista. El equipo de R&D irá completando el contenido progresivamente.</p>
+        </div>
+    </div>
+</div>

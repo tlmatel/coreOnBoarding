@@ -1,0 +1,103 @@
+@{
+    ViewData["Title"] = "Proveedor Cloud";
+}
+
+<h1 class="mb-3">Proveedor Cloud — <span class="text-primary">Google Cloud Platform</span></h1>
+<p class="lead">
+    Toda la infraestructura de Core OnBoarding se aloja en <strong>Google Cloud Platform (GCP)</strong>,
+    aprovechando su red global, servicios gestionados y certificaciones de seguridad para ofrecer
+    un servicio fiable, escalable y seguro a todos los tenants.
+</p>
+
+<hr class="my-4">
+
+<div class="row g-4 mt-2">
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h5><i class="bi bi-buildings text-primary"></i> Infraestructura global</h5>
+            <p>
+                Regiones y zonas distribuidas geográficamente, con conectividad de baja latencia
+                y red privada de fibra de Google.
+            </p>
+            <a asp-action="Infrastructure" class="btn btn-sm btn-outline-primary">Ver más →</a>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h5><i class="bi bi-diagram-3 text-primary"></i> Kubernetes (GKE)</h5>
+            <p>
+                Clusters gestionados con Google Kubernetes Engine: autoescalado, actualizaciones
+                automáticas y alta disponibilidad.
+            </p>
+            <a asp-action="Kubernetes" class="btn btn-sm btn-outline-primary">Ver más →</a>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h5><i class="bi bi-shield-check text-primary"></i> Redundancia y HA</h5>
+            <p>
+                Arquitectura multi-zona con failover automático, balanceo de carga global
+                y SLAs de disponibilidad del 99.95%.
+            </p>
+            <a asp-action="Reliability" class="btn btn-sm btn-outline-primary">Ver más →</a>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h5><i class="bi bi-arrow-repeat text-primary"></i> Copias de seguridad</h5>
+            <p>
+                Backups automatizados, políticas de retención configurables y recuperación
+                ante desastres con RPO y RTO definidos.
+            </p>
+            <a asp-action="Backups" class="btn btn-sm btn-outline-primary">Ver más →</a>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h5><i class="bi bi-lock text-primary"></i> Seguridad cloud</h5>
+            <p>
+                Cifrado en reposo y en tránsito, IAM granular, VPC privadas y
+                cumplimiento normativo (ISO 27001, SOC 2, GDPR).
+            </p>
+            <a asp-action="Security" class="btn btn-sm btn-outline-primary">Ver más →</a>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100">
+            <h5><i class="bi bi-graph-up-arrow text-primary"></i> Escalabilidad</h5>
+            <p>
+                Capacidad elástica: los recursos se ajustan automáticamente a la demanda,
+                pagando solo por lo que se consume.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-5">
+
+<h3 class="mb-3">¿Por qué Google Cloud?</h3>
+<div class="row g-4">
+    <div class="col-lg-6">
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr><th>Criterio</th><th>Valoración</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Red global privada</td><td>La más extensa del mundo, 40+ regiones</td></tr>
+                <tr><td>Kubernetes nativo</td><td>GKE es el servicio K8s más maduro del mercado</td></tr>
+                <tr><td>Precio/rendimiento</td><td>Descuentos por uso sostenido + committed use</td></tr>
+                <tr><td>Seguridad</td><td>Zero-trust, cifrado por defecto, BeyondCorp</td></tr>
+                <tr><td>Cumplimiento</td><td>ISO 27001, SOC 1/2/3, GDPR, ENS Alta</td></tr>
+                <tr><td>Soporte</td><td>Premium support con SLA de respuesta < 15 min (P1)</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-6">
+        <div class="p-4 rounded" style="background:#f0f7ff; border:1px solid #d0e3f7;">
+            <h5><i class="bi bi-geo-alt text-primary"></i> Región principal</h5>
+            <p class="mb-2"><strong>europe-west1</strong> (Bélgica) — Baja latencia para clientes europeos.</p>
+            <h5 class="mt-3"><i class="bi bi-geo text-primary"></i> Región DR</h5>
+            <p class="mb-0"><strong>europe-west3</strong> (Frankfurt) — Disaster Recovery con replicación asíncrona.</p>
+        </div>
+    </div>
+</div>

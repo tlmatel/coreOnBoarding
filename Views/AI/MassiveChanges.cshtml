@@ -1,0 +1,133 @@
+@{
+    ViewData["Title"] = "Cambios masivos con IA";
+}
+
+<h1 class="mb-3">Cambios Masivos con <span class="text-primary">Agentes IA</span></h1>
+<p class="lead">
+    Modifica miles de registros de una sola vez simplemente <strong>describiendo en lenguaje natural</strong>
+    qué quieres cambiar. El agente interpreta tu petición, localiza los registros afectados,
+    te muestra una previsualización y ejecuta el cambio con trazabilidad completa.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Ejemplos de uso</h3>
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
+            <h6><i class="bi bi-chat-left-text text-primary"></i> Actualización de precios</h6>
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "Sube un 3% todos los artículos de la tarifa PVP cuyo proveedor sea Schneider y que no se hayan modificado en los últimos 60 días"
+            </div>
+            <p class="small text-muted mb-0">El agente identifica 1.247 artículos, muestra ejemplo de antes/después y pide confirmación.</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
+            <h6><i class="bi bi-chat-left-text text-primary"></i> Reclasificación</h6>
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "Mueve todos los clientes de la zona Norte que facturen menos de 5.000€/año a la categoría C y asígnalos al comercial Pedro García"
+            </div>
+            <p class="small text-muted mb-0">El agente detecta 89 clientes, desglosa el impacto en cartera y solicita validación.</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
+            <h6><i class="bi bi-chat-left-text text-primary"></i> Corrección de datos</h6>
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "Pon el campo 'país' a 'España' en todos los proveedores que tengan código postal entre 01000 y 52999 y el país esté vacío"
+            </div>
+            <p class="small text-muted mb-0">El agente localiza 56 proveedores con el campo vacío y los corrige en bloque.</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
+            <h6><i class="bi bi-chat-left-text text-primary"></i> Activación / Desactivación</h6>
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "Desactiva todos los artículos que no hayan tenido movimiento de stock ni ventas en los últimos 18 meses"
+            </div>
+            <p class="small text-muted mb-0">El agente analiza histórico, identifica 2.340 artículos "muertos" y propone la baja.</p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Flujo de ejecución</h3>
+<div class="p-4 rounded" style="background:#f8fafe; border:1px solid #e0eaf5;">
+    <div class="row text-center">
+        <div class="col">
+            <div class="p-3 rounded" style="background:#0d6efd; color:#fff; border-radius:8px;">
+                <i class="bi bi-chat-dots fs-4"></i>
+                <div class="small mt-1"><strong>Prompt</strong></div>
+            </div>
+            <div class="small text-muted mt-1">Usuario describe</div>
+        </div>
+        <div class="col-auto d-flex align-items-center"><i class="bi bi-arrow-right text-muted"></i></div>
+        <div class="col">
+            <div class="p-3 rounded" style="background:#6f42c1; color:#fff; border-radius:8px;">
+                <i class="bi bi-cpu fs-4"></i>
+                <div class="small mt-1"><strong>Análisis</strong></div>
+            </div>
+            <div class="small text-muted mt-1">Agente interpreta</div>
+        </div>
+        <div class="col-auto d-flex align-items-center"><i class="bi bi-arrow-right text-muted"></i></div>
+        <div class="col">
+            <div class="p-3 rounded" style="background:#fd7e14; color:#fff; border-radius:8px;">
+                <i class="bi bi-eye fs-4"></i>
+                <div class="small mt-1"><strong>Preview</strong></div>
+            </div>
+            <div class="small text-muted mt-1">Muestra impacto</div>
+        </div>
+        <div class="col-auto d-flex align-items-center"><i class="bi bi-arrow-right text-muted"></i></div>
+        <div class="col">
+            <div class="p-3 rounded" style="background:#198754; color:#fff; border-radius:8px;">
+                <i class="bi bi-check-circle fs-4"></i>
+                <div class="small mt-1"><strong>Confirma</strong></div>
+            </div>
+            <div class="small text-muted mt-1">Usuario aprueba</div>
+        </div>
+        <div class="col-auto d-flex align-items-center"><i class="bi bi-arrow-right text-muted"></i></div>
+        <div class="col">
+            <div class="p-3 rounded" style="background:#20c997; color:#fff; border-radius:8px;">
+                <i class="bi bi-lightning fs-4"></i>
+                <div class="small mt-1"><strong>Ejecuta</strong></div>
+            </div>
+            <div class="small text-muted mt-1">Aplicación + log</div>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Garantías</h3>
+<div class="row g-3">
+    <div class="col-md-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-arrow-counterclockwise fs-2 text-primary"></i>
+            <h6 class="mt-2">Rollback</h6>
+            <p class="small mb-0">Cada operación masiva se puede deshacer al completo.</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-journal-check fs-2 text-success"></i>
+            <h6 class="mt-2">Auditoría</h6>
+            <p class="small mb-0">Log detallado de qué se cambió, por quién y cuándo.</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-shield-lock fs-2 text-warning"></i>
+            <h6 class="mt-2">Permisos</h6>
+            <p class="small mb-0">Solo ejecuta lo que el usuario tiene permitido hacer.</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-speedometer2 fs-2 text-danger"></i>
+            <h6 class="mt-2">Límites</h6>
+            <p class="small mb-0">Umbrales configurables para evitar cambios accidentales.</p>
+        </div>
+    </div>
+</div>

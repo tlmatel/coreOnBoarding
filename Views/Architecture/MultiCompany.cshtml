@@ -1,0 +1,115 @@
+@{
+    ViewData["Title"] = "Multi Empresa / Sede";
+}
+
+<h1 class="mb-3">Multi Empresa / <span class="text-primary">Sede</span></h1>
+<p class="lead">
+    Core OnBoarding soporta de forma nativa la gestión <strong>multi-empresa y multi-sede</strong>,
+    permitiendo que una misma instalación sirva a varias sociedades, delegaciones o centros de trabajo
+    con datos aislados y configuraciones independientes.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Modelo de datos</h3>
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="p-4 rounded" style="background:#f8fafe; border:1px solid #e0eaf5;">
+            <table class="table table-sm table-bordered mb-0">
+                <thead class="table-light">
+                    <tr><th>Concepto</th><th>Descripción</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Tenant</strong></td><td>Entidad raíz — representa al cliente (grupo empresarial)</td></tr>
+                    <tr><td><strong>Empresa</strong></td><td>Sociedad jurídica dentro del tenant (CIF propio, contabilidad separada)</td></tr>
+                    <tr><td><strong>Sede / Delegación</strong></td><td>Centro de trabajo físico dentro de una empresa</td></tr>
+                    <tr><td><strong>Almacén</strong></td><td>Ubicación logística vinculada a una sede</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-diagram-2 text-primary"></i> Jerarquía</h5>
+            <div class="ps-3 small" style="border-left: 3px solid #0d6efd;">
+                <div class="mb-1"><strong>Tenant</strong> (Grupo ABC)</div>
+                <div class="ps-3 mb-1">├─ Empresa 1 (ABC Madrid S.L.)</div>
+                <div class="ps-4 mb-1">├─ Sede Central</div>
+                <div class="ps-4 mb-1">└─ Delegación Sur</div>
+                <div class="ps-3 mb-1">├─ Empresa 2 (ABC Barcelona S.A.)</div>
+                <div class="ps-4 mb-1">└─ Sede Única</div>
+                <div class="ps-3">└─ Empresa 3 (ABC Portugal Lda.)</div>
+                <div class="ps-4">└─ Filial Lisboa</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Capacidades principales</h3>
+<div class="row g-3">
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h6><i class="bi bi-building text-primary"></i> Configuración por empresa</h6>
+            <ul class="small mb-0">
+                <li>Datos fiscales y razón social propios</li>
+                <li>Secuencias de documentos independientes</li>
+                <li>Plan contable y ejercicios separados</li>
+                <li>Condiciones comerciales por sociedad</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h6><i class="bi bi-geo-alt text-primary"></i> Configuración por sede</h6>
+            <ul class="small mb-0">
+                <li>Dirección y datos de contacto propios</li>
+                <li>Almacenes y stock segregado</li>
+                <li>Tarifas y descuentos locales</li>
+                <li>Horarios y calendarios laborales</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h6><i class="bi bi-arrows-move text-primary"></i> Operaciones inter-empresa</h6>
+            <ul class="small mb-0">
+                <li>Transferencias de stock entre sedes</li>
+                <li>Facturación inter-company automática</li>
+                <li>Consolidación contable a nivel grupo</li>
+                <li>Reporting consolidado o por entidad</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Control de acceso por entidad</h3>
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-person-gear text-primary"></i> Usuarios y permisos</h5>
+            <p>Cada usuario se asocia a una o varias empresas/sedes con permisos granulares:</p>
+            <ul class="small mb-0">
+                <li><strong>Acceso global</strong> — Ve todas las empresas del tenant (director general)</li>
+                <li><strong>Acceso multi-empresa</strong> — Accede a un subconjunto de sociedades</li>
+                <li><strong>Acceso por sede</strong> — Solo ve datos de su delegación</li>
+                <li>Cambio de contexto empresa/sede sin cerrar sesión</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-funnel text-primary"></i> Filtrado automático</h5>
+            <p>El sistema aplica filtros de forma transparente:</p>
+            <ul class="small mb-0">
+                <li>Todas las consultas se filtran por empresa/sede activa</li>
+                <li>Los documentos se generan con la identidad de la empresa seleccionada</li>
+                <li>Los listados solo muestran registros de las entidades autorizadas</li>
+                <li>Los informes se acotan al contexto del usuario</li>
+            </ul>
+        </div>
+    </div>
+</div>

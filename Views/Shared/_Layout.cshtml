@@ -1,0 +1,281 @@
+@{
+    var ctrl = ViewContext.RouteData.Values["controller"]?.ToString();
+    var act = ViewContext.RouteData.Values["action"]?.ToString();
+    string Active(string controller, string action) =>
+        ctrl == controller && act == action ? "active" : "";
+    string Expanded(string controller) =>
+        ctrl == controller ? "true" : "false";
+    string Show(string controller) =>
+        ctrl == controller ? "show" : "";
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - coreOnBoarding</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/coreOnBoarding.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-inner">
+            <button class="btn btn-sm d-lg-none me-3 header-toggle" type="button" onclick="toggleSidebar()">
+                <i class="bi bi-list"></i>
+            </button>
+            <a class="header-brand" asp-controller="Home" asp-action="Index">
+                <div class="header-logo">C</div>
+                <div class="header-titles">
+                    <span class="header-title">Core <strong>OnBoarding</strong></span>
+                    <span class="header-tagline">Todo lo que hay que saber de Core y no te han contado</span>
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <div class="layout-wrapper">
+        <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleSidebar()"></div>
+
+        <aside class="sidebar" id="sidebar">
+            <nav class="pt-2">
+                <!-- HOME -->
+                <div class="sidebar-section">
+                    <a asp-controller="Home" asp-action="Index"
+                       class="section-header text-decoration-none @(ctrl == "Home" ? "text-primary" : "")">
+                        <i class="bi bi-house-door"></i> Inicio
+                    </a>
+                </div>
+
+                <!-- 1. VISIÓN GENERAL -->
+                <div class="sidebar-section">
+                    <button class="section-header" data-bs-toggle="collapse" data-bs-target="#sec1"
+                            aria-expanded="@Expanded("ProductOverview")">
+                        <i class="bi bi-eye"></i> 1. Visión General
+                        <i class="bi bi-chevron-right chevron"></i>
+                    </button>
+                    <div class="collapse @Show("ProductOverview")" id="sec1">
+                        <nav class="nav flex-column pb-2">
+                            <a class="nav-link @Active("ProductOverview","Platform")" asp-controller="ProductOverview" asp-action="Platform">1.1 Qué es la plataforma</a>
+                            <a class="nav-link @Active("ProductOverview","TargetAudience")" asp-controller="ProductOverview" asp-action="TargetAudience">1.2 Público objetivo</a>
+                            <a class="nav-link @Active("ProductOverview","ValueProposition")" asp-controller="ProductOverview" asp-action="ValueProposition">1.3 Propuesta de valor</a>
+                            <a class="nav-link @Active("ProductOverview","KeyConcepts")" asp-controller="ProductOverview" asp-action="KeyConcepts">1.4 Conceptos clave</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- 2. ARQUITECTURA FUNCIONAL -->
+                <div class="sidebar-section">
+                    <button class="section-header" data-bs-toggle="collapse" data-bs-target="#sec2"
+                            aria-expanded="@Expanded("Architecture")">
+                        <i class="bi bi-diagram-3"></i> 2. Arquitectura Funcional
+                        <i class="bi bi-chevron-right chevron"></i>
+                    </button>
+                    <div class="collapse @Show("Architecture")" id="sec2">
+                        <nav class="nav flex-column pb-2">
+                            <a class="nav-link @Active("Architecture","Modules")" asp-controller="Architecture" asp-action="Modules">2.1 Estructura de módulos</a>
+                            <a class="nav-link @Active("Architecture","ModuleRelations")" asp-controller="Architecture" asp-action="ModuleRelations">2.2 Relación entre módulos</a>
+                            <a class="nav-link @Active("Architecture","Navigation")" asp-controller="Architecture" asp-action="Navigation">2.3 Navegación general</a>
+                            <a class="nav-link @Active("Architecture","RolesProfiles")" asp-controller="Architecture" asp-action="RolesProfiles">2.4 Roles y perfiles</a>
+                            <a class="nav-link @Active("Architecture","MultiCompany")" asp-controller="Architecture" asp-action="MultiCompany">2.5 Multi Empresa / Sede</a>
+                            <a class="nav-link @Active("Architecture","Security")" asp-controller="Architecture" asp-action="Security">2.6 Seguridad</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- 3. CONCEPTOS TÉCNICOS -->
+                <div class="sidebar-section">
+                    <button class="section-header" data-bs-toggle="collapse" data-bs-target="#sec3"
+                            aria-expanded="@Expanded("TechnicalConcepts")">
+                        <i class="bi bi-cpu"></i> 3. Conceptos Técnicos
+                        <i class="bi bi-chevron-right chevron"></i>
+                    </button>
+                    <div class="collapse @Show("TechnicalConcepts")" id="sec3">
+                        <nav class="nav flex-column pb-2">
+                            <a class="nav-link @Active("TechnicalConcepts","Saas")" asp-controller="TechnicalConcepts" asp-action="Saas">3.1 Qué significa SaaS</a>
+                            <a class="nav-link @Active("TechnicalConcepts","HighLevel")" asp-controller="TechnicalConcepts" asp-action="HighLevel">3.2 Arquitectura de alto nivel</a>
+                            <a class="nav-link @Active("TechnicalConcepts","Security")" asp-controller="TechnicalConcepts" asp-action="Security">3.3 Seguridad</a>
+                            <a class="nav-link @Active("TechnicalConcepts","Integrations")" asp-controller="TechnicalConcepts" asp-action="Integrations">3.4 Integraciones</a>
+                            <a class="nav-link @Active("TechnicalConcepts","Performance")" asp-controller="TechnicalConcepts" asp-action="Performance">3.5 Rendimiento y escalabilidad</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- 4. GUÍA FUNCIONAL -->
+                <div class="sidebar-section">
+                    <button class="section-header" data-bs-toggle="collapse" data-bs-target="#sec4"
+                            aria-expanded="@Expanded("FunctionalGuide")">
+                        <i class="bi bi-book"></i> 4. Guía Funcional por Área
+                        <i class="bi bi-chevron-right chevron"></i>
+                    </button>
+                    <div class="collapse @Show("FunctionalGuide")" id="sec4">
+                        <nav class="nav flex-column pb-2">
+                            <a class="nav-link @Active("FunctionalGuide","Index")" asp-controller="FunctionalGuide" asp-action="Index">4.0 Visión general</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- 5. ARGUMENTARIO COMERCIAL -->
+                <div class="sidebar-section">
+                    <button class="section-header" data-bs-toggle="collapse" data-bs-target="#sec5"
+                            aria-expanded="@Expanded("Sales")">
+                        <i class="bi bi-megaphone"></i> 5. Argumentario Comercial
+                        <i class="bi bi-chevron-right chevron"></i>
+                    </button>
+                    <div class="collapse @Show("Sales")" id="sec5">
+                        <nav class="nav flex-column pb-2">
+                            <a class="nav-link @Active("Sales","ElevatorPitch")" asp-controller="Sales" asp-action="ElevatorPitch">5.1 Elevator pitch</a>
+                            <a class="nav-link @Active("Sales","Arguments")" asp-controller="Sales" asp-action="Arguments">5.2 Argumentos de venta</a>
+                            <a class="nav-link @Active("Sales","Objections")" asp-controller="Sales" asp-action="Objections">5.3 Objeciones típicas</a>
+                            <a class="nav-link @Active("Sales","Competitors")" asp-controller="Sales" asp-action="Competitors">5.4 Comparativa competidores</a>
+                            <a class="nav-link @Active("Sales","SuccessStories")" asp-controller="Sales" asp-action="SuccessStories">5.5 Casos de éxito</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- 6. IMPLANTACIÓN -->
+                <div class="sidebar-section">
+                    <button class="section-header" data-bs-toggle="collapse" data-bs-target="#sec6"
+                            aria-expanded="@Expanded("Implementation")">
+                        <i class="bi bi-gear"></i> 6. Implantación
+                        <i class="bi bi-chevron-right chevron"></i>
+                    </button>
+                    <div class="collapse @Show("Implementation")" id="sec6">
+                        <nav class="nav flex-column pb-2">
+                            <a class="nav-link @Active("Implementation","Methodology")" asp-controller="Implementation" asp-action="Methodology">6.1 Metodología</a>
+                            <a class="nav-link @Active("Implementation","InitialSetup")" asp-controller="Implementation" asp-action="InitialSetup">6.2 Configuración inicial</a>
+                            <a class="nav-link @Active("Implementation","DataMigration")" asp-controller="Implementation" asp-action="DataMigration">6.3 Migración de datos</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- 7. STACK TECNOLÓGICO -->
+                <div class="sidebar-section">
+                    <button class="section-header" data-bs-toggle="collapse" data-bs-target="#sec7"
+                            aria-expanded="@Expanded("TechStack")">
+                        <i class="bi bi-stack"></i> 7. Stack Tecnológico
+                        <i class="bi bi-chevron-right chevron"></i>
+                    </button>
+                    <div class="collapse @Show("TechStack")" id="sec7">
+                        <nav class="nav flex-column pb-2">
+                            <a class="nav-link @Active("TechStack","Index")" asp-controller="TechStack" asp-action="Index">7.0 Visión general del pipeline</a>
+                            <a class="nav-link @Active("TechStack","Development")" asp-controller="TechStack" asp-action="Development">7.1 Desarrollo & CI</a>
+                            <a class="nav-link @Active("TechStack","Packaging")" asp-controller="TechStack" asp-action="Packaging">7.2 Empaquetado Helm Charts</a>
+                            <a class="nav-link @Active("TechStack","Deployment")" asp-controller="TechStack" asp-action="Deployment">7.3 Despliegue con ArgoCD</a>
+                            <a class="nav-link @Active("TechStack","Operations")" asp-controller="TechStack" asp-action="Operations">7.4 Operaciones</a>
+                            <a class="nav-link @Active("TechStack","Technologies")" asp-controller="TechStack" asp-action="Technologies">7.5 Tecnologías clave</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- 8. OBSERVABILIDAD, MONITORIZACIÓN Y SOPORTE -->
+                <div class="sidebar-section">
+                    <button class="section-header" data-bs-toggle="collapse" data-bs-target="#sec8"
+                            aria-expanded="@Expanded("Support")">
+                        <i class="bi bi-activity"></i> 8. Observabilidad y Soporte
+                        <i class="bi bi-chevron-right chevron"></i>
+                    </button>
+                    <div class="collapse @Show("Support")" id="sec8">
+                        <nav class="nav flex-column pb-2">
+                            <a class="nav-link @Active("Support","Index")" asp-controller="Support" asp-action="Index">8.0 Visión general</a>
+                            <a class="nav-link @Active("Support","Traceability")" asp-controller="Support" asp-action="Traceability">8.1 Trazabilidad completa</a>
+                            <a class="nav-link @Active("Support","Grafana")" asp-controller="Support" asp-action="Grafana">8.2 Grafana</a>
+                            <a class="nav-link @Active("Support","TenantMonitoring")" asp-controller="Support" asp-action="TenantMonitoring">8.3 Monitorización por tenant</a>
+                            <a class="nav-link @Active("Support","UserActivity")" asp-controller="Support" asp-action="UserActivity">8.4 Actividad de usuario</a>
+                            <a class="nav-link @Active("Support","Diagnostics")" asp-controller="Support" asp-action="Diagnostics">8.5 Diagnóstico y soporte</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- 9. PROVEEDOR CLOUD -->
+                <div class="sidebar-section">
+                    <button class="section-header" data-bs-toggle="collapse" data-bs-target="#sec9"
+                            aria-expanded="@Expanded("CloudProvider")">
+                        <i class="bi bi-cloud"></i> 9. Proveedor Cloud
+                        <i class="bi bi-chevron-right chevron"></i>
+                    </button>
+                    <div class="collapse @Show("CloudProvider")" id="sec9">
+                        <nav class="nav flex-column pb-2">
+                            <a class="nav-link @Active("CloudProvider","Index")" asp-controller="CloudProvider" asp-action="Index">9.0 Visión general</a>
+                            <a class="nav-link @Active("CloudProvider","Infrastructure")" asp-controller="CloudProvider" asp-action="Infrastructure">9.1 Infraestructura</a>
+                            <a class="nav-link @Active("CloudProvider","Kubernetes")" asp-controller="CloudProvider" asp-action="Kubernetes">9.2 Kubernetes (GKE)</a>
+                            <a class="nav-link @Active("CloudProvider","Reliability")" asp-controller="CloudProvider" asp-action="Reliability">9.3 Redundancia y HA</a>
+                            <a class="nav-link @Active("CloudProvider","Backups")" asp-controller="CloudProvider" asp-action="Backups">9.4 Copias de seguridad</a>
+                            <a class="nav-link @Active("CloudProvider","Security")" asp-controller="CloudProvider" asp-action="Security">9.5 Seguridad cloud</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- 10. INTELIGENCIA ARTIFICIAL -->
+                <div class="sidebar-section">
+                    <button class="section-header" data-bs-toggle="collapse" data-bs-target="#sec10"
+                            aria-expanded="@Expanded("AI")">
+                        <i class="bi bi-robot"></i> 10. Inteligencia Artificial
+                        <i class="bi bi-chevron-right chevron"></i>
+                    </button>
+                    <div class="collapse @Show("AI")" id="sec10">
+                        <nav class="nav flex-column pb-2">
+                            <a class="nav-link @Active("AI","Index")" asp-controller="AI" asp-action="Index">10.0 Visión general</a>
+                            <a class="nav-link @Active("AI","MassiveChanges")" asp-controller="AI" asp-action="MassiveChanges">10.1 Cambios masivos</a>
+                            <a class="nav-link @Active("AI","Widgets")" asp-controller="AI" asp-action="Widgets">10.2 Widgets y gráficos</a>
+                            <a class="nav-link @Active("AI","Reports")" asp-controller="AI" asp-action="Reports">10.3 Reports y formularios</a>
+                            <a class="nav-link @Active("AI","Filters")" asp-controller="AI" asp-action="Filters">10.4 Diseño de filtros</a>
+                            <a class="nav-link @Active("AI","Mcp")" asp-controller="AI" asp-action="Mcp">10.5 MCP (Model Context Protocol)</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- 11. INTEGRACIONES CON BANCOS DE DATOS -->
+                <div class="sidebar-section">
+                    <button class="section-header" data-bs-toggle="collapse" data-bs-target="#sec11"
+                            aria-expanded="@Expanded("DataBanks")">
+                        <i class="bi bi-database-gear"></i> 11. Bancos de Datos
+                        <i class="bi bi-chevron-right chevron"></i>
+                    </button>
+                    <div class="collapse @Show("DataBanks")" id="sec11">
+                        <nav class="nav flex-column pb-2">
+                            <a class="nav-link @Active("DataBanks","Index")" asp-controller="DataBanks" asp-action="Index">11.0 Visión general</a>
+                            <a class="nav-link @Active("DataBanks","Edam")" asp-controller="DataBanks" asp-action="Edam">11.1 eDam / Electronet</a>
+                            <a class="nav-link @Active("DataBanks","GoCatalog")" asp-controller="DataBanks" asp-action="GoCatalog">11.2 GO!Catalog</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- 12. DESPLIEGUE Y ACTUALIZACIONES -->
+                <div class="sidebar-section">
+                    <button class="section-header" data-bs-toggle="collapse" data-bs-target="#sec12"
+                            aria-expanded="@Expanded("Releases")">
+                        <i class="bi bi-rocket-takeoff"></i> 12. Despliegue y Versiones
+                        <i class="bi bi-chevron-right chevron"></i>
+                    </button>
+                    <div class="collapse @Show("Releases")" id="sec12">
+                        <nav class="nav flex-column pb-2">
+                            <a class="nav-link @Active("Releases","Index")" asp-controller="Releases" asp-action="Index">12.0 Visión general</a>
+                            <a class="nav-link @Active("Releases","Environments")" asp-controller="Releases" asp-action="Environments">12.1 Entornos compartidos</a>
+                            <a class="nav-link @Active("Releases","VersionFlow")" asp-controller="Releases" asp-action="VersionFlow">12.2 De Beta a Stable</a>
+                            <a class="nav-link @Active("Releases","Hotfix")" asp-controller="Releases" asp-action="Hotfix">12.3 Hotfixes</a>
+                        </nav>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <div class="main-content">
+            @RenderBody()
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('show');
+            document.getElementById('sidebarBackdrop').classList.toggle('show');
+        }
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
