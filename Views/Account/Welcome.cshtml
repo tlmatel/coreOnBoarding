@@ -1,0 +1,106 @@
+@{
+    ViewData["Title"] = "Bienvenido";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bienvenido - Core OnBoarding</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8eeff 50%, #f5f0ff 100%);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+        .welcome-card {
+            max-width: 460px;
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            border: none;
+        }
+        .welcome-header {
+            background: linear-gradient(135deg, #0d6efd 0%, #4f9cff 100%);
+            color: white;
+            padding: 3rem 2rem 2.5rem;
+            text-align: center;
+        }
+        .welcome-logo {
+            width: 72px;
+            height: 72px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            backdrop-filter: blur(10px);
+        }
+        .welcome-header h2 {
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        .welcome-header p {
+            opacity: 0.85;
+            font-size: 0.95rem;
+        }
+        .card-body {
+            padding: 2rem;
+        }
+        .btn-auth0 {
+            background: linear-gradient(135deg, #0d6efd, #4f9cff);
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            padding: 0.8rem;
+            font-size: 1.05rem;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+        .btn-auth0:hover {
+            background: linear-gradient(135deg, #0b5ed7, #3d8bef);
+            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(13,110,253,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-card shadow-lg card">
+        <div class="welcome-header">
+            <div class="welcome-logo">C</div>
+            <h2>Core <strong>OnBoarding</strong></h2>
+            <p class="mb-0">Todo lo que hay que saber de Core y no te han contado</p>
+        </div>
+        <div class="card-body">
+            <h5 class="fw-semibold mb-2">Acceso seguro</h5>
+            <p class="text-muted mb-4">
+                Para acceder al portal necesitas autenticarte con tu cuenta corporativa mediante Auth0.
+            </p>
+            <div class="d-grid">
+                <a asp-controller="Account" asp-action="Login" class="btn btn-auth0">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Iniciar sesión con Auth0
+                </a>
+            </div>
+            <div class="text-center mt-3">
+                <small class="text-muted">
+                    <i class="bi bi-shield-check me-1"></i>
+                    Conexión segura mediante SSO
+                </small>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

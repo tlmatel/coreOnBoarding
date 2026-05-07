@@ -26,13 +26,34 @@
             <button class="btn btn-sm d-lg-none me-3 header-toggle" type="button" onclick="toggleSidebar()">
                 <i class="bi bi-list"></i>
             </button>
-            <a class="header-brand" asp-controller="Home" asp-action="Index">
+            <a class="header-brand" asp-controller="Home" asp-action="Index"
+               title="@(User.FindFirst("hubrd_debug")?.Value ?? "No auth data")">
                 <div class="header-logo">C</div>
                 <div class="header-titles">
                     <span class="header-title">Core <strong>OnBoarding</strong></span>
                     <span class="header-tagline">Todo lo que hay que saber de Core y no te han contado</span>
                 </div>
             </a>
+            <div class="ms-auto d-flex align-items-center">
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <a asp-controller="Account" asp-action="Profile"
+                       class="btn btn-sm btn-outline-primary me-2" title="Mi perfil">
+                        <i class="bi bi-person-circle me-1"></i>@(User.Identity.Name ?? "Usuario")
+                    </a>
+                    <a asp-controller="Account" asp-action="Logout"
+                       class="btn btn-sm btn-outline-secondary" title="Cerrar sesión">
+                        <i class="bi bi-box-arrow-right"></i>
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Login"
+                       class="btn btn-sm btn-primary">
+                        <i class="bi bi-box-arrow-in-right me-1"></i>Iniciar sesión
+                    </a>
+                }
+            </div>
         </div>
     </header>
 
@@ -296,6 +317,21 @@
         </aside>
 
         <div class="main-content">
+            @if (User.Identity?.IsAuthenticated == true && ViewContext.HttpContext.Request.Query.ContainsKey("debug"))
+            {
+                <div class="alert alert-secondary mx-3 mt-3" style="font-size:0.8rem;">
+                    <strong>DEBUG Claims:</strong>
+                    <br/>IsInRole("onboarding-admin"): <strong>@User.IsInRole("onboarding-admin")</strong>
+                    &nbsp;|&nbsp; IsInRole("onboarding-user"): <strong>@User.IsInRole("onboarding-user")</strong>
+                    <hr class="my-1"/>
+                    <ul class="mb-0">
+                        @foreach (var claim in User.Claims)
+                        {
+                            <li><strong>@claim.Type</strong>: @claim.Value</li>
+                        }
+                    </ul>
+                </div>
+            }
             @RenderBody()
         </div>
     </div>

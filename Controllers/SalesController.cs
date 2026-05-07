@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace coreOnBoarding.Controllers;
 
+[Authorize]
 public class SalesController : Controller
 {
     public IActionResult ElevatorPitch() => View();
