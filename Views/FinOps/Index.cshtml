@@ -1,0 +1,186 @@
+@{
+    ViewData["Title"] = "FinOps";
+}
+
+<h1 class="mb-3">Fin<span class="text-primary">Ops</span></h1>
+<p class="lead">
+    <strong>FinOps (Financial Operations)</strong> es la práctica que une ingeniería, finanzas y negocio
+    para gestionar de forma colaborativa el coste de la infraestructura cloud, maximizando el valor
+    obtenido por cada euro invertido.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">¿Qué es FinOps?</h3>
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="p-4 rounded" style="background:#f8fafe; border:1px solid #e0eaf5;">
+            <p>
+                En un modelo cloud como el de Core OnBoarding (Google Cloud + Kubernetes),
+                los costes de infraestructura son <strong>variables y elásticos</strong>:
+                crecen y decrecen según el uso. FinOps establece las prácticas para:
+            </p>
+            <ul class="mb-0">
+                <li><strong>Visibilizar</strong> — Saber exactamente cuánto cuesta cada componente, servicio y tenant</li>
+                <li><strong>Optimizar</strong> — Eliminar desperdicio, dimensionar correctamente, usar descuentos</li>
+                <li><strong>Operar</strong> — Tomar decisiones de ingeniería con consciencia de coste</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="topic-card h-100 p-4 text-center">
+            <div class="mb-3">
+                <div class="rounded-circle d-inline-flex align-items-center justify-content-center" style="width:80px; height:80px; background:linear-gradient(135deg, #0d6efd, #198754); color:#fff;">
+                    <i class="bi bi-currency-exchange fs-1"></i>
+                </div>
+            </div>
+            <h5>Los 3 pilares</h5>
+            <div class="d-flex justify-content-center gap-2 mt-2">
+                <span class="badge bg-primary px-3 py-2">Informar</span>
+                <span class="badge bg-success px-3 py-2">Optimizar</span>
+                <span class="badge bg-warning text-dark px-3 py-2">Operar</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">¿Por qué FinOps en Core OnBoarding?</h3>
+<div class="p-4 rounded" style="background:#fff8e6; border:1px solid #f0d060;">
+    <p class="mb-0">
+        Core OnBoarding opera en <strong>Google Cloud con Kubernetes (GKE)</strong>, ejecutando una
+        plataforma multitenant que sirve a múltiples clientes sobre infraestructura compartida.
+        El coste de esa infraestructura se reparte entre todos los tenants. FinOps nos permite
+        saber <strong>cuánto cuesta servir a cada cliente</strong>, optimizar los recursos y trasladar
+        ese ahorro al precio final.
+    </p>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Beneficios para la organización</h3>
+<div class="row g-4">
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-eye text-primary"></i> Visibilidad total de costes</h5>
+            <ul class="small mb-0">
+                <li>Coste desglosado por servicio GCP (GKE, Cloud SQL, Storage, etc.)</li>
+                <li>Coste atribuido por tenant / cliente</li>
+                <li>Coste por entorno (Dev, Staging, Producción)</li>
+                <li>Evolución temporal y tendencias</li>
+                <li>Alertas cuando un coste se desvía del presupuesto</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-graph-down-arrow text-success"></i> Optimización continua</h5>
+            <ul class="small mb-0">
+                <li>Right-sizing de nodos y pods (no sobredimensionar)</li>
+                <li>Committed Use Discounts (GCP) para carga base</li>
+                <li>Spot/preemptible nodes para jobs no críticos</li>
+                <li>Autoescalado inteligente (escalar hacia abajo también)</li>
+                <li>Limpieza de recursos huérfanos (discos, IPs, snapshots)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-piggy-bank text-warning"></i> Margen predecible</h5>
+            <ul class="small mb-0">
+                <li>Saber el coste real de servir a cada cliente</li>
+                <li>Pricing basado en datos, no en estimaciones</li>
+                <li>Detectar clientes con coste desproporcionado</li>
+                <li>Presupuestos mensuales con tracking automático</li>
+                <li>Previsión de costes ante crecimiento de clientes</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-people text-info"></i> Cultura de responsabilidad</h5>
+            <ul class="small mb-0">
+                <li>Ingeniería decide con consciencia de coste</li>
+                <li>Cada equipo ve el impacto económico de sus decisiones</li>
+                <li>Reviews de coste en cada sprint</li>
+                <li>Accountability compartida entre tech y negocio</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-speedometer2 text-danger"></i> Eficiencia operativa</h5>
+            <ul class="small mb-0">
+                <li>Menos desperdicio = menos coste = mejor precio</li>
+                <li>Infraestructura compartida bien dimensionada</li>
+                <li>Actualizaciones sin duplicar entornos</li>
+                <li>Monitorización de coste como parte del CI/CD</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-bar-chart text-secondary"></i> Reporting ejecutivo</h5>
+            <ul class="small mb-0">
+                <li>Dashboard de costes cloud en Grafana</li>
+                <li>Informe mensual automático por área</li>
+                <li>Comparativa mes a mes, trimestre a trimestre</li>
+                <li>KPIs: coste por usuario, coste por transacción</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Beneficios para el cliente final</h3>
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="topic-card h-100 p-4 text-center">
+            <i class="bi bi-cash-coin fs-1 text-success"></i>
+            <h5 class="mt-2">Precio justo</h5>
+            <p class="small mb-0">
+                La optimización de costes cloud se traslada directamente al precio de la suscripción.
+                Menos desperdicio interno = mejor precio para el cliente.
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="topic-card h-100 p-4 text-center">
+            <i class="bi bi-receipt-cutoff fs-1 text-primary"></i>
+            <h5 class="mt-2">Coste predecible</h5>
+            <p class="small mb-0">
+                Cuota mensual fija. El cliente no sufre picos de coste ni sorpresas por consumo.
+                FinOps absorbe la variabilidad internamente.
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="topic-card h-100 p-4 text-center">
+            <i class="bi bi-rocket-takeoff fs-1 text-warning"></i>
+            <h5 class="mt-2">Rendimiento garantizado</h5>
+            <p class="small mb-0">
+                Optimizar no es recortar: es dimensionar bien. El cliente recibe un servicio
+                rápido y fiable sin pagar por recursos ociosos.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">FinOps en la práctica — Core OnBoarding</h3>
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr><th>Práctica</th><th>Qué hacemos</th><th>Herramienta</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>Etiquetado de recursos</td><td>Todo recurso GCP tiene labels: entorno, equipo, servicio, tenant</td><td>Terraform + políticas GCP</td></tr>
+        <tr><td>Presupuestos y alertas</td><td>Budgets por proyecto GCP con alertas al 80%, 100%, 120%</td><td>GCP Billing Budgets</td></tr>
+        <tr><td>Coste por tenant</td><td>Atribución de coste por namespace K8s → tenant</td><td>Kubecost / OpenCost</td></tr>
+        <tr><td>Right-sizing</td><td>Revisión mensual de requests/limits vs uso real en pods</td><td>GKE Recommender + Grafana</td></tr>
+        <tr><td>Committed Use</td><td>Reserva de cómputo base con descuentos de hasta 57%</td><td>GCP CUD</td></tr>
+        <tr><td>Reporting</td><td>Dashboard mensual con desglose y tendencias</td><td>Grafana + BigQuery export</td></tr>
+    </tbody>
+</table>
