@@ -1,0 +1,107 @@
+@{
+    ViewData["Title"] = "Gestión de usuarios";
+}
+
+<h1 class="mb-3">Gestión de <span class="text-primary">Usuarios</span></h1>
+<p class="lead">
+    La tabla maestra de usuarios existe dentro de <strong>Auth0</strong>. La gestión principal
+    la realizarán los propios administradores del sistema desde el frontend de Core.
+    El Panel de Control expone una API y herramientas complementarias.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">API de gestión de usuarios</h3>
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-person-lines-fill text-primary"></i> Consulta</h5>
+            <p class="small">Obtener datos del usuario según Auth0:</p>
+            <ul class="small mb-0">
+                <li>Código e identificador</li>
+                <li>Correo electrónico</li>
+                <li>Nombre completo</li>
+                <li>Roles asignados</li>
+                <li>Tenants a los que pertenece</li>
+                <li>Estado (activo / bloqueado)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-person-plus text-success"></i> Creación</h5>
+            <p class="small">Crear nuevos usuarios en Auth0:</p>
+            <ul class="small mb-0">
+                <li>Respetar los <strong>límites de licencia</strong> del tenant</li>
+                <li>Asociar el usuario a un tenant existente</li>
+                <li>Un mismo usuario puede pertenecer a <strong>más de un tenant</strong></li>
+                <li>Asignar roles iniciales</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Operaciones disponibles</h3>
+<div class="row g-3">
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card p-3 h-100">
+            <h6 class="small fw-bold"><i class="bi bi-person-dash text-danger"></i> Desasociar usuarios</h6>
+            <p class="small mb-0">
+                Desasociar usuarios de un tenant. Si quedan "libres" (sin ningún tenant), borrarlos de Auth0.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card p-3 h-100">
+            <h6 class="small fw-bold"><i class="bi bi-lock text-warning"></i> Bloqueo / Desbloqueo</h6>
+            <p class="small mb-0">
+                Bloquear o desbloquear usuarios específicos dentro de un tenant.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card p-3 h-100">
+            <h6 class="small fw-bold"><i class="bi bi-key text-primary"></i> Contraseñas</h6>
+            <p class="small mb-0">
+                Modificación o reinicio de contraseñas a través de Auth0.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card p-3 h-100">
+            <h6 class="small fw-bold"><i class="bi bi-shield-check text-success"></i> MFA</h6>
+            <p class="small mb-0">
+                Gestión de autenticación multifactor (activar, desactivar, resetear dispositivos) vía Auth0.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card p-3 h-100">
+            <h6 class="small fw-bold"><i class="bi bi-clock-history text-info"></i> Sesiones</h6>
+            <p class="small mb-0">
+                Ver sesiones activas, cerrar sesiones remotamente, gestionar tokens de refresco.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card p-3 h-100">
+            <h6 class="small fw-bold"><i class="bi bi-person-badge text-secondary"></i> Roles</h6>
+            <p class="small mb-0">
+                Asignar y revocar roles a usuarios dentro de cada tenant.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<div class="p-4 rounded" style="background:#f8fafe; border:1px solid #e0eaf5;">
+    <h6><i class="bi bi-question-circle text-primary"></i> Punto abierto</h6>
+    <p class="small mb-0">
+        No está claro si es necesario replicar la información de Auth0 en el panel de control
+        o si basta con consultarla en tiempo real vía API. La decisión dependerá de los requisitos
+        de rendimiento y de si se necesitan consultas offline o históricas.
+    </p>
+</div>

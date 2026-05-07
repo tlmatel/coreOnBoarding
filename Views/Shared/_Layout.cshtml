@@ -260,6 +260,38 @@
                         </nav>
                     </div>
                 </div>
+
+                <!-- 13. FINOPS -->
+                <div class="sidebar-section">
+                    <button class="section-header" data-bs-toggle="collapse" data-bs-target="#sec13"
+                            aria-expanded="@Expanded("FinOps")">
+                        <i class="bi bi-currency-exchange"></i> 13. FinOps
+                        <i class="bi bi-chevron-right chevron"></i>
+                    </button>
+                    <div class="collapse @Show("FinOps")" id="sec13">
+                        <nav class="nav flex-column pb-2">
+                            <a class="nav-link @Active("FinOps","Index")" asp-controller="FinOps" asp-action="Index">13.0 FinOps en Core</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- 14. BACKOFFICE CORE -->
+                <div class="sidebar-section">
+                    <button class="section-header" data-bs-toggle="collapse" data-bs-target="#sec14"
+                            aria-expanded="@Expanded("BackOffice")">
+                        <i class="bi bi-sliders2"></i> 14. BackOffice Core
+                        <i class="bi bi-chevron-right chevron"></i>
+                    </button>
+                    <div class="collapse @Show("BackOffice")" id="sec14">
+                        <nav class="nav flex-column pb-2">
+                            <a class="nav-link @Active("BackOffice","Index")" asp-controller="BackOffice" asp-action="Index">14.0 Panel de Control</a>
+                            <a class="nav-link @Active("BackOffice","Instances")" asp-controller="BackOffice" asp-action="Instances">14.1 Instancias y bases de datos</a>
+                            <a class="nav-link @Active("BackOffice","Tenants")" asp-controller="BackOffice" asp-action="Tenants">14.2 Gestión de tenants</a>
+                            <a class="nav-link @Active("BackOffice","Users")" asp-controller="BackOffice" asp-action="Users">14.3 Gestión de usuarios</a>
+                            <a class="nav-link @Active("BackOffice","Updates")" asp-controller="BackOffice" asp-action="Updates">14.4 Actualizaciones</a>
+                        </nav>
+                    </div>
+                </div>
             </nav>
         </aside>
 

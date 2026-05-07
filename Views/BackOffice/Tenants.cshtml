@@ -1,0 +1,110 @@
+@{
+    ViewData["Title"] = "Gestión de tenants";
+}
+
+<h1 class="mb-3">Gestión de <span class="text-primary">Tenants</span></h1>
+<p class="lead">
+    Gestión de los clientes dados de alta en la plataforma: alta, bloqueo, licenciamiento,
+    monitorización de recursos y configuración técnica.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Información asociada a cada tenant</h3>
+<div class="row g-4">
+    <div class="col-lg-7">
+        <table class="table table-bordered table-sm">
+            <thead class="table-light">
+                <tr><th>Campo</th><th>Descripción</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Identificador (GUID)</strong></td><td>Identificador único propio del tenant</td></tr>
+                <tr><td><strong>ID Auth0</strong></td><td>Identificador del tenant en el servicio de autenticación</td></tr>
+                <tr><td><strong>Nombre</strong></td><td>Nombre comercial del cliente</td></tr>
+                <tr><td><strong>URL base</strong></td><td>Subdominio o dominio completo (ej: <code>cliente.core.com</code>)</td></tr>
+                <tr><td><strong>Estado de bloqueo</strong></td><td>Activo / Bloqueado + motivo (mantenimiento, falta de pago, etc.)</td></tr>
+                <tr><td><strong>Bucket GCS</strong></td><td>Bucket de Google Cloud para su Gestión Documental</td></tr>
+                <tr><td><strong>Instancia y BD</strong></td><td>Instancia y base de datos donde está instalado</td></tr>
+                <tr><td><strong>Máx. usuarios</strong></td><td>Número máximo de usuarios según licencia</td></tr>
+                <tr><td><strong>Límites API</strong></td><td>Rate limits y cuotas de la API</td></tr>
+                <tr><td><strong>Límites Gestión Documental</strong></td><td>Espacio máximo de almacenamiento</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-5">
+        <div class="p-4 rounded" style="background:#fff8e6; border:1px solid #f0d060;">
+            <h6><i class="bi bi-info-circle text-warning"></i> API interna</h6>
+            <p class="small mb-0">
+                Se requerirá una <strong>API interna</strong> para proveer esta información a los
+                servicios de Core (backend, frontend, facturación, etc.). Todo servicio que necesite
+                saber datos del tenant consultará esta API.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Operaciones sobre tenants</h3>
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-plus-circle text-success"></i> Alta de un nuevo tenant</h5>
+            <p class="small">El proceso de alta gestiona todos los aspectos técnicos:</p>
+            <ol class="small mb-0">
+                <li>Crear el tenant en la base de datos</li>
+                <li>Crear el bucket para Gestión Documental</li>
+                <li>Inicializar los datos (empresa inicial, perfiles, etc.)</li>
+                <li>Forzar la carga de datos básicos (parámetros y otros)</li>
+                <li>Crear el subdominio, si procede</li>
+                <li>Configurar el tenant en Auth0</li>
+            </ol>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-bar-chart text-primary"></i> Control y monitorización</h5>
+            <p class="small">Consultar el uso que hace cada tenant de los recursos:</p>
+            <ul class="small mb-0">
+                <li>Cantidad de usuarios dados de alta vs. licencia</li>
+                <li>Tamaño de la base de datos</li>
+                <li>Uso de almacenamiento documental</li>
+                <li>Consumo de API (requests/día)</li>
+                <li><strong>Bloquear o desbloquear</strong> el tenant (mantenimiento, impago, etc.)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Licenciamiento</h3>
+<div class="p-4 rounded" style="background:#f8fafe; border:1px solid #e0eaf5;">
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="topic-card p-3 text-center h-100">
+                <i class="bi bi-people fs-2 text-primary"></i>
+                <h6 class="mt-2">Usuarios</h6>
+                <p class="small mb-0">Máximo de usuarios concurrentes o registrados según contrato.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="topic-card p-3 text-center h-100">
+                <i class="bi bi-speedometer fs-2 text-warning"></i>
+                <h6 class="mt-2">API</h6>
+                <p class="small mb-0">Rate limits y cuotas de llamadas a la API por período.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="topic-card p-3 text-center h-100">
+                <i class="bi bi-hdd fs-2 text-success"></i>
+                <h6 class="mt-2">Almacenamiento</h6>
+                <p class="small mb-0">Espacio máximo para documentos y adjuntos en el bucket.</p>
+            </div>
+        </div>
+    </div>
+    <p class="small text-muted mt-3 mb-0">
+        <i class="bi bi-lightbulb text-warning"></i> Es necesario definir cuáles son los criterios de licenciamiento del producto que se deben controlar.
+        Podría ser útil que administradores del tenant pudieran acceder aquí para ver sus datos y gestionar ciertos aspectos de su suscripción.
+    </p>
+</div>

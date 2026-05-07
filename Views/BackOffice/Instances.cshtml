@@ -1,0 +1,81 @@
+@{
+    ViewData["Title"] = "Instancias y bases de datos";
+}
+
+<h1 class="mb-3">Instancias y <span class="text-primary">Bases de Datos</span></h1>
+<p class="lead">
+    Gestión de las instancias PostgreSQL y sus bases de datos, controlando la distribución
+    de tenants y el uso de recursos.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Funcionalidades</h3>
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-eye text-primary"></i> Visualización de instancias</h5>
+            <p class="small">Ver las instancias y bases de datos en funcionamiento con su nivel de uso para distribuir correctamente los tenants:</p>
+            <ul class="small mb-0">
+                <li>Cantidad de tenants por instancia</li>
+                <li>Espacio en disco (usado / disponible)</li>
+                <li>Datos de CPU y memoria</li>
+                <li>Estado de salud de cada instancia</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-plus-circle text-success"></i> Creación de instancias y BD</h5>
+            <p class="small">Crear nuevas instancias y bases de datos desde el panel:</p>
+            <ul class="small mb-0">
+                <li>Provisionar nueva instancia PostgreSQL con límites de hardware</li>
+                <li>Crear bases de datos dentro de una instancia existente</li>
+                <li>La base de datos determina en qué <strong>entorno</strong> se encontrarán sus tenants</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Modelo de distribución</h3>
+<div class="p-4 rounded" style="background:#f8fafe; border:1px solid #e0eaf5;">
+    <div class="row text-center g-3">
+        <div class="col-md-4">
+            <div class="p-3 rounded" style="background:#0d6efd; color:#fff; border-radius:8px;">
+                <i class="bi bi-hdd-stack fs-3"></i>
+                <div class="mt-1 fw-bold">Instancia PostgreSQL</div>
+                <div class="small opacity-75">Hardware dedicado (CPU, RAM, disco)</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 rounded" style="background:#198754; color:#fff; border-radius:8px;">
+                <i class="bi bi-database fs-3"></i>
+                <div class="mt-1 fw-bold">Base de datos</div>
+                <div class="small opacity-75">1 o más por instancia — define el entorno</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-3 rounded" style="background:#fd7e14; color:#fff; border-radius:8px;">
+                <i class="bi bi-building fs-3"></i>
+                <div class="mt-1 fw-bold">Tenants</div>
+                <div class="small opacity-75">N tenants por base de datos</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Evolución futura</h3>
+<div class="p-4 rounded" style="background:#e3f2fd; border:1px solid #90caf9;">
+    <h6><i class="bi bi-arrow-left-right text-primary"></i> Mover o copiar tenants</h6>
+    <p class="small mb-0">
+        En el futuro deberá existir un proceso que permita <strong>mover o copiar tenants</strong> entre bases de datos, para:
+    </p>
+    <ul class="small mb-0 mt-2">
+        <li><strong>Cambiar un tenant de entorno</strong> (por ejemplo, de Edge a LTS o viceversa)</li>
+        <li><strong>Crear una copia de un tenant</strong> para entorno de pruebas (con datos anonimizados)</li>
+    </ul>
+</div>

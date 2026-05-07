@@ -1,0 +1,111 @@
+@{
+    ViewData["Title"] = "BackOffice Core — Panel de Control";
+}
+
+<h1 class="mb-3">BackOffice <span class="text-primary">Core</span></h1>
+<p class="lead">
+    El <strong>Panel de Control de Core</strong> es la herramienta interna para gestionar
+    instancias de bases de datos, tenants, usuarios y actualizaciones en los distintos entornos
+    de la plataforma.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Conceptos clave</h3>
+<div class="row g-4">
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-hdd-stack text-primary"></i> Instancia de base de datos</h5>
+            <p class="small mb-0">
+                Conjunto de software que gestiona las bases de datos (PostgreSQL), con límites de hardware
+                definidos. Una instancia puede contener <strong>más de una base de datos</strong>.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-folder2-open text-success"></i> Bucket</h5>
+            <p class="small mb-0">
+                Repositorio de archivos en la nube (Google Cloud Storage) utilizado para la
+                <strong>Gestión Documental</strong> de cada tenant.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-building text-warning"></i> Tenant</h5>
+            <p class="small mb-0">
+                El cliente final. Corresponde a una "instalación" virtual del ERP.
+                Cada tenant puede tener varias empresas. Se le asigna un subdominio
+                (ej: <code>cliente.core.com</code>).
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-key text-danger"></i> Auth0</h5>
+            <p class="small mb-0">
+                Servicio de autenticación y autorización de usuarios (login).
+                Un mismo usuario puede pertenecer a <strong>más de un tenant</strong>.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-8">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-layers text-info"></i> Entornos</h5>
+            <p class="small mb-2">Conjunto de servicios (backend, frontend, etc.) desplegados en una versión concreta:</p>
+            <div class="d-flex flex-wrap gap-2">
+                <span class="badge bg-secondary px-3 py-2">Development</span>
+                <span class="badge bg-warning text-dark px-3 py-2">QA</span>
+                <span class="badge bg-success px-3 py-2">Producción LTS</span>
+                <span class="badge bg-primary px-3 py-2">Producción Edge</span>
+            </div>
+            <p class="small text-muted mt-2 mb-0">
+                Development y QA están completamente separados de Producción.
+                Existirán dos versiones del Panel de Control para poder probar cambios.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Secciones del panel</h3>
+<div class="row g-4">
+    <div class="col-md-6 col-lg-3">
+        <a asp-action="Instances" class="text-decoration-none">
+            <div class="topic-card h-100 p-4 text-center">
+                <i class="bi bi-hdd-rack fs-1 text-primary"></i>
+                <h6 class="mt-2 text-dark">Instancias y BD</h6>
+                <p class="small text-muted mb-0">Gestión de instancias PostgreSQL y distribución de tenants.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <a asp-action="Tenants" class="text-decoration-none">
+            <div class="topic-card h-100 p-4 text-center">
+                <i class="bi bi-building fs-1 text-success"></i>
+                <h6 class="mt-2 text-dark">Gestión de Tenants</h6>
+                <p class="small text-muted mb-0">Alta, bloqueo, licenciamiento y monitorización de clientes.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <a asp-action="Users" class="text-decoration-none">
+            <div class="topic-card h-100 p-4 text-center">
+                <i class="bi bi-people fs-1 text-warning"></i>
+                <h6 class="mt-2 text-dark">Gestión de Usuarios</h6>
+                <p class="small text-muted mb-0">Usuarios Auth0, roles, MFA, sesiones y asociación a tenants.</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <a asp-action="Updates" class="text-decoration-none">
+            <div class="topic-card h-100 p-4 text-center">
+                <i class="bi bi-arrow-up-circle fs-1 text-danger"></i>
+                <h6 class="mt-2 text-dark">Actualizaciones</h6>
+                <p class="small text-muted mb-0">Releases, hotfixes, planificación y despliegue en entornos.</p>
+            </div>
+        </a>
+    </div>
+</div>

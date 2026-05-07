@@ -1,0 +1,180 @@
+@{
+    ViewData["Title"] = "Actualizaciones";
+}
+
+<h1 class="mb-3">Gestión de <span class="text-primary">Actualizaciones</span></h1>
+<p class="lead">
+    Planificación y despliegue de actualizaciones en los distintos entornos,
+    con gestión de ventanas de mantenimiento y comunicación a usuarios.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Funcionalidades del panel</h3>
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-box-seam text-primary"></i> Paquetes de actualización</h5>
+            <ul class="small mb-0">
+                <li>Visualizar los paquetes que ha puesto a disposición el equipo de desarrollo</li>
+                <li>Ver contenido de cada paquete (changelog, migraciones de BD, etc.)</li>
+                <li>Planificar su despliegue en los distintos entornos</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-signpost-split text-success"></i> Flujo de despliegue</h5>
+            <p class="small mb-2">Después de QA, las actualizaciones siguen este orden:</p>
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+                <span class="badge bg-warning text-dark px-3 py-2">QA</span>
+                <i class="bi bi-arrow-right text-muted"></i>
+                <span class="badge bg-primary px-3 py-2">Producción Edge</span>
+                <i class="bi bi-arrow-right text-muted"></i>
+                <span class="badge bg-success px-3 py-2">Producción LTS</span>
+            </div>
+            <p class="small text-muted mt-2 mb-0">
+                Edge sirve a un conjunto predeterminado de clientes para validar antes de generalizar.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Tipos de actualización</h3>
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100" style="border-left:4px solid #dc3545;">
+            <h5><i class="bi bi-bandaid text-danger"></i> Hotfixes</h5>
+            <p class="small">Se despliegan <strong>inmediatamente</strong>, sin mantenimiento programado ni tiempo de inactividad.</p>
+            <ul class="small mb-0">
+                <li>Sin ventana de mantenimiento</li>
+                <li>Sin downtime para el usuario</li>
+                <li>Pueden incluir pequeños cambios en BD (crear índice concurrente, añadir campo no obligatorio)</li>
+                <li>Según las capacidades de PostgreSQL para cambios online</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100" style="border-left:4px solid #0d6efd;">
+            <h5><i class="bi bi-arrow-up-circle text-primary"></i> Releases</h5>
+            <p class="small">Requieren <strong>mantenimiento programado</strong>. Se programan por la noche.</p>
+            <ul class="small mb-0">
+                <li>Ventana de mantenimiento planificada</li>
+                <li>Incluyen cambios de BD, backend, frontend</li>
+                <li>Proceso transaccional (rollback si hay error)</li>
+                <li>Primero en Edge, luego en LTS tras validación</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Proceso de despliegue de una Release</h3>
+<div class="p-4 rounded" style="background:#f8fafe; border:1px solid #e0eaf5;">
+    <div class="row g-3">
+        <div class="col-md-6 col-lg-4">
+            <div class="text-center">
+                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-2" style="width:44px; height:44px; background:#6f42c1; color:#fff;">
+                    <strong>1</strong>
+                </div>
+                <h6 class="small fw-bold">Aviso previo</h6>
+                <p class="small text-muted mb-0">
+                    Se publica un aviso consultable por los usuarios indicando día y hora del mantenimiento programado.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="text-center">
+                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-2" style="width:44px; height:44px; background:#fd7e14; color:#fff;">
+                    <strong>2</strong>
+                </div>
+                <h6 class="small fw-bold">Aviso 15 min antes</h6>
+                <p class="small text-muted mb-0">
+                    Se envía mensaje a todos los usuarios conectados: el mantenimiento está por comenzar, deben guardar sus datos.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="text-center">
+                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-2" style="width:44px; height:44px; background:#dc3545; color:#fff;">
+                    <strong>3</strong>
+                </div>
+                <h6 class="small fw-bold">Cierre de sesiones</h6>
+                <p class="small text-muted mb-0">
+                    Se cierran todas las sesiones abiertas y se marcan los tenants afectados como <strong>bloqueados</strong>.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="text-center">
+                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-2" style="width:44px; height:44px; background:#0d6efd; color:#fff;">
+                    <strong>4</strong>
+                </div>
+                <h6 class="small fw-bold">Parar tareas</h6>
+                <p class="small text-muted mb-0">
+                    Se detienen las tareas de larga ejecución (vía código o deteniendo el contenedor).
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="text-center">
+                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-2" style="width:44px; height:44px; background:#198754; color:#fff;">
+                    <strong>5</strong>
+                </div>
+                <h6 class="small fw-bold">Despliegue</h6>
+                <p class="small text-muted mb-0">
+                    Snapshot de BD → Actualizar BD → Deploy servicios. Si hay error: <strong>restaurar y rollback</strong>.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="text-center">
+                <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-2" style="width:44px; height:44px; background:#20c997; color:#fff;">
+                    <strong>6</strong>
+                </div>
+                <h6 class="small fw-bold">Desbloqueo</h6>
+                <p class="small text-muted mb-0">
+                    Se quita el bloqueo a los tenants y los usuarios pueden volver a ingresar.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Garantía transaccional</h3>
+<div class="p-4 rounded" style="background:#fce4ec; border:1px solid #ef9a9a;">
+    <p class="mb-0">
+        <i class="bi bi-exclamation-triangle text-danger"></i>
+        <strong>Cualquier error durante el despliegue debe ser tratado de forma transaccional.</strong>
+        Si algo falla, se restauran las bases de datos desde el snapshot y se vuelven a desplegar
+        las versiones anteriores de los servicios. No se puede dejar nada a medias.
+    </p>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Entornos de producción</h3>
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr><th>Entorno</th><th>Propósito</th><th>Clientes</th><th>Cuándo recibe actualizaciones</th></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><span class="badge bg-primary px-3">Producción Edge</span></td>
+            <td>Validación con clientes reales</td>
+            <td>Conjunto predeterminado de early adopters</td>
+            <td>Inmediatamente después de QA</td>
+        </tr>
+        <tr>
+            <td><span class="badge bg-success px-3">Producción LTS</span></td>
+            <td>Entorno estable para el grueso de clientes</td>
+            <td>Todos los demás clientes</td>
+            <td>Tras validación exitosa en Edge</td>
+        </tr>
+    </tbody>
+</table>
