@@ -1,0 +1,260 @@
+@{
+    ViewData["Title"] = "Multitenancy";
+}
+
+<h1 class="mb-3">Multi<span class="text-primary">tenancy</span></h1>
+<p class="lead">
+    Core OnBoarding utiliza una arquitectura <strong>multitenant</strong> donde múltiples clientes
+    (tenants) comparten la misma infraestructura y aplicación, con aislamiento completo de datos.
+    Cada tenant corresponde a un cliente (grupo empresarial) distinto.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Modelos de tenancy</h3>
+<p>Existen diferentes enfoques de multitenancy, desde el aislamiento total hasta compartición total. Core OnBoarding se posiciona en <strong>Application Tenancy</strong>: aplicación compartida con base de datos segregada.</p>
+
+<style>
+    .mt-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .mt-col { display: flex; flex-direction: column; gap: 6px; }
+    .mt-header { padding: 10px; border-radius: 8px; text-align: center; font-weight: 700; font-size: 0.85rem; color: #fff; }
+    .mt-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+    .mt-cell { padding: 8px 4px; border-radius: 4px; text-align: center; font-size: 0.75rem; font-weight: 600; color: #fff; }
+    .mt-full { padding: 8px 4px; border-radius: 4px; text-align: center; font-size: 0.75rem; font-weight: 600; color: #fff; grid-column: 1 / -1; }
+    .mt-half { padding: 8px 4px; border-radius: 4px; text-align: center; font-size: 0.75rem; font-weight: 600; color: #fff; }
+    .mt-row-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; }
+    .teal { background: #00838f; }
+    .gold { background: #c8a415; }
+    .mt-label { text-align: center; font-size: 0.8rem; color: #666; margin-top: 4px; }
+    @@media (max-width: 767px) { .mt-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>
+
+<div class="p-4 rounded mb-4" style="background:#f5f5f5; border:1px solid #e0e0e0;">
+    <div class="mt-grid">
+        <!-- Isolated Tenancy -->
+        <div class="mt-col">
+            <div class="mt-header teal">Isolated Tenancy</div>
+            <div class="mt-row">
+                <div class="mt-cell teal">Application</div>
+                <div class="mt-cell teal">Application</div>
+                <div class="mt-cell teal">Application</div>
+            </div>
+            <div class="mt-row">
+                <div class="mt-cell teal">Tenant</div>
+                <div class="mt-cell teal">Tenant</div>
+                <div class="mt-cell teal">Tenant</div>
+            </div>
+            <div class="mt-row">
+                <div class="mt-cell teal">DataBase</div>
+                <div class="mt-cell teal">DataBase</div>
+                <div class="mt-cell teal">DataBase</div>
+            </div>
+            <div class="mt-row">
+                <div class="mt-cell teal">Infrastructure</div>
+                <div class="mt-cell teal">Infrastructure</div>
+                <div class="mt-cell teal">Infrastructure</div>
+            </div>
+            <div class="mt-label">Todo separado</div>
+        </div>
+
+        <!-- Infrastructure Tenancy -->
+        <div class="mt-col">
+            <div class="mt-header teal">Infrastructure <small>Tenancy</small></div>
+            <div class="mt-row">
+                <div class="mt-cell teal">Application</div>
+                <div class="mt-cell teal">Application</div>
+                <div class="mt-cell teal">Application</div>
+            </div>
+            <div class="mt-row">
+                <div class="mt-cell teal">Tenant</div>
+                <div class="mt-cell teal">Tenant</div>
+                <div class="mt-cell teal">Tenant</div>
+            </div>
+            <div class="mt-row">
+                <div class="mt-cell teal">DataBase</div>
+                <div class="mt-cell teal">DataBase</div>
+                <div class="mt-cell teal">DataBase</div>
+            </div>
+            <div class="mt-row">
+                <div class="mt-full teal">Infrastructure</div>
+            </div>
+            <div class="mt-label">Infra compartida</div>
+        </div>
+
+        <!-- Application Tenancy -->
+        <div class="mt-col">
+            <div class="mt-header gold">Application <small>Tenancy</small> ★</div>
+            <div class="mt-row">
+                <div class="mt-full gold">Application</div>
+            </div>
+            <div class="mt-row">
+                <div class="mt-cell gold">Tenant</div>
+                <div class="mt-cell gold">Tenant</div>
+                <div class="mt-cell gold">Tenant</div>
+            </div>
+            <div style="display:grid; grid-template-columns: 2fr 1fr; gap:4px;">
+                <div class="mt-half gold">DataBase</div>
+                <div class="mt-half gold">DataBase</div>
+            </div>
+            <div class="mt-row">
+                <div class="mt-full gold">Infrastructure</div>
+            </div>
+            <div class="mt-label"><strong>← Core OnBoarding</strong></div>
+        </div>
+
+        <!-- Shared Tenancy -->
+        <div class="mt-col">
+            <div class="mt-header teal">Shared <small>Tenancy</small></div>
+            <div class="mt-row">
+                <div class="mt-full teal">Application</div>
+            </div>
+            <div class="mt-row">
+                <div class="mt-cell teal">Tenant</div>
+                <div class="mt-cell teal">Tenant</div>
+                <div class="mt-cell teal">Tenant</div>
+            </div>
+            <div class="mt-row">
+                <div class="mt-full teal">DataBase</div>
+            </div>
+            <div class="mt-row">
+                <div class="mt-full teal">Infrastructure</div>
+            </div>
+            <div class="mt-label">Todo compartido</div>
+        </div>
+    </div>
+
+    <!-- Flecha Aislamiento → Compartición -->
+    <div class="d-flex align-items-center mt-4 px-2">
+        <span class="small fw-bold" style="color:#00838f;">Isolating</span>
+        <div class="flex-grow-1 mx-3" style="height:28px; background: linear-gradient(to right, #00838f, #c8a415, #00838f); border-radius: 14px; position:relative;">
+            <div style="position:absolute; left:8px; top:50%; transform:translateY(-50%); color:#fff; font-size:1.1rem;">◀</div>
+            <div style="position:absolute; right:8px; top:50%; transform:translateY(-50%); color:#fff; font-size:1.1rem;">▶</div>
+        </div>
+        <span class="small fw-bold" style="color:#00838f;">Sharing</span>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Jerarquía: Tenant / Empresa / Sede</h3>
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="topic-card h-100 p-4" style="border-left: 4px solid #00838f;">
+            <h5 style="color:#00838f;"><i class="bi bi-building"></i> Tenant</h5>
+            <ol class="small mb-0">
+                <li>Un Tenant corresponde a un <strong>cliente</strong> (grupo empresarial).</li>
+                <li>Un Tenant es <strong>estanco</strong>. No se puede acceder de un tenant a otro.</li>
+                <li>Un usuario puede tener acceso a 1 o varios Tenants.</li>
+            </ol>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="topic-card h-100 p-4" style="border-left: 4px solid #c8a415;">
+            <h5 style="color:#c8a415;"><i class="bi bi-shop"></i> Empresa</h5>
+            <ol class="small mb-0">
+                <li>Las Empresas son independientes entre ellas. Tienen <strong>distinto CIF</strong>.</li>
+                <li>Los artículos, clientes, proveedores y tarifas <strong>podrán compartirse</strong> entre las empresas del Tenant.</li>
+                <li>Países, provincias y divisas serán <strong>comunes</strong> en las empresas del Tenant.</li>
+            </ol>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="topic-card h-100 p-4" style="border-left: 4px solid #198754;">
+            <h5 class="text-success"><i class="bi bi-geo-alt"></i> Sede</h5>
+            <ol class="small mb-0">
+                <li>Los stocks van por sede (<strong>único Almacén</strong>).</li>
+                <li>No se comparte almacén entre Sedes ni empresas.</li>
+                <li>Cada Sede tendrá sus <strong>movimientos de almacén</strong> propios.</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<div class="p-4 rounded" style="background:#fff8e6; border:1px solid #f0d060;">
+    <h5><i class="bi bi-exclamation-triangle text-warning"></i> Principio clave de diseño</h5>
+    <p class="mb-0">
+        La Aplicación, <strong>a nivel de usuario, no es multiempresa</strong>. Cada pantalla corresponderá
+        a una empresa/sede determinada para realizar las transacciones de Ofertas, Pedidos, Albaranes, Facturas, etc.
+        <br><br>
+        Los procesos de <strong>consolidaciones entre empresas y entre Tenants</strong> serán bajo software
+        y seguridad específico para ello.
+    </p>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Aislamiento de datos</h3>
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-lock text-danger"></i> Estanco entre Tenants</h5>
+            <table class="table table-sm table-bordered small mb-0">
+                <thead class="table-light">
+                    <tr><th>Recurso</th><th>Aislamiento</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Base de datos</td><td>Separada por tenant (schema o instancia)</td></tr>
+                    <tr><td>Usuarios</td><td>Cada tenant tiene los suyos</td></tr>
+                    <tr><td>Ficheros / documentos</td><td>Bucket separado por tenant</td></tr>
+                    <tr><td>Configuración funcional</td><td>Independiente por tenant</td></tr>
+                    <tr><td>Logs / auditoría</td><td>Segregados y filtrados</td></tr>
+                    <tr><td>Backups</td><td>Restaurables por tenant</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4">
+            <h5><i class="bi bi-share text-primary"></i> Compartido dentro del Tenant</h5>
+            <table class="table table-sm table-bordered small mb-0">
+                <thead class="table-light">
+                    <tr><th>Recurso</th><th>Nivel de compartición</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Artículos / catálogo</td><td>Compartible entre empresas del tenant</td></tr>
+                    <tr><td>Clientes / proveedores</td><td>Compartible entre empresas del tenant</td></tr>
+                    <tr><td>Tarifas base</td><td>Compartible, con personalización por empresa</td></tr>
+                    <tr><td>Países, provincias, divisas</td><td>Comunes a todo el tenant</td></tr>
+                    <tr><td>Stock</td><td><strong>No compartido</strong> — siempre por sede</td></tr>
+                    <tr><td>Transacciones (pedidos, facturas...)</td><td><strong>No compartido</strong> — por empresa/sede</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Ventajas del modelo Application Tenancy</h3>
+<div class="row g-3">
+    <div class="col-md-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-shield-lock fs-2 text-danger"></i>
+            <h6 class="mt-2">Seguridad</h6>
+            <p class="small mb-0">Datos 100% aislados entre clientes. Imposible acceso cruzado.</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-piggy-bank fs-2 text-success"></i>
+            <h6 class="mt-2">Eficiencia</h6>
+            <p class="small mb-0">Aplicación e infraestructura compartidas reducen costes.</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-rocket fs-2 text-primary"></i>
+            <h6 class="mt-2">Actualizaciones</h6>
+            <p class="small mb-0">Un despliegue actualiza a todos los tenants simultáneamente.</p>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-arrow-counterclockwise fs-2 text-warning"></i>
+            <h6 class="mt-2">Backups</h6>
+            <p class="small mb-0">Restauración granular por tenant sin afectar al resto.</p>
+        </div>
+    </div>
+</div>
