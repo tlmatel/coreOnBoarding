@@ -33,19 +33,135 @@
 
 ## 1.1 Qué es la plataforma
 
-*(Contenido pendiente de desarrollo)*
+Telematel inicia una nueva etapa tecnológica con el desarrollo de **CORE**, la nueva generación de ERP empresarial diseñada para responder a los retos actuales y futuros del sector de la distribución técnica y las empresas instaladoras.
+
+CORE nace como una evolución estratégica respecto a los ERPs actuales de Telematel —**GO!Manage** y **SoftSumind**—, incorporando una arquitectura moderna, SaaS y API First, preparada para la integración, la automatización y el aprovechamiento de la Inteligencia Artificial.
+
+La plataforma está concebida para ofrecer una solución escalable, flexible y preparada para el crecimiento de las empresas del sector eléctrico, fontanería, climatización y materiales técnicos afines, cubriendo tanto las necesidades actuales como los nuevos modelos operativos digitales que marcarán el futuro del mercado.
+
+### ¿Qué es CORE?
+
+CORE es la nueva plataforma ERP cloud de Telematel, desarrollada bajo una arquitectura moderna orientada a servicios, totalmente web y preparada para operar como solución **SaaS** (Software as a Service).
+
+La plataforma ha sido diseñada bajo varios principios fundamentales:
+
+- Arquitectura API First
+- Separación completa FrontEnd / BackEnd
+- Entorno Cloud SaaS
+- Preparada para IA e integración
+- Escalabilidad funcional y tecnológica
+- Experiencia de usuario moderna y accesible desde cualquier dispositivo
+
+CORE no es únicamente una migración tecnológica del ERP actual, sino una **nueva plataforma estratégica preparada para el futuro del sector**. Su objetivo es unificar y evolucionar las capacidades funcionales existentes en **GO!Manage** y **SoftSumind**, y transformarlas en una plataforma única, moderna y preparada para los próximos años.
+
+### Diferencias respecto al ERP actual
+
+| Aspecto | GO!Manage / SoftSumind | CORE |
+|---------|------------------------|------|
+| **Arquitectura** | Cliente-Servidor | SaaS Web |
+| **Tecnología** | Progress tradicional | Arquitectura moderna API First |
+| **FrontEnd** | Acoplado al BackEnd | Separado completamente |
+| **Acceso** | Cliente instalado | Navegador Web |
+| **Infraestructura** | Servidores locales | Cloud |
+| **Escalabilidad** | Limitada | Alta escalabilidad |
+| **Integraciones** | Más complejas | APIs abiertas |
+| **Actualizaciones** | Manuales | Centralizadas |
+| **IA** | Limitada | Preparada para IA |
+| **Movilidad** | Parcial | Total |
+| **Despliegue** | Complejo | Simplificado |
+| **Costes IT cliente** | Elevados | Reducidos |
+| **Innovación** | Más lenta | Continua |
 
 ## 1.2 Público objetivo
 
-*(Contenido pendiente de desarrollo)*
+### Fases de liberación
+
+#### CORE 1
+
+Primera liberación orientada principalmente a cubrir las funcionalidades de GO!Manage.
+
+- **Origen:** Nuevo cliente / Actual cliente del ERP GO!Manage
+- **Tipo de empresas:** Distribuidores pequeños, medianos y empresas multi-sede
+- **Sectores:** Electricidad, Fontanería, Climatización, Material técnico especializado
+- **Características objetivo:** Empresas con necesidad de modernización, que buscan reducir infraestructura, que necesitan movilidad y acceso web
+
+#### CORE 2
+
+Ampliación funcional para cubrir GO!Manage y SoftSumind, incluyendo funcionalidades avanzadas para grandes distribuidores.
+
+- **Origen:** Nuevo cliente / Actual cliente de GO!Manage y SoftSumind
+- **Tipo de empresas:** Distribuidores medianos, grandes distribuidores, grupos empresariales
+- **Características objetivo:** Alta escalabilidad, grandes volúmenes de información, operativas complejas, integraciones avanzadas, automatización logística y financiera
+
+#### CORE 3
+
+Ampliación para cobertura completa para empresas instaladoras.
+
+- **Origen:** Nuevo cliente / Actual cliente del ERP GO!Manage
+- **Tipo de empresas:** Instaladores pequeños, medianos, empresas de servicios técnicos
+- **Sectores:** Instalaciones eléctricas, Climatización, Fontanería, Mantenimiento técnico
+- **Características objetivo:** Movilidad, gestión operativa en campo, acceso remoto, digitalización documental, integración comercial y técnica
+
+### Casos de uso ideales
+
+- **Empresa distribuidora digitalizada:** Automatizar procesos, integrar eCommerce, mejorar trazabilidad, información en tiempo real
+- **Empresas multisede:** Gestión centralizada, operación distribuida, acceso global, escalabilidad organizativa
+- **Empresas orientadas a integración:** Conectar con plataformas externas, clientes, proveedores, operadores logísticos, sistemas de BI
+- **Empresas orientadas a IA:** Automatización documental, procesamiento inteligente, asistentes IA, búsqueda avanzada, predicción
+- **Empresas en crecimiento:** Escalar rápidamente, reducir inversiones iniciales, incorporar nuevas sedes y usuarios fácilmente
+- **ERP preparado para el ecosistema futuro:** Automatización avanzada, IA generativa, APIs abiertas, integración continua, cloud computing, datos en tiempo real
 
 ## 1.3 Propuesta de valor
 
-*(Contenido pendiente de desarrollo)*
+### Objetivos para Telematel
+
+- **Evolución tecnológica:** Plataforma moderna, mantenible y escalable, alineada con las tendencias del mercado del software empresarial
+- **Consolidación funcional:** Unificar funcionalidades de distintos ERPs, reducir duplicidades, centralizar evolución y mantenimiento, acelerar desarrollos futuros
+- **Modelo SaaS recurrente:** Incrementar ingresos recurrentes, monetizar servicios cloud, mejorar la estabilidad financiera, reducir dependencia de proyectos de infraestructura
+- **Preparación para IA y automatización:** Automatización inteligente, integración con IA generativa, procesamiento documental, asistentes inteligentes, integraciones externas avanzadas
+- **Escalabilidad empresarial:** Soportar clientes de mayor tamaño, escalar recursos dinámicamente, mejorar rendimiento y disponibilidad, facilitar despliegues continuos
+
+### Objetivos para los clientes
+
+- **Eliminación de infraestructura local:** Eliminar servidores locales, reducir costes de hardware y mantenimiento IT, evitar actualizaciones complejas
+- **Acceso universal:** Desde cualquier ubicación, navegador web, entornos híbridos y remotos, mayor movilidad empresarial
+- **Integración sencilla:** eCommerce, plataformas B2B, marketplaces, software de logística, SGA, BI y analítica, CRM, plataformas documentales, IA y automatización
+- **Evolución continua:** Mejoras continuas, actualizaciones automáticas, nuevas funcionalidades más rápidas, innovación constante
+- **Experiencia de usuario moderna:** Mayor productividad, mejor usabilidad, procesos más intuitivos, reducción de tiempos operativos
+
+### Problemas que resuelve CORE
+
+- **Limitaciones tecnológicas del modelo actual:** Dependencia de infraestructura local, complejidad de despliegue, dificultad de integración, escalabilidad limitada, mayor coste operativo → CORE elimina estas barreras mediante una arquitectura cloud moderna
+- **Dificultad de integración:** Integraciones complejas, dependencias técnicas propietarias, intercambio manual de información, sistemas aislados → Resuelto gracias a su enfoque API First
+- **Necesidad de movilidad y acceso remoto:** Delegaciones, movilidad, teletrabajo, dispositivos múltiples → CORE ofrece acceso web universal
+- **Necesidad de automatización e IA:** Automatizar tareas repetitivas, procesar documentos automáticamente, obtener ayuda inteligente, analizar información en tiempo real → CORE está diseñada específicamente para facilitar estas capacidades
+- **Crecimiento y escalabilidad empresarial:** Más usuarios, más sedes, más volumen de datos, más automatización → CORE permitirá escalar sin las limitaciones tradicionales
 
 ## 1.4 Conceptos clave
 
-*(Contenido pendiente de desarrollo)*
+### Visión SaaS y estrategia futura
+
+#### Plataforma cloud empresarial
+
+CORE representa la transformación de Telematel hacia un modelo cloud empresarial moderno: plataforma 100% SaaS, servicios centralizados, actualizaciones continuas, alta disponibilidad y seguridad gestionada centralmente.
+
+#### ERP conectado
+
+CORE estará preparado para integrarse con ecosistemas digitales sectoriales, plataformas de fabricantes, distribución online, marketplaces, herramientas colaborativas y plataformas logísticas.
+
+#### ERP preparado para IA
+
+Uno de los pilares estratégicos de CORE es convertirse en una plataforma preparada para la Inteligencia Artificial: automatización documental, interpretación de facturas y pedidos, asistentes inteligentes, generación automática de procesos, ayuda contextual al usuario, búsqueda inteligente y análisis predictivo.
+
+#### Evolución continua
+
+CORE está concebido como una plataforma viva y evolutiva: liberaciones continuas, nuevos módulos cloud, automatización creciente, mayor interoperabilidad y arquitectura extensible.
+
+### Conclusión
+
+CORE representa la **transformación estratégica de Telematel** hacia una nueva generación de soluciones ERP cloud, conectadas, escalables y preparadas para el futuro. La nueva plataforma permitirá evolucionar desde los modelos tradicionales cliente-servidor hacia un ecosistema SaaS moderno, preparado para la integración, la automatización y la Inteligencia Artificial.
+
+Con CORE, Telematel no solo moderniza su tecnología, sino que **construye la base sobre la que evolucionarán los procesos empresariales de sus clientes** durante los próximos años.
 
 ---
 
