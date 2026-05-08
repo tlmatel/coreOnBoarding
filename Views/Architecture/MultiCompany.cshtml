@@ -4,7 +4,7 @@
 
 <h1 class="mb-3">Multi Empresa / <span class="text-primary">Sede</span></h1>
 <p class="lead">
-    Core OnBoarding soporta de forma nativa la gestión <strong>multi-empresa y multi-sede</strong>,
+    Core soporta de forma nativa la gestión <strong>multi-empresa y multi-sede</strong>,
     permitiendo que una misma instalación sirva a varias sociedades, delegaciones o centros de trabajo
     con datos aislados y configuraciones independientes.
 </p>
@@ -82,6 +82,69 @@
             </ul>
         </div>
     </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Sesión de usuario: una empresa, múltiples sedes</h3>
+
+<div class="p-4 rounded mb-4" style="background:#e8f0fe; border:1px solid #bad3fb;">
+    <div class="d-flex gap-3">
+        <div class="flex-shrink-0">
+            <i class="bi bi-building-check fs-2 text-primary"></i>
+        </div>
+        <div>
+            <h5 class="text-primary mb-2">La sesión está ligada a una empresa</h5>
+            <p class="mb-0">
+                En el frontend, el usuario trabaja siempre en el contexto de <strong>una única empresa</strong>
+                por sesión. Todas las transacciones que genere (pedidos, albaranes, facturas…) pertenecerán
+                a esa empresa. Para operar en otra empresa del grupo es necesario realizar un
+                <strong>cambio de empresa en la sesión</strong> — sin necesidad de cerrar sesión ni volver
+                a autenticarse, pero sí cambiando el contexto activo.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-2">
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100" style="border-left: 4px solid #198754;">
+            <h5 class="text-success mb-3"><i class="bi bi-check-circle-fill me-1"></i> Multi-sede: sí, por defecto</h5>
+            <p class="small mb-2">
+                Dentro de la empresa activa, el usuario puede consultar y operar en
+                <strong>múltiples sedes simultáneamente</strong>, según los permisos que tenga asignados.
+            </p>
+            <ul class="small mb-0">
+                <li>Los listados de documentos pueden mostrar registros de varias sedes a la vez</li>
+                <li>El usuario puede filtrar o acotar por sede si lo necesita</li>
+                <li>Los informes pueden consolidar datos de todas las sedes autorizadas</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100" style="border-left: 4px solid #fd7e14;">
+            <h5 style="color:#fd7e14;" class="mb-3"><i class="bi bi-arrow-repeat me-1"></i> Multi-empresa: cambio de sesión</h5>
+            <p class="small mb-2">
+                Para trabajar en otra empresa del grupo, el usuario debe cambiar el contexto de empresa
+                en la sesión. Este cambio es inmediato y no requiere volver a introducir credenciales.
+            </p>
+            <ul class="small mb-0">
+                <li>La aplicación recarga el contexto con los datos de la nueva empresa</li>
+                <li>Los permisos del usuario pueden variar entre empresas</li>
+                <li>No se mezclan datos de distintas empresas en una misma sesión</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="p-3 rounded mb-2" style="background:#fff8e6; border:1px solid #f0d060;">
+    <p class="small mb-0">
+        <i class="bi bi-exclamation-triangle text-warning me-1"></i>
+        <strong>Diseño intencionado:</strong> este modelo garantiza que nunca se mezclen datos de distintas
+        sociedades en una misma pantalla de transacciones, lo que simplifica la trazabilidad contable,
+        fiscal y de auditoría. Los procesos de consolidación entre empresas existen como funcionalidades
+        específicas, no como modo de operación habitual.
+    </p>
 </div>
 
 <hr class="my-4">

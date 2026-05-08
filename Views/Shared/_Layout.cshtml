@@ -96,13 +96,13 @@
                     </button>
                     <div class="collapse @Show("Architecture")" id="sec2">
                         <nav class="nav flex-column pb-2">
-                            <a class="nav-link @Active("Architecture","Multitenancy")" asp-controller="Architecture" asp-action="Multitenancy">2.1 Multitenancy</a>
-                            <a class="nav-link @Active("Architecture","Modules")" asp-controller="Architecture" asp-action="Modules">2.2 Estructura de módulos</a>
-                            <a class="nav-link @Active("Architecture","ModuleRelations")" asp-controller="Architecture" asp-action="ModuleRelations">2.3 Relación entre módulos</a>
-                            <a class="nav-link @Active("Architecture","Navigation")" asp-controller="Architecture" asp-action="Navigation">2.4 Navegación general</a>
-                            <a class="nav-link @Active("Architecture","RolesProfiles")" asp-controller="Architecture" asp-action="RolesProfiles">2.5 Roles y perfiles</a>
-                            <a class="nav-link @Active("Architecture","MultiCompany")" asp-controller="Architecture" asp-action="MultiCompany">2.6 Multi Empresa / Sede</a>
-                            <a class="nav-link @Active("Architecture","Security")" asp-controller="Architecture" asp-action="Security">2.7 Seguridad</a>
+                            <a class="nav-link @Active("Architecture","Multitenancy")" asp-controller="Architecture" asp-action="Multitenancy">2.1 Multitenancy <span class="doc-status doc-status-included">Incluido</span></a>
+                            <a class="nav-link @Active("Architecture","Modules")" asp-controller="Architecture" asp-action="Modules">2.2 Estructura de módulos <span class="doc-status doc-status-pending">Pdte. Producto</span></a>
+                            <a class="nav-link @Active("Architecture","ModuleRelations")" asp-controller="Architecture" asp-action="ModuleRelations">2.3 Relación entre módulos <span class="doc-status doc-status-pending">Pdte. Producto</span></a>
+                            <a class="nav-link @Active("Architecture","Navigation")" asp-controller="Architecture" asp-action="Navigation">2.4 Navegación general <span class="doc-status doc-status-pending">Pdte. Producto</span></a>
+                            <a class="nav-link @Active("Architecture","RolesProfiles")" asp-controller="Architecture" asp-action="RolesProfiles">2.5 Roles y seguridad <span class="doc-status doc-status-included">Incluido</span></a>
+                            <a class="nav-link @Active("Architecture","MultiCompany")" asp-controller="Architecture" asp-action="MultiCompany">2.6 Multi Empresa / Sede <span class="doc-status doc-status-included">Incluido</span></a>
+                            <a class="nav-link @Active("Architecture","RemoteDevices")" asp-controller="Architecture" asp-action="RemoteDevices">2.7 Dispositivos remotos <span class="doc-status doc-status-included">Incluido</span></a>
                         </nav>
                     </div>
                 </div>
@@ -116,11 +116,10 @@
                     </button>
                     <div class="collapse @Show("TechnicalConcepts")" id="sec3">
                         <nav class="nav flex-column pb-2">
-                            <a class="nav-link @Active("TechnicalConcepts","Saas")" asp-controller="TechnicalConcepts" asp-action="Saas">3.1 Qué significa SaaS</a>
-                            <a class="nav-link @Active("TechnicalConcepts","HighLevel")" asp-controller="TechnicalConcepts" asp-action="HighLevel">3.2 Arquitectura de alto nivel</a>
-                            <a class="nav-link @Active("TechnicalConcepts","Security")" asp-controller="TechnicalConcepts" asp-action="Security">3.3 Seguridad</a>
-                            <a class="nav-link @Active("TechnicalConcepts","Integrations")" asp-controller="TechnicalConcepts" asp-action="Integrations">3.4 Integraciones</a>
-                            <a class="nav-link @Active("TechnicalConcepts","Performance")" asp-controller="TechnicalConcepts" asp-action="Performance">3.5 Rendimiento y escalabilidad</a>
+                            <a class="nav-link @Active("TechnicalConcepts","Saas")" asp-controller="TechnicalConcepts" asp-action="Saas">3.1 Qué significa SaaS <span class="doc-status doc-status-included">Incluido</span></a>
+                            <a class="nav-link @Active("TechnicalConcepts","HighLevel")" asp-controller="TechnicalConcepts" asp-action="HighLevel">3.2 Arquitectura de alto nivel <span class="doc-status doc-status-included">Incluido</span></a>
+                            <a class="nav-link @Active("Architecture","Security")" asp-controller="Architecture" asp-action="Security">3.3 Seguridad técnica <span class="doc-status doc-status-included">Incluido</span></a>
+                            <a class="nav-link @Active("TechnicalConcepts","Integrations")" asp-controller="TechnicalConcepts" asp-action="Integrations">3.4 Integraciones <span class="doc-status doc-status-roadmap">Roadmap</span></a>
                         </nav>
                     </div>
                 </div>
@@ -166,9 +165,9 @@
                     </button>
                     <div class="collapse @Show("Implementation")" id="sec6">
                         <nav class="nav flex-column pb-2">
-                            <a class="nav-link @Active("Implementation","Methodology")" asp-controller="Implementation" asp-action="Methodology">6.1 Metodología</a>
-                            <a class="nav-link @Active("Implementation","InitialSetup")" asp-controller="Implementation" asp-action="InitialSetup">6.2 Configuración inicial</a>
-                            <a class="nav-link @Active("Implementation","DataMigration")" asp-controller="Implementation" asp-action="DataMigration">6.3 Migración de datos</a>
+                            <a class="nav-link @Active("Implementation","Methodology")" asp-controller="Implementation" asp-action="Methodology">6.1 Metodología <span class="doc-status doc-status-draft">Pendiente</span></a>
+                            <a class="nav-link @Active("Implementation","InitialSetup")" asp-controller="Implementation" asp-action="InitialSetup">6.2 Configuración inicial <span class="doc-status doc-status-included">Incluido</span></a>
+                            <a class="nav-link @Active("Implementation","DataMigration")" asp-controller="Implementation" asp-action="DataMigration">6.3 Migración de datos <span class="doc-status doc-status-roadmap">Roadmap</span></a>
                         </nav>
                     </div>
                 </div>
@@ -201,12 +200,11 @@
                     </button>
                     <div class="collapse @Show("Support")" id="sec8">
                         <nav class="nav flex-column pb-2">
-                            <a class="nav-link @Active("Support","Index")" asp-controller="Support" asp-action="Index">8.0 Visión general</a>
-                            <a class="nav-link @Active("Support","Traceability")" asp-controller="Support" asp-action="Traceability">8.1 Trazabilidad completa</a>
-                            <a class="nav-link @Active("Support","Grafana")" asp-controller="Support" asp-action="Grafana">8.2 Grafana</a>
-                            <a class="nav-link @Active("Support","TenantMonitoring")" asp-controller="Support" asp-action="TenantMonitoring">8.3 Monitorización por tenant</a>
-                            <a class="nav-link @Active("Support","UserActivity")" asp-controller="Support" asp-action="UserActivity">8.4 Actividad de usuario</a>
-                            <a class="nav-link @Active("Support","Diagnostics")" asp-controller="Support" asp-action="Diagnostics">8.5 Diagnóstico y soporte</a>
+                            <a class="nav-link @Active("Support","Index")" asp-controller="Support" asp-action="Index">8.0 Visión general <span class="doc-status doc-status-included">Incluido</span></a>
+                            <a class="nav-link @Active("Support","Traceability")" asp-controller="Support" asp-action="Traceability">8.1 Trazabilidad completa <span class="doc-status doc-status-included">Incluido</span></a>
+                            <a class="nav-link @Active("Support","Grafana")" asp-controller="Support" asp-action="Grafana">8.2 Grafana <span class="doc-status doc-status-included">Incluido</span></a>
+                            <a class="nav-link @Active("Support","TenantMonitoring")" asp-controller="Support" asp-action="TenantMonitoring">8.3 Monitorización por tenant <span class="doc-status doc-status-included">Incluido</span></a>
+                            <a class="nav-link @Active("Support","Diagnostics")" asp-controller="Support" asp-action="Diagnostics">8.4 Diagnóstico y soporte <span class="doc-status doc-status-included">Incluido</span></a>
                         </nav>
                     </div>
                 </div>
@@ -240,11 +238,11 @@
                     <div class="collapse @Show("AI")" id="sec10">
                         <nav class="nav flex-column pb-2">
                             <a class="nav-link @Active("AI","Index")" asp-controller="AI" asp-action="Index">10.0 Visión general</a>
-                            <a class="nav-link @Active("AI","MassiveChanges")" asp-controller="AI" asp-action="MassiveChanges">10.1 Cambios masivos</a>
-                            <a class="nav-link @Active("AI","Widgets")" asp-controller="AI" asp-action="Widgets">10.2 Widgets y gráficos</a>
-                            <a class="nav-link @Active("AI","Reports")" asp-controller="AI" asp-action="Reports">10.3 Reports y formularios</a>
-                            <a class="nav-link @Active("AI","Filters")" asp-controller="AI" asp-action="Filters">10.4 Diseño de filtros</a>
-                            <a class="nav-link @Active("AI","Mcp")" asp-controller="AI" asp-action="Mcp">10.5 MCP (Model Context Protocol)</a>
+                            <a class="nav-link @Active("AI","Widgets")" asp-controller="AI" asp-action="Widgets">10.2 Widgets y gráficos <span class="doc-status doc-status-included">Incluido</span></a>
+                            <a class="nav-link @Active("AI","Reports")" asp-controller="AI" asp-action="Reports">10.3 Reports y formularios <span class="doc-status doc-status-roadmap">Roadmap</span></a>
+                            <a class="nav-link @Active("AI","Filters")" asp-controller="AI" asp-action="Filters">10.4 Diseño de filtros <span class="doc-status doc-status-roadmap">Roadmap</span></a>
+                            <a class="nav-link @Active("AI","Mcp")" asp-controller="AI" asp-action="Mcp">10.5 MCP (Model Context Protocol) <span class="doc-status doc-status-roadmap">Roadmap</span></a>
+                            <a class="nav-link @Active("AI","ScreenAssistants")" asp-controller="AI" asp-action="ScreenAssistants">10.6 Asistentes en pantalla <span class="doc-status doc-status-roadmap">Roadmap</span></a>
                         </nav>
                     </div>
                 </div>
@@ -305,11 +303,10 @@
                     </button>
                     <div class="collapse @Show("BackOffice")" id="sec14">
                         <nav class="nav flex-column pb-2">
-                            <a class="nav-link @Active("BackOffice","Index")" asp-controller="BackOffice" asp-action="Index">14.0 Panel de Control</a>
-                            <a class="nav-link @Active("BackOffice","Instances")" asp-controller="BackOffice" asp-action="Instances">14.1 Instancias y bases de datos</a>
-                            <a class="nav-link @Active("BackOffice","Tenants")" asp-controller="BackOffice" asp-action="Tenants">14.2 Gestión de tenants</a>
-                            <a class="nav-link @Active("BackOffice","Users")" asp-controller="BackOffice" asp-action="Users">14.3 Gestión de usuarios</a>
-                            <a class="nav-link @Active("BackOffice","Updates")" asp-controller="BackOffice" asp-action="Updates">14.4 Actualizaciones</a>
+                            <a class="nav-link @Active("BackOffice","Index")" asp-controller="BackOffice" asp-action="Index">14.0 Panel de Control <span class="doc-status doc-status-included">Incluido</span></a>
+                            <a class="nav-link @Active("BackOffice","Instances")" asp-controller="BackOffice" asp-action="Instances">14.1 Instancias y bases de datos <span class="doc-status doc-status-included">Incluido</span></a>
+                            <a class="nav-link @Active("BackOffice","Tenants")" asp-controller="BackOffice" asp-action="Tenants">14.2 Gestión de tenants <span class="doc-status doc-status-included">Incluido</span></a>
+                            <a class="nav-link @Active("BackOffice","Updates")" asp-controller="BackOffice" asp-action="Updates">14.4 Actualizaciones <span class="doc-status doc-status-roadmap">Roadmap</span></a>
                         </nav>
                     </div>
                 </div>

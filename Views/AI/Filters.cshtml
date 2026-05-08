@@ -9,28 +9,21 @@
     y los aplica al instante.
 </p>
 
+<div class="p-3 rounded mb-4" style="background:#fff8e1; border:1px solid #ffe082;">
+    <p class="small mb-0">
+        <i class="bi bi-exclamation-triangle text-warning me-1"></i>
+        <strong>Limitación importante.</strong> Los filtros solo pueden aplicarse sobre los campos
+        que pertenecen directamente al registro que se está consultando. No es posible añadir
+        condiciones que dependan de otras tablas o entidades (por ejemplo, filtrar clientes por su
+        volumen de facturación) salvo que esa relación haya sido programada explícitamente en la vista.
+    </p>
+</div>
+
 <hr class="my-4">
 
-<h3 class="mb-3">Ejemplos de filtrado natural</h3>
+<h3 class="mb-3">Ejemplos de filtrado válidos</h3>
+<p class="text-muted small mb-3">Los siguientes ejemplos filtran únicamente por campos propios del registro.</p>
 <div class="row g-3">
-    <div class="col-md-6">
-        <div class="topic-card p-4 h-100">
-            <h6><i class="bi bi-people text-primary"></i> Vista de clientes</h6>
-            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
-                "Muéstrame solo los clientes de Barcelona que compren más de 50.000€/año y tengan alguna factura pendiente"
-            </div>
-            <p class="small text-muted mb-0">Aplica: provincia = Barcelona AND facturación anual > 50K AND saldo pendiente > 0.</p>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="topic-card p-4 h-100">
-            <h6><i class="bi bi-box-seam text-primary"></i> Vista de artículos</h6>
-            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
-                "Filtra los artículos de la familia Climatización con stock bajo mínimo y que tengan pedido de compra en curso"
-            </div>
-            <p class="small text-muted mb-0">Aplica: familia = Climatización AND stock < stock_min AND pedido_compra_activo = true.</p>
-        </div>
-    </div>
     <div class="col-md-6">
         <div class="topic-card p-4 h-100">
             <h6><i class="bi bi-receipt text-primary"></i> Vista de pedidos</h6>
@@ -42,11 +35,29 @@
     </div>
     <div class="col-md-6">
         <div class="topic-card p-4 h-100">
+            <h6><i class="bi bi-box-seam text-primary"></i> Vista de artículos</h6>
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "Filtra los artículos de la familia Climatización con stock por debajo del mínimo"
+            </div>
+            <p class="small text-muted mb-0">Aplica: familia = Climatización AND stock &lt; stock_min.</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
             <h6><i class="bi bi-truck text-primary"></i> Vista de proveedores</h6>
             <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
-                "Proveedores internacionales con plazo de entrega mayor a 15 días y que no hayan servido en los últimos 3 meses"
+                "Proveedores internacionales con plazo de entrega mayor a 15 días"
             </div>
-            <p class="small text-muted mb-0">Aplica: país != España AND lead_time > 15 AND última_recepción < hace 3 meses.</p>
+            <p class="small text-muted mb-0">Aplica: país != España AND lead_time > 15.</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
+            <h6><i class="bi bi-people text-primary"></i> Vista de clientes</h6>
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "Clientes de Barcelona con límite de crédito superior a 10.000€ y cuenta bloqueada"
+            </div>
+            <p class="small text-muted mb-0">Aplica: provincia = Barcelona AND limite_credito > 10000 AND bloqueado = true.</p>
         </div>
     </div>
 </div>
@@ -59,7 +70,7 @@
         <div class="topic-card p-4">
             <h5><i class="bi bi-save text-primary"></i> Filtros guardados</h5>
             <ul class="small mb-0">
-                <li>"Guárdame este filtro como <em>Clientes VIP morosos</em>"</li>
+                <li>"Guárdame este filtro como <em>Pedidos pendientes de expedir</em>"</li>
                 <li>Acceso rápido desde un selector de filtros guardados</li>
                 <li>Compartir filtros con el equipo</li>
                 <li>Filtros privados o públicos por rol</li>
@@ -71,9 +82,9 @@
             <h5><i class="bi bi-magic text-warning"></i> Refinamiento iterativo</h5>
             <ul class="small mb-0">
                 <li>"Añade también los de Valencia" — Amplía criterio</li>
-                <li>"Quita los que facturen menos de 10K" — Restringe</li>
-                <li>"Ordénalos por fecha de último pedido" — Cambia orden</li>
-                <li>"Muéstrame solo las columnas nombre, ciudad y saldo" — Ajusta vista</li>
+                <li>"Quita los que sean menores de 500€" — Restringe</li>
+                <li>"Ordénalos por fecha de creación" — Cambia orden</li>
+                <li>"Muéstrame solo las columnas número, cliente e importe" — Ajusta vista</li>
             </ul>
         </div>
     </div>
@@ -89,7 +100,6 @@
     <tbody>
         <tr><td>Curva de aprendizaje</td><td>Media — hay que conocer los campos</td><td>Nula — se describe en lenguaje natural</td></tr>
         <tr><td>Combinaciones complejas</td><td>Difícil — múltiples selectores</td><td>Fácil — una frase lo resuelve</td></tr>
-        <tr><td>Campos calculados</td><td>No disponible sin desarrollo</td><td>El agente los genera al vuelo</td></tr>
         <tr><td>Velocidad</td><td>Varios clics y selecciones</td><td>Una frase, resultado inmediato</td></tr>
         <tr><td>Reutilización</td><td>Manual (guardar configuración)</td><td>"Guárdamelo como..." y listo</td></tr>
     </tbody>

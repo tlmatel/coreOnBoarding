@@ -1,0 +1,269 @@
+@{
+    ViewData["Title"] = "Arquitectura de alto nivel";
+}
+
+<h1 class="mb-3">Arquitectura de <span class="text-primary">alto nivel</span></h1>
+<p class="lead">
+    Core está construido sobre .NET moderno con una arquitectura orientada a servicios:
+    la aplicación se divide en componentes especializados que se comunican entre sí de forma
+    asíncrona, en lugar de ser un único bloque monolítico.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Servicios, no microservicios</h3>
+
+<p>
+    Cada componente del sistema tiene una responsabilidad bien delimitada
+    (<em>separation of concerns</em>): el backend no hace informes, el generador de informes
+    no envía correos, el servicio de correo no ejecuta tareas largas. Esto hace el sistema más
+    fácil de mantener, escalar y evolucionar.
+</p>
+
+<div class="p-4 rounded mb-4" style="background:#fff8e6; border:1px solid #f0d060;">
+    <p class="mb-0 small">
+        <i class="bi bi-lightbulb text-warning me-1"></i>
+        <strong>¿Microservicios?</strong> Técnicamente los componentes son demasiado grandes para
+        llamarse microservicios en el sentido estricto del término. Son servicios con responsabilidades
+        claras que se comunican de forma desacoplada — lo que importa funcionalmente es el mismo
+        principio: cada pieza hace una cosa y la hace bien.
+    </p>
+</div>
+
+<h3 class="mb-3">Los servicios</h3>
+
+<style>
+    .svc-card { border-left: 4px solid var(--svc-color); }
+    .svc-tag { font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 0.3rem; background: var(--svc-color); color: #fff; white-space: nowrap; }
+</style>
+
+<div class="row g-3 mb-4">
+
+    <div class="col-md-6">
+        <div class="topic-card p-3 h-100 svc-card" style="--svc-color:#0d6efd;">
+            <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-cpu fs-3 text-primary flex-shrink-0 mt-1"></i>
+                <div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <h6 class="mb-0">core-backend</h6>
+                        <span class="svc-tag" style="--svc-color:#0d6efd;">Backend principal</span>
+                    </div>
+                    <p class="small mb-0">El corazón del sistema. Expone la API REST, contiene la lógica de negocio y gestiona el acceso a los datos. Es el punto de entrada para todas las operaciones del frontend.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="topic-card p-3 h-100 svc-card" style="--svc-color:#198754;">
+            <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-display fs-3 flex-shrink-0 mt-1" style="color:#198754;"></i>
+                <div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <h6 class="mb-0">core-frontend</h6>
+                        <span class="svc-tag" style="--svc-color:#198754;">Frontend</span>
+                    </div>
+                    <p class="small mb-0">La aplicación web que utiliza el usuario. Se comunica con <code>core-backend</code> a través de la API y con <code>core-rts</code> para recibir actualizaciones en tiempo real.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="topic-card p-3 h-100 svc-card" style="--svc-color:#fd7e14;">
+            <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-hourglass-split fs-3 flex-shrink-0 mt-1" style="color:#fd7e14;"></i>
+                <div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <h6 class="mb-0">core-backend-tasks</h6>
+                        <span class="svc-tag" style="--svc-color:#fd7e14;">Tareas largas</span>
+                    </div>
+                    <p class="small mb-0">Ejecuta procesos de larga duración de forma desacoplada: recálculos masivos, importaciones, generación de datos en batch… El frontend puede consultar el progreso en tiempo real sin bloquear la UI.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="topic-card p-3 h-100 svc-card" style="--svc-color:#6f42c1;">
+            <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-diagram-3 fs-3 flex-shrink-0 mt-1" style="color:#6f42c1;"></i>
+                <div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <h6 class="mb-0">core-saga</h6>
+                        <span class="svc-tag" style="--svc-color:#6f42c1;">Orquestación</span>
+                    </div>
+                    <p class="small mb-0">Orquesta el ciclo de vida de las tareas: asigna consumidores disponibles, gestiona reintentos en caso de fallo, controla timeouts y persiste el resultado final en base de datos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="topic-card p-3 h-100 svc-card" style="--svc-color:#dc3545;">
+            <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-bar-chart-line fs-3 flex-shrink-0 mt-1" style="color:#dc3545;"></i>
+                <div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <h6 class="mb-0">core-reporting</h6>
+                        <span class="svc-tag" style="--svc-color:#dc3545;">Informes</span>
+                    </div>
+                    <p class="small mb-0">Genera los informes del sistema: ejecuta las consultas, aplica el diseño y produce el documento final (PDF, Excel…). Opera de forma aislada para que una generación pesada no afecte al resto.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="topic-card p-3 h-100 svc-card" style="--svc-color:#c8a415;">
+            <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-pencil-square fs-3 flex-shrink-0 mt-1" style="color:#c8a415;"></i>
+                <div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <h6 class="mb-0">core-report-designer-web</h6>
+                        <span class="svc-tag" style="--svc-color:#c8a415;">Diseño de informes</span>
+                    </div>
+                    <p class="small mb-0">Herramienta web para diseñar y personalizar las plantillas de informes. Permite al implantador crear o adaptar informes sin necesidad de programación.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="topic-card p-3 h-100 svc-card" style="--svc-color:#20c997;">
+            <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-envelope fs-3 flex-shrink-0 mt-1" style="color:#20c997;"></i>
+                <div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <h6 class="mb-0">core-mailer</h6>
+                        <span class="svc-tag" style="--svc-color:#20c997;">E-mail</span>
+                    </div>
+                    <p class="small mb-0">Gestiona todos los envíos de correo electrónico del sistema: notificaciones, documentos, alertas... Al ser un servicio independiente, un problema con el servidor de correo no interrumpe la operativa principal.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="topic-card p-3 h-100 svc-card" style="--svc-color:#00838f;">
+            <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-arrow-left-right fs-3 flex-shrink-0 mt-1" style="color:#00838f;"></i>
+                <div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <h6 class="mb-0">core-rts</h6>
+                        <span class="svc-tag" style="--svc-color:#00838f;">Tiempo real</span>
+                    </div>
+                    <p class="small mb-0">Bridge de comunicación en tiempo real. Gestiona las conexiones WebSocket del frontend y de los agentes remotos (<em>Core Remote</em>), permitiendo notificaciones y operaciones bidireccionales instantáneas.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="topic-card p-3 h-100 svc-card" style="--svc-color:#6c757d;">
+            <div class="d-flex align-items-start gap-3">
+                <i class="bi bi-image fs-3 flex-shrink-0 mt-1" style="color:#6c757d;"></i>
+                <div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <h6 class="mb-0">core-thumbnailer</h6>
+                        <span class="svc-tag" style="--svc-color:#6c757d;">Miniaturas</span>
+                    </div>
+                    <p class="small mb-0">Genera miniaturas y previsualizaciones de los documentos adjuntos. Al ejecutarse de forma independiente, el procesado de ficheros pesados no impacta en el rendimiento del backend principal.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Comunicación entre servicios</h3>
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100" style="border-left: 4px solid #ff6b35;">
+            <div class="d-flex align-items-center gap-3 mb-3">
+                <div style="background:#fff0ea; border-radius:10px; padding:0.6rem 0.8rem;">
+                    <i class="bi bi-send fs-3" style="color:#ff6b35;"></i>
+                </div>
+                <div>
+                    <h5 class="mb-0">RabbitMQ</h5>
+                    <small class="text-muted">Message broker</small>
+                </div>
+            </div>
+            <p class="small mb-0">
+                Los servicios no se llaman directamente entre sí. En su lugar, publican y consumen
+                <strong>mensajes a través de RabbitMQ</strong>, un broker de mensajería que actúa
+                de intermediario. Esto los mantiene desacoplados: si un servicio está momentáneamente
+                caído, los mensajes esperan en cola y se procesan cuando vuelve a estar disponible.
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100" style="border-left: 4px solid #dc382d;">
+            <div class="d-flex align-items-center gap-3 mb-3">
+                <div style="background:#fdecea; border-radius:10px; padding:0.6rem 0.8rem;">
+                    <i class="bi bi-lightning-charge fs-3" style="color:#dc382d;"></i>
+                </div>
+                <div>
+                    <h5 class="mb-0">Redis</h5>
+                    <small class="text-muted">Caché y datos volátiles</small>
+                </div>
+            </div>
+            <p class="small mb-0">
+                Redis se usa como almacén en memoria para <strong>caché de datos</strong> de acceso
+                frecuente y para <strong>datos volátiles</strong> que no necesitan persistencia a largo
+                plazo: el estado transitorio de las tareas en curso, sesiones, tokens temporales, etc.
+                Su acceso es extremadamente rápido al residir en memoria.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Reducción del «blast radius»</h3>
+
+<div class="p-4 rounded" style="background:#e8f0fe; border:1px solid #bad3fb;">
+    <div class="d-flex gap-3">
+        <div class="flex-shrink-0">
+            <i class="bi bi-shield-check fs-2 text-primary"></i>
+        </div>
+        <div>
+            <h5 class="text-primary mb-2">Si algo falla, falla en pequeño</h5>
+            <p class="mb-3">
+                Una de las ventajas clave de esta arquitectura es limitar el impacto de los fallos.
+                Si el servicio de generación de informes tiene un problema, los usuarios siguen pudiendo
+                trabajar con normalidad en el ERP. Si el servicio de correo falla, las operaciones no
+                se interrumpen. Si una tarea larga se cuelga, no arrastra al backend principal.
+            </p>
+            <div class="row g-3">
+                <div class="col-sm-4 text-center">
+                    <div class="p-2 rounded" style="background:#fff;">
+                        <i class="bi bi-x-circle text-danger d-block fs-4 mb-1"></i>
+                        <div class="small fw-bold">core-mailer caído</div>
+                        <div class="small text-muted">No salen emails</div>
+                        <div class="small text-success">✓ El ERP funciona</div>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="p-2 rounded" style="background:#fff;">
+                        <i class="bi bi-x-circle text-danger d-block fs-4 mb-1"></i>
+                        <div class="small fw-bold">core-reporting caído</div>
+                        <div class="small text-muted">No se generan informes</div>
+                        <div class="small text-success">✓ El ERP funciona</div>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="p-2 rounded" style="background:#fff;">
+                        <i class="bi bi-x-circle text-danger d-block fs-4 mb-1"></i>
+                        <div class="small fw-bold">core-thumbnailer caído</div>
+                        <div class="small text-muted">Sin previsualizaciones</div>
+                        <div class="small text-success">✓ El ERP funciona</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -54,16 +54,19 @@
         <div class="topic-card h-100 p-4">
             <h5><i class="bi bi-layers text-info"></i> Entornos</h5>
             <p class="small mb-2">Conjunto de servicios (backend, frontend, etc.) desplegados en una versión concreta:</p>
-            <div class="d-flex flex-wrap gap-2">
+            <div class="d-flex flex-wrap gap-2 mb-3">
                 <span class="badge bg-secondary px-3 py-2">Development</span>
                 <span class="badge bg-warning text-dark px-3 py-2">QA</span>
                 <span class="badge bg-success px-3 py-2">Producción LTS</span>
                 <span class="badge bg-primary px-3 py-2">Producción Edge</span>
             </div>
-            <p class="small text-muted mt-2 mb-0">
-                Development y QA están completamente separados de Producción.
-                Existirán dos versiones del Panel de Control para poder probar cambios.
+            <p class="small mb-2">
+                Existen <strong>dos instancias completamente separadas</strong> del Panel de Control:
             </p>
+            <ul class="small mb-0">
+                <li><strong>Panel Dev/QA:</strong> gestiona los entornos de desarrollo y pruebas. Permite experimentar con cambios sin ningún riesgo para los datos de producción.</li>
+                <li><strong>Panel de Producción:</strong> gestiona los entornos LTS y Edge con datos reales de clientes. Acceso restringido.</li>
+            </ul>
         </div>
     </div>
 </div>
@@ -87,15 +90,6 @@
                 <i class="bi bi-building fs-1 text-success"></i>
                 <h6 class="mt-2 text-dark">Gestión de Tenants</h6>
                 <p class="small text-muted mb-0">Alta, bloqueo, licenciamiento y monitorización de clientes.</p>
-            </div>
-        </a>
-    </div>
-    <div class="col-md-6 col-lg-3">
-        <a asp-action="Users" class="text-decoration-none">
-            <div class="topic-card h-100 p-4 text-center">
-                <i class="bi bi-people fs-1 text-warning"></i>
-                <h6 class="mt-2 text-dark">Gestión de Usuarios</h6>
-                <p class="small text-muted mb-0">Usuarios Auth0, roles, MFA, sesiones y asociación a tenants.</p>
             </div>
         </a>
     </div>

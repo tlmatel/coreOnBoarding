@@ -2,7 +2,7 @@
     ViewData["Title"] = "Diagnóstico y soporte";
 }
 
-<h2>8.5 Diagnóstico y soporte</h2>
+<h2>8.4 Diagnóstico y soporte</h2>
 <p class="lead mb-5">Cómo utilizar toda la infraestructura de observabilidad para resolver incidencias de forma rápida, precisa y documentada.</p>
 
 <!-- FLUJO DE DIAGNÓSTICO -->
@@ -20,7 +20,7 @@
         <div class="col-md-6 col-lg-2">
             <div class="text-center">
                 <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-2" style="width: 48px; height: 48px; font-size: 1.2rem; font-weight: 700;">2</div>
-                <h6 class="fw-bold small">Consultar Health Score</h6>
+                <h6 class="fw-bold small">Core Health by Environment</h6>
                 <p class="text-muted" style="font-size: 0.75rem;">¿Es un problema aislado o sistémico?</p>
             </div>
         </div>
@@ -94,12 +94,6 @@
                 <td>Revisar permisos del rol, verificar filtros, comprobar migración</td>
             </tr>
             <tr>
-                <td>"Ha desaparecido un registro"</td>
-                <td>Dashboard auditoría → buscar entidad por ID → historial de cambios</td>
-                <td>Eliminación por otro usuario, regla de negocio automática, error de sync</td>
-                <td>Consultar quién/cuándo/por qué se eliminó, restaurar si procede</td>
-            </tr>
-            <tr>
                 <td>"El informe no cuadra"</td>
                 <td>Dashboard operaciones → eventos del módulo afectado → datos procesados</td>
                 <td>Datos en estado transitorio, cálculo pendiente, caché desactualizada</td>
@@ -165,46 +159,3 @@
     </div>
 </div>
 
-<!-- KPIs DE SOPORTE -->
-<h4 class="fw-bold mb-3">KPIs del equipo de soporte (medidos en Grafana)</h4>
-
-<div class="row g-3 mb-5">
-    <div class="col-md-6 col-lg-3">
-        <div class="card topic-card p-4 text-center">
-            <i class="bi bi-clock-history fs-3 text-primary d-block mb-2"></i>
-            <h6 class="fw-bold">MTTR</h6>
-            <p class="text-muted small mb-0">Tiempo medio de resolución. Objetivo: &lt; 30 min para P1.</p>
-        </div>
-    </div>
-    <div class="col-md-6 col-lg-3">
-        <div class="card topic-card p-4 text-center">
-            <i class="bi bi-check-circle fs-3 text-success d-block mb-2"></i>
-            <h6 class="fw-bold">First Contact Resolution</h6>
-            <p class="text-muted small mb-0">% de incidencias resueltas en N1. Objetivo: &gt; 70%.</p>
-        </div>
-    </div>
-    <div class="col-md-6 col-lg-3">
-        <div class="card topic-card p-4 text-center">
-            <i class="bi bi-bell fs-3 text-warning d-block mb-2"></i>
-            <h6 class="fw-bold">Detección proactiva</h6>
-            <p class="text-muted small mb-0">% de problemas detectados antes de que el cliente reporte.</p>
-        </div>
-    </div>
-    <div class="col-md-6 col-lg-3">
-        <div class="card topic-card p-4 text-center">
-            <i class="bi bi-emoji-smile fs-3 text-info d-block mb-2"></i>
-            <h6 class="fw-bold">Satisfacción</h6>
-            <p class="text-muted small mb-0">NPS del servicio de soporte. Objetivo: &gt; 8/10.</p>
-        </div>
-    </div>
-</div>
-
-<div class="alert alert-light border">
-    <div class="d-flex align-items-start">
-        <i class="bi bi-lightbulb text-warning me-3 fs-5"></i>
-        <div>
-            <strong>El soporte como ventaja competitiva</strong>
-            <p class="mb-0 text-muted mt-1">Con toda esta infraestructura de observabilidad, el equipo de soporte no es un centro de costes: es un diferenciador. Resolver rápido, resolver bien y resolver antes de que el cliente lo note es lo que genera fidelización y referencias.</p>
-        </div>
-    </div>
-</div>

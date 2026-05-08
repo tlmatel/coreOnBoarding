@@ -1,0 +1,138 @@
+@{
+    ViewData["Title"] = "Configuración inicial";
+}
+
+<h1 class="mb-3">Configuración <span class="text-primary">inicial</span></h1>
+<p class="lead">
+    Cuando se da de alta un nuevo tenant en Core, el sistema crea automáticamente una estructura
+    base lista para empezar. A partir de ahí, el implantador completa la configuración adaptándola
+    a la realidad del cliente.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">¿Qué se crea automáticamente?</h3>
+
+<div class="p-4 rounded mb-4" style="background:#e8f5e9; border:1px solid #a5d6a7;">
+    <div class="d-flex gap-3">
+        <div class="flex-shrink-0">
+            <i class="bi bi-stars fs-2 text-success"></i>
+        </div>
+        <div>
+            <h5 class="text-success mb-2">Alta del tenant lista en segundos</h5>
+            <p class="mb-0">
+                Al crear el tenant se provisiona automáticamente una <strong>empresa y sede iniciales</strong>,
+                y se asigna como <strong>administrador del sistema</strong> el usuario informado durante
+                el alta. Este usuario tendrá acceso completo para completar el resto de la configuración.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-4">
+        <div class="topic-card p-4 h-100" style="border-left: 4px solid #198754;">
+            <h6 class="text-success mb-3"><i class="bi bi-building-check me-1"></i> Empresa inicial</h6>
+            <p class="small mb-0">Se crea una primera empresa con los datos básicos informados en el alta del tenant. Puede renombrarse y completarse posteriormente con datos fiscales, logotipo, etc.</p>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="topic-card p-4 h-100" style="border-left: 4px solid #198754;">
+            <h6 class="text-success mb-3"><i class="bi bi-geo-alt-fill me-1"></i> Sede inicial</h6>
+            <p class="small mb-0">Asociada a la empresa inicial. Puede configurarse como la sede principal o renombrarse para reflejar la estructura real del cliente (central, almacén principal, etc.).</p>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="topic-card p-4 h-100" style="border-left: 4px solid #198754;">
+            <h6 class="text-success mb-3"><i class="bi bi-person-gear me-1"></i> Usuario administrador</h6>
+            <p class="small mb-0">El usuario informado durante el alta queda asignado como administrador del sistema con acceso completo, listo para acceder y comenzar la configuración.</p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Pasos de configuración</h3>
+<p>Una vez creado el tenant, el implantador completa la puesta en marcha siguiendo este orden recomendado:</p>
+
+<div class="d-flex flex-column gap-3">
+
+    <div class="topic-card p-4">
+        <div class="d-flex align-items-start gap-3">
+            <div class="flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle text-white fw-bold"
+                 style="width:2rem; height:2rem; background:#0d6efd; font-size:0.9rem;">1</div>
+            <div>
+                <h6 class="mb-1">Definir los roles necesarios</h6>
+                <p class="small mb-0 text-muted">
+                    Crear los roles que se usarán en la implantación: qué perfiles de usuario existen,
+                    qué pueden ver y qué pueden hacer. Cuanto más cuidada sea esta fase, más precisa
+                    y segura será la instalación. Ver
+                    <a asp-controller="Architecture" asp-action="RolesProfiles">2.5 Roles y seguridad</a>
+                    para más detalle.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="topic-card p-4">
+        <div class="d-flex align-items-start gap-3">
+            <div class="flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle text-white fw-bold"
+                 style="width:2rem; height:2rem; background:#0d6efd; font-size:0.9rem;">2</div>
+            <div>
+                <h6 class="mb-1">Crear los usuarios adicionales</h6>
+                <p class="small mb-0 text-muted">
+                    Dar de alta al resto de usuarios del tenant y asignarles los roles correspondientes,
+                    con el nivel de ámbito adecuado (global, empresa o sede).
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="topic-card p-4">
+        <div class="d-flex align-items-start gap-3">
+            <div class="flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle text-white fw-bold"
+                 style="width:2rem; height:2rem; background:#0d6efd; font-size:0.9rem;">3</div>
+            <div>
+                <h6 class="mb-1">Crear empresas y sedes adicionales</h6>
+                <p class="small mb-0 text-muted">
+                    Si el cliente tiene más de una sociedad o ubicación, se dan de alta las empresas
+                    y sedes restantes. Ver
+                    <a asp-controller="Architecture" asp-action="MultiCompany">2.6 Multi Empresa / Sede</a>
+                    para entender la jerarquía.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="topic-card p-4">
+        <div class="d-flex align-items-start gap-3">
+            <div class="flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle text-white fw-bold"
+                 style="width:2rem; height:2rem; background:#0d6efd; font-size:0.9rem;">4</div>
+            <div>
+                <h6 class="mb-1">Parametrización de la aplicación</h6>
+                <p class="small mb-0 text-muted">
+                    Configurar los parámetros funcionales de Core según las necesidades del cliente:
+                    series de documentos, condiciones de pago, almacenes, impresoras remotas,
+                    plantillas de email, módulos activos, etc.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="topic-card p-4">
+        <div class="d-flex align-items-start gap-3">
+            <div class="flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle text-white fw-bold"
+                 style="width:2rem; height:2rem; background:#6c757d; font-size:0.9rem;">5</div>
+            <div>
+                <h6 class="mb-1">Importación de datos <span class="badge bg-secondary bg-opacity-25 text-secondary ms-1" style="font-size:0.7rem;">Si procede</span></h6>
+                <p class="small mb-0 text-muted">
+                    Si el cliente viene de otro sistema, se realiza la migración de datos maestros
+                    (clientes, proveedores, artículos, tarifas…) y, en su caso, el histórico de
+                    transacciones. La necesidad y el alcance de esta fase se define durante la
+                    preventa.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>

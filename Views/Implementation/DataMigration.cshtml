@@ -1,0 +1,80 @@
+@{
+    ViewData["Title"] = "Migración de datos";
+}
+
+<h1 class="mb-3">Migración <span class="text-primary">de datos</span></h1>
+<p class="lead">
+    La incorporación de un cliente existente a Core requiere trasladar sus datos históricos al nuevo
+    sistema. Esta funcionalidad está en diseño y se irá concretando a medida que avance el producto.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Dos escenarios de partida</h3>
+
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100" style="border-left: 4px solid #198754;">
+            <div class="d-flex align-items-center gap-2 mb-3">
+                <i class="bi bi-stars fs-4 text-success"></i>
+                <h5 class="mb-0">Cliente nuevo</h5>
+            </div>
+            <p class="small mb-0">
+                Cuando el cliente empieza desde cero, el proceso es el descrito en
+                <a asp-controller="Implementation" asp-action="InitialSetup">6.2 Configuración inicial</a>:
+                se crea el tenant, se configuran empresas, sedes, roles y usuarios, y se introducen
+                los datos maestros manualmente o mediante importación puntual de ficheros.
+                No hay histórico que migrar.
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100" style="border-left: 4px solid #0d6efd;">
+            <div class="d-flex align-items-center gap-2 mb-3">
+                <i class="bi bi-database-up fs-4 text-primary"></i>
+                <h5 class="mb-0">Cliente existente con histórico</h5>
+            </div>
+            <p class="small mb-0">
+                Cuando el cliente viene de otro sistema y necesita conservar su histórico de datos
+                (clientes, proveedores, artículos, documentos, movimientos…), se requiere un
+                proceso de migración específico. Este es el escenario que se describe a continuación.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Proceso de migración planificado</h3>
+
+<div class="p-4 rounded mb-4" style="background:#e8f0fe; border:1px solid #bad3fb;">
+    <div class="d-flex gap-3">
+        <div class="flex-shrink-0">
+            <i class="bi bi-map fs-2 text-primary"></i>
+        </div>
+        <div>
+            <h5 class="text-primary mb-2">Importación desde base de datos pre-migrada</h5>
+            <p class="mb-2">
+                Se está diseñando un proceso que permita incorporar a Core los datos de clientes
+                existentes a partir de una <strong>base de datos pre-migrada</strong>: un volcado
+                de datos del sistema origen que haya sido previamente transformado a un
+                <strong>formato de datos común</strong> definido por Telematel.
+            </p>
+            <p class="mb-0 small text-muted">
+                Este formato intermedio actuará como contrato entre el proceso de extracción del
+                sistema origen y el proceso de importación de Core, independizando ambas partes
+                y facilitando la migración desde distintos sistemas de partida.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="p-4 rounded" style="background:#fff8e6; border:1px solid #f0d060;">
+    <p class="small mb-0">
+        <i class="bi bi-exclamation-triangle text-warning me-1"></i>
+        <strong>En diseño.</strong> El detalle del formato de datos, las herramientas de transformación
+        y el proceso completo de migración se irán definiendo a medida que avance el roadmap del producto.
+        Para proyectos con necesidades de migración urgentes, contactar con el equipo de producto para
+        valorar el alcance caso por caso.
+    </p>
+</div>

@@ -12,5 +12,6 @@ public class ArchitectureController : Controller
     public IActionResult Navigation() => View();
     public IActionResult RolesProfiles() => View();
     public IActionResult MultiCompany() => View();
+    public IActionResult RemoteDevices() => View();
     public IActionResult Security() => View();
 }

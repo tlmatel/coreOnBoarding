@@ -1,0 +1,140 @@
+@{
+    ViewData["Title"] = "Integraciones";
+}
+
+<h1 class="mb-3"><span class="text-primary">Integraciones</span></h1>
+<p class="lead">
+    Core expone una API completa que permite a sistemas externos leer y escribir datos de forma
+    segura y controlada. La hoja de ruta incluye además mecanismos de integración más avanzados
+    para cubrir escenarios de sincronización y conectividad con terceros.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Integración vía API</h3>
+
+<p>
+    Cualquier sistema externo puede integrarse con Core a través de su API REST. Para autenticarse,
+    el usuario genera una <strong>clave API</strong> desde el propio frontend de Core, sin intervención
+    técnica. Esa clave se envía en cada petición mediante la cabecera HTTP estándar:
+</p>
+
+<div class="p-3 rounded mb-4" style="background:#1e1e2e; color:#cdd6f4; font-family: monospace; font-size: 0.9rem; border-radius: 8px;">
+    <span style="color:#89b4fa;">GET</span> https://miempresa.core.app/api/clientes<br>
+    <span style="color:#a6e3a1;">X-Api-Key:</span> <span style="color:#fab387;">ck1-xxxxxxxxxxxxxxxxxxxxxxxx</span>
+</div>
+
+<div class="row g-4 mb-2">
+    <div class="col-lg-4">
+        <div class="topic-card p-4 h-100">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-person-gear fs-4 text-primary"></i>
+                <h6 class="mb-0">Generada por el usuario</h6>
+            </div>
+            <p class="small mb-0">
+                Cualquier usuario con los permisos adecuados puede crear y revocar claves API
+                desde el panel de configuración de Core, sin necesidad de contactar con soporte
+                ni de configuración técnica.
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="topic-card p-4 h-100">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-shield-check fs-4 text-success"></i>
+                <h6 class="mb-0">Seguridad funcional aplicada</h6>
+            </div>
+            <p class="small mb-0">
+                La clave API actúa en nombre del usuario que la generó. Todos los permisos de
+                roles y sedes se aplican igual que en el acceso por navegador: la integración
+                solo puede acceder a lo que ese usuario puede acceder.
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="topic-card p-4 h-100">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-activity fs-4 text-warning"></i>
+                <h6 class="mb-0">Misma API, mismo contrato</h6>
+            </div>
+            <p class="small mb-0">
+                No existe una API separada para integraciones. El sistema externo usa exactamente
+                los mismos endpoints que usa el frontend de Core, lo que garantiza consistencia
+                y que todo lo que es posible en la UI también lo es vía API.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">
+    <i class="bi bi-arrow-repeat text-primary me-2"></i>En proceso
+</h3>
+
+<div class="row g-4 mb-2">
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100" style="border-left: 4px solid #0d6efd;">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <span class="badge" style="background:#e8f0fe; color:#0d6efd; font-size:0.7rem;">En proceso</span>
+                <h6 class="mb-0">Integración con Go!Catalog y EDAM</h6>
+            </div>
+            <p class="small mb-0">
+                Integración con <strong>Go!Catalog</strong> y el estándar <strong>EDAM</strong>
+                para la importación y sincronización del catálogo de productos. Permitirá mantener
+                el catálogo de artículos actualizado automáticamente con la información de los
+                fabricantes y distribuidores.
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100" style="border-left: 4px solid #0d6efd;">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <span class="badge" style="background:#e8f0fe; color:#0d6efd; font-size:0.7rem;">En proceso</span>
+                <h6 class="mb-0">Integración con Go!Connect</h6>
+            </div>
+            <p class="small mb-0">
+                Integración con <strong>Go!Connect</strong> para la comunicación e intercambio de
+                documentos y datos entre empresas del sector. Facilitará la automatización de
+                procesos de compra-venta entre socios comerciales conectados a la plataforma.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">
+    <i class="bi bi-map text-secondary me-2"></i>Futuribles
+</h3>
+
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100" style="border-left: 4px solid #adb5bd;">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <span class="badge bg-secondary bg-opacity-25 text-secondary" style="font-size:0.7rem;">Futurible</span>
+                <h6 class="mb-0">Webhooks</h6>
+            </div>
+            <p class="small mb-0">
+                Permitir que Core notifique a sistemas externos cuando ocurran eventos relevantes
+                (creación de un pedido, cambio de estado de un documento, etc.) mediante
+                <strong>webhooks</strong>: llamadas HTTP automáticas al endpoint que el
+                integrador configure. Elimina la necesidad de hacer polling periódico a la API.
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100" style="border-left: 4px solid #adb5bd;">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <span class="badge bg-secondary bg-opacity-25 text-secondary" style="font-size:0.7rem;">Futurible</span>
+                <h6 class="mb-0">Capa de integración — registros modificados</h6>
+            </div>
+            <p class="small mb-0">
+                Una capa de integración específica que exponga qué registros han sido creados,
+                modificados o eliminados desde la última sincronización. Simplifica enormemente
+                las integraciones con ERPs, ecommerce o sistemas de BI que necesitan mantenerse
+                sincronizados con los datos de Core sin procesar el dataset completo cada vez.
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,298 @@
+@{
+    ViewData["Title"] = "Roles y seguridad";
+}
+
+<h1 class="mb-3">Roles y <span class="text-primary">seguridad</span></h1>
+<p class="lead">
+    El sistema de seguridad de Core se basa en <strong>roles</strong>: conjuntos de permisos
+    que determinan qué puede ver y hacer cada usuario. El modelo está diseñado para ser flexible y preciso,
+    permitiendo configuraciones muy detalladas sin complejidad operativa.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">¿Qué es un rol?</h3>
+<p>Un <strong>rol</strong> es un perfil de acceso con nombre al que se le asignan permisos sobre distintos
+    ámbitos de la aplicación. Cuando a un usuario se le asigna un rol, hereda automáticamente todos los
+    permisos que ese rol define.</p>
+
+<div class="row g-3 mb-2">
+    <div class="col-sm-6 col-lg-4">
+        <div class="topic-card p-3 h-100">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-layout-sidebar fs-4 text-primary"></i>
+                <h6 class="mb-0">Menú de la aplicación</h6>
+            </div>
+            <p class="small mb-0">Controla qué opciones y pantallas son visibles para el usuario.</p>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-4">
+        <div class="topic-card p-3 h-100">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-plug fs-4 text-success"></i>
+                <h6 class="mb-0">Endpoints de la API</h6>
+            </div>
+            <p class="small mb-0">Define a qué operaciones de la API tiene acceso el usuario (lectura, escritura, borrado…).</p>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-4">
+        <div class="topic-card p-3 h-100">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-bar-chart-line fs-4 text-warning"></i>
+                <h6 class="mb-0">Informes</h6>
+            </div>
+            <p class="small mb-0">Controla qué informes puede generar y descargar el usuario.</p>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-4">
+        <div class="topic-card p-3 h-100">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-folder2-open fs-4 text-danger"></i>
+                <h6 class="mb-0">Gestión documental</h6>
+            </div>
+            <p class="small mb-0">Determina sobre qué tipos de documento puede subir, descargar o eliminar archivos adjuntos.</p>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-4">
+        <div class="topic-card p-3 h-100">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-check2-square fs-4" style="color:#8e44ad;"></i>
+                <h6 class="mb-0">Autorizaciones</h6>
+            </div>
+            <p class="small mb-0">Controla quién puede autorizar qué tipos de documentos o procesos que requieren aprobación.</p>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-4">
+        <div class="topic-card p-3 h-100">
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <i class="bi bi-printer fs-4" style="color:#00838f;"></i>
+                <h6 class="mb-0">Impresoras remotas</h6>
+            </div>
+            <p class="small mb-0">Define a qué impresoras remotas puede enviar trabajos de impresión el usuario.</p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Asignación de roles a usuarios</h3>
+<p>Los roles se asignan a los usuarios con <strong>tres niveles de ámbito</strong>, lo que permite una
+    configuración muy precisa según la estructura de la empresa:</p>
+
+<div class="row g-4 mb-3">
+    <div class="col-lg-4">
+        <div class="topic-card h-100 p-4" style="border-left: 4px solid #0d6efd;">
+            <h5 style="color:#0d6efd;"><i class="bi bi-globe2"></i> Global (tenant)</h5>
+            <p class="small mb-0">El rol aplica en <strong>todas las empresas y sedes</strong> a las que el usuario tiene acceso.
+                Ideal para perfiles corporativos o de administración general.</p>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="topic-card h-100 p-4" style="border-left: 4px solid #c8a415;">
+            <h5 style="color:#c8a415;"><i class="bi bi-shop"></i> Empresa</h5>
+            <p class="small mb-0">El rol aplica únicamente <strong>dentro de una empresa concreta</strong>,
+                independientemente de cuántas sedes tenga. Permite diferencias de acceso entre empresas del grupo.</p>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="topic-card h-100 p-4" style="border-left: 4px solid #198754;">
+            <h5 class="text-success"><i class="bi bi-geo-alt"></i> Sede</h5>
+            <p class="small mb-0">El nivel más granular. El rol aplica solo <strong>en una sede específica</strong>,
+                permitiendo que un mismo usuario tenga distintos permisos en distintas ubicaciones.</p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Ejemplo: rol «Almacén»</h3>
+<p>Imaginemos una empresa con un perfil de usuario de almacén. El implantador crea el rol <strong>Almacén</strong>
+    y le asigna los permisos adecuados:</p>
+
+<style>
+    .perm-table th { font-size: 0.8rem; }
+    .perm-table td { font-size: 0.85rem; vertical-align: middle; }
+    .perm-allow { color: #198754; font-weight: 600; }
+    .perm-deny  { color: #dc3545; font-weight: 600; }
+    .perm-none  { color: #aaa; }
+</style>
+
+<div class="p-4 rounded mb-3" style="background:#f8f9fa; border:1px solid #e0e0e0;">
+    <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="badge rounded-pill" style="background:#00838f; font-size:0.9rem; padding: 0.4rem 0.9rem;">
+            <i class="bi bi-box-seam me-1"></i> Rol: Almacén
+        </span>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-sm table-bordered perm-table mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th style="width:40%">Ámbito / Opción</th>
+                    <th class="text-center" style="width:15%">Lectura</th>
+                    <th class="text-center" style="width:15%">Escritura</th>
+                    <th>Observaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><i class="bi bi-boxes text-secondary me-1"></i> Consulta de stock</td>
+                    <td class="text-center perm-allow"><i class="bi bi-check-circle-fill"></i></td>
+                    <td class="text-center perm-none"><i class="bi bi-dash"></i></td>
+                    <td class="small">Solo visualización de existencias</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-arrow-left-right text-secondary me-1"></i> Movimientos de almacén</td>
+                    <td class="text-center perm-allow"><i class="bi bi-check-circle-fill"></i></td>
+                    <td class="text-center perm-allow"><i class="bi bi-check-circle-fill"></i></td>
+                    <td class="small">Puede registrar entradas, salidas y ajustes</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-arrow-down-circle text-secondary me-1"></i> Albaranes de compra</td>
+                    <td class="text-center perm-allow"><i class="bi bi-check-circle-fill"></i></td>
+                    <td class="text-center perm-allow"><i class="bi bi-check-circle-fill"></i></td>
+                    <td class="small">Puede recepcionar mercancía</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-shuffle text-secondary me-1"></i> Traspasos entre sedes</td>
+                    <td class="text-center perm-allow"><i class="bi bi-check-circle-fill"></i></td>
+                    <td class="text-center perm-allow"><i class="bi bi-check-circle-fill"></i></td>
+                    <td class="small">Gestión de traslados de stock</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-receipt text-secondary me-1"></i> Facturación</td>
+                    <td class="text-center perm-deny"><i class="bi bi-x-circle-fill"></i></td>
+                    <td class="text-center perm-deny"><i class="bi bi-x-circle-fill"></i></td>
+                    <td class="small">Sin acceso — no es su área</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-cash-stack text-secondary me-1"></i> Contabilidad</td>
+                    <td class="text-center perm-deny"><i class="bi bi-x-circle-fill"></i></td>
+                    <td class="text-center perm-deny"><i class="bi bi-x-circle-fill"></i></td>
+                    <td class="small">Sin acceso — no es su área</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-gear text-secondary me-1"></i> Configuración del sistema</td>
+                    <td class="text-center perm-deny"><i class="bi bi-x-circle-fill"></i></td>
+                    <td class="text-center perm-deny"><i class="bi bi-x-circle-fill"></i></td>
+                    <td class="small">Sin acceso — restringido a administradores</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-bar-chart text-secondary me-1"></i> Informe de inventario</td>
+                    <td class="text-center perm-allow"><i class="bi bi-check-circle-fill"></i></td>
+                    <td class="text-center perm-none"><i class="bi bi-dash"></i></td>
+                    <td class="small">Puede generar y exportar el informe</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<p class="small text-muted">
+    <i class="bi bi-info-circle me-1"></i>
+    El implantador define los roles según las necesidades de cada implantación. Los nombres y permisos
+    anteriores son solo un ejemplo orientativo.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Multi-rol: flexibilidad y precisión</h3>
+
+<div class="p-4 rounded mb-4" style="background:#e8f0fe; border:1px solid #bad3fb;">
+    <h5 class="text-primary mb-3"><i class="bi bi-layers"></i> Un usuario puede tener más de un rol asignado</h5>
+    <p class="mb-3">
+        Esta es una de las características más potentes del sistema. En lugar de crear un rol distinto
+        para cada variante posible, el implantador puede <strong>combinar roles</strong> y ajustar el
+        resultado con permisos adicionales o denegaciones explícitas.
+    </p>
+    <p class="mb-0">
+        Las reglas de prioridad son claras: los <strong>permisos de denegación siempre prevalecen</strong>
+        sobre los de acceso. Esto permite construir configuraciones muy precisas: un usuario puede tener
+        acceso amplio a través de un rol general, y al mismo tiempo tener bloqueado un área concreta
+        mediante un rol de denegación específico.
+    </p>
+</div>
+
+<p>Veamos dos ejemplos reales:</p>
+
+<div class="row g-4 mb-3">
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100">
+            <h6><i class="bi bi-person-circle text-primary me-1"></i> Usuario: Ana</h6>
+            <ul class="small mb-0">
+                <li class="mb-1">
+                    <strong>Empresa A (todos los almacenes):</strong>
+                    roles <code>maestros-lectura</code> y <code>compras-total</code><br>
+                    → Puede consultar maestros y gestionar todo el módulo de compras en la Empresa A.
+                </li>
+                <li>
+                    <strong>Empresa A, Almacén Central:</strong>
+                    rol <code>admin</code><br>
+                    → En ese almacén específico, además, tiene acceso completo de administración.
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100">
+            <h6><i class="bi bi-person-circle text-success me-1"></i> Usuario: Roberto</h6>
+            <ul class="small mb-0">
+                <li class="mb-1">
+                    <strong>Global:</strong>
+                    roles <code>contabilidad-total</code> y <code>ventas-total</code><br>
+                    → Acceso completo a Contabilidad y Ventas en todas las empresas y sedes.
+                </li>
+                <li>
+                    <strong>Empresa C:</strong>
+                    rol <code>ventas-facturación-denegado</code><br>
+                    → En la Empresa C, a pesar del acceso global, <strong>no puede acceder a facturación</strong>.
+                    El permiso de denegación prevalece.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Seguridad en la API: sin atajos posibles</h3>
+
+<div class="p-4 rounded" style="background:#fff3f3; border:1px solid #f5c2c2;">
+    <div class="d-flex gap-3">
+        <div class="flex-shrink-0">
+            <i class="bi bi-shield-lock-fill fs-2 text-danger"></i>
+        </div>
+        <div>
+            <h5 class="text-danger mb-2">La seguridad se aplica a nivel de endpoint</h5>
+            <p class="mb-2">
+                Toda la configuración de roles y permisos <strong>no es solo visual</strong>. Cada permiso
+                se traduce directamente en restricciones a nivel de endpoint en la API. Esto significa que
+                un usuario sin acceso a una pantalla tampoco puede realizar esa operación accediendo
+                directamente a la URL de la API.
+            </p>
+            <p class="mb-0">
+                No importa si un usuario técnicamente conoce la URL de un endpoint: si no tiene el permiso
+                correspondiente en su rol, la API devolverá un error de acceso denegado. <strong>No existe
+                ninguna forma de saltarse la seguridad manipulando el navegador o llamando a la API directamente.</strong>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3 mt-2">
+    <div class="col-md-6">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-display fs-2 text-primary mb-2 d-block"></i>
+            <h6>Seguridad en el frontend</h6>
+            <p class="small mb-0">Las opciones de menú, botones y pantallas a las que el usuario no tiene
+                acceso directamente no aparecen en la interfaz.</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-hdd-network fs-2 text-danger mb-2 d-block"></i>
+            <h6>Seguridad en la API</h6>
+            <p class="small mb-0">Aunque el usuario conozca la URL, cada petición a la API es verificada
+                contra sus permisos efectivos. Sin permiso, no hay acceso.</p>
+        </div>
+    </div>
+</div>

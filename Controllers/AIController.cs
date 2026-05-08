@@ -12,4 +12,5 @@ public class AIController : Controller
     public IActionResult Reports() => View();
     public IActionResult Filters() => View();
     public IActionResult Mcp() => View();
+    public IActionResult ScreenAssistants() => View();
 }

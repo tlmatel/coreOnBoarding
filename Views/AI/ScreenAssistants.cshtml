@@ -1,0 +1,118 @@
+@{
+    ViewData["Title"] = "Asistentes en pantalla";
+}
+
+<h1 class="mb-3">Asistentes <span class="text-primary">en pantalla</span></h1>
+<p class="lead">
+    La idea es disponer de un asistente conversacional integrado en cada pantalla del ERP que
+    conozca en todo momento el <strong>contexto de lo que el usuario está viendo</strong>:
+    los datos cargados, los campos disponibles y las acciones que puede realizar. Un asistente
+    que no solo responde preguntas, sino que actúa.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">¿Qué lo diferencia de un chatbot genérico?</h3>
+<div class="row g-4 mb-4">
+    <div class="col-lg-6">
+        <div class="p-4 rounded h-100" style="background:#f8fafe; border:1px solid #e0eaf5;">
+            <h5><i class="bi bi-chat-dots text-secondary"></i> Chatbot genérico</h5>
+            <ul class="small mb-0">
+                <li>Conoce solo lo que el usuario le escribe</li>
+                <li>Sin acceso al estado de la aplicación</li>
+                <li>Responde, pero no actúa en el sistema</li>
+                <li>El usuario tiene que describir todo el contexto</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="p-4 rounded h-100" style="background:#e8f5e9; border:1px solid #a5d6a7;">
+            <h5><i class="bi bi-cpu text-success"></i> Asistente en pantalla</h5>
+            <ul class="small mb-0">
+                <li>Conoce el registro abierto y sus datos</li>
+                <li>Sabe qué acciones están disponibles en ese momento</li>
+                <li>Puede ejecutar acciones directamente en la pantalla</li>
+                <li>El contexto ya está dado: no hay que explicarlo</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Ejemplos de uso</h3>
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
+            <h6><i class="bi bi-receipt text-primary"></i> Dentro de un pedido de venta</h6>
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "¿Cuándo se entregó el último pedido a este cliente?"
+            </div>
+            <p class="small text-muted mb-0">
+                El asistente conoce el cliente del pedido abierto y puede consultar el historial
+                sin que el usuario tenga que decir el nombre ni el código del cliente.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
+            <h6><i class="bi bi-box-seam text-primary"></i> Dentro de una ficha de artículo</h6>
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "Genera el pedido de compra al proveedor habitual con la cantidad hasta el máximo de stock"
+            </div>
+            <p class="small text-muted mb-0">
+                El asistente conoce el artículo, su proveedor habitual y los niveles de stock configurados.
+                Puede crear el pedido con un solo mensaje.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
+            <h6><i class="bi bi-people text-primary"></i> Dentro de una ficha de cliente</h6>
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "¿Tiene alguna factura vencida sin pagar? Envíale un recordatorio de pago."
+            </div>
+            <p class="small text-muted mb-0">
+                El asistente consulta el estado financiero del cliente y puede disparar el envío del
+                recordatorio, todo sin salir de la ficha.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card p-4 h-100">
+            <h6><i class="bi bi-file-earmark-text text-primary"></i> Dentro de un albarán</h6>
+            <div class="p-3 rounded mb-2" style="background:#f0f4ff; font-style:italic; font-size:0.95rem;">
+                "Factura este albarán con las condiciones de pago habituales del cliente"
+            </div>
+            <p class="small text-muted mb-0">
+                El asistente conoce el albarán abierto y las condiciones del cliente vinculado.
+                Puede generar la factura directamente.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Estado y perspectivas</h3>
+<div class="p-4 rounded" style="background:#e8f0fe; border:1px solid #bad3fb;">
+    <div class="d-flex gap-3">
+        <div class="flex-shrink-0">
+            <i class="bi bi-lightbulb-fill fs-2 text-primary"></i>
+        </div>
+        <div>
+            <h5 class="mb-2">Una capacidad con mucho potencial</h5>
+            <p class="mb-2">
+                La ventaja de los asistentes en pantalla frente a otras aproximaciones de IA es
+                que el contexto ya está disponible: el sistema sabe qué registro está abierto,
+                qué datos contiene y qué puede hacerse con él. El usuario no necesita describir
+                nada, solo preguntar o pedir.
+            </p>
+            <p class="mb-0">
+                Es una línea de desarrollo que consideramos muy viable y con un impacto real en
+                la productividad diaria. La incluimos en el roadmap como una prioridad a explorar
+                en próximas iteraciones.
+            </p>
+        </div>
+    </div>
+</div>

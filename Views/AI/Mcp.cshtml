@@ -4,10 +4,21 @@
 
 <h1 class="mb-3">MCP — <span class="text-primary">Model Context Protocol</span></h1>
 <p class="lead">
-    El <strong>Model Context Protocol (MCP)</strong> es el estándar abierto que permite a los modelos de IA
-    (LLMs) conectarse de forma segura y estructurada con herramientas externas, APIs y fuentes de datos.
-    Es la capa que hace posible que los agentes IA de Core OnBoarding interactúen con el ERP.
+    El <strong>Model Context Protocol (MCP)</strong> es el estándar abierto que permite a herramientas
+    de IA externas —como <strong>Claude Desktop</strong>, Cursor u otros agentes compatibles—
+    conectarse directamente con sistemas de terceros. En el contexto de Core, un servidor MCP
+    permitiría que estas herramientas interactuasen con el ERP de forma directa, sin necesidad
+    de desarrollos de integración a medida.
 </p>
+
+<div class="p-3 rounded mb-4" style="background:#fff8e1; border:1px solid #ffe082;">
+    <p class="small mb-0">
+        <i class="bi bi-exclamation-triangle text-warning me-1"></i>
+        <strong>Estado: en investigación.</strong> Disponemos de un prototipo de servidor MCP para Core,
+        pero su viabilidad práctica como herramienta de usuario final es incierta. Los detalles se
+        explican a continuación.
+    </p>
+</div>
 
 <hr class="my-4">
 
@@ -17,16 +28,12 @@
         <div class="p-4 rounded" style="background:#f8fafe; border:1px solid #e0eaf5;">
             <p>
                 MCP es un protocolo creado por <strong>Anthropic</strong> (creadores de Claude) que define
-                cómo los modelos de lenguaje pueden:
-            </p>
-            <ul>
-                <li><strong>Descubrir</strong> herramientas disponibles (tools)</li>
-                <li><strong>Invocar</strong> funciones del sistema con parámetros correctos</li>
-                <li><strong>Recibir</strong> resultados estructurados para continuar el razonamiento</li>
-                <li><strong>Acceder</strong> a datos contextuales (resources) del entorno</li>
-            </ul>
-            <p class="mb-0">
+                cómo los modelos de lenguaje pueden descubrir y llamar a funciones de sistemas externos.
                 Es el equivalente a un <em>"USB universal"</em> para conectar IA con cualquier sistema.
+            </p>
+            <p class="mb-0">
+                Con un servidor MCP de Core, un usuario podría abrir Claude Desktop y preguntar directamente
+                cosas como "¿Cuántos pedidos pendientes de expedir hay a día de hoy?" sin entrar en el ERP.
             </p>
         </div>
     </div>
@@ -34,7 +41,7 @@
         <div class="topic-card h-100 p-4 text-center">
             <div class="mb-3">
                 <div style="display:inline-block; padding:10px 20px; background:#0d6efd; color:#fff; border-radius:8px; font-weight:600; font-size:0.9rem;">
-                    Modelo IA (LLM)
+                    Claude Desktop / Agente IA
                 </div>
                 <div class="my-2"><i class="bi bi-arrow-down-up fs-4 text-primary"></i></div>
                 <div style="display:inline-block; padding:10px 20px; background:#6f42c1; color:#fff; border-radius:8px; font-weight:600; font-size:0.9rem;">
@@ -42,7 +49,7 @@
                 </div>
                 <div class="my-2"><i class="bi bi-arrow-down-up fs-4 text-primary"></i></div>
                 <div style="display:inline-block; padding:10px 20px; background:#198754; color:#fff; border-radius:8px; font-weight:600; font-size:0.9rem;">
-                    Core OnBoarding (ERP)
+                    Core (ERP)
                 </div>
             </div>
         </div>
@@ -51,93 +58,48 @@
 
 <hr class="my-4">
 
-<h3 class="mb-3">Arquitectura MCP en Core OnBoarding</h3>
-<div class="row g-4">
-    <div class="col-lg-6">
-        <div class="topic-card p-4">
-            <h5><i class="bi bi-tools text-primary"></i> Tools (Herramientas)</h5>
-            <p class="small">Acciones que el agente puede ejecutar:</p>
-            <table class="table table-sm table-bordered small mb-0">
-                <thead class="table-light">
-                    <tr><th>Tool</th><th>Descripción</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><code>search_products</code></td><td>Buscar artículos con filtros</td></tr>
-                    <tr><td><code>update_records</code></td><td>Modificar registros en bloque</td></tr>
-                    <tr><td><code>create_report</code></td><td>Generar informe bajo demanda</td></tr>
-                    <tr><td><code>get_dashboard_data</code></td><td>Obtener datos para widgets</td></tr>
-                    <tr><td><code>apply_filter</code></td><td>Aplicar filtros a una vista</td></tr>
-                    <tr><td><code>execute_workflow</code></td><td>Lanzar un flujo de trabajo</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="topic-card p-4">
-            <h5><i class="bi bi-database text-success"></i> Resources (Contexto)</h5>
-            <p class="small">Datos que el agente puede consultar para razonar:</p>
-            <table class="table table-sm table-bordered small mb-0">
-                <thead class="table-light">
-                    <tr><th>Resource</th><th>Descripción</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td><code>schema://products</code></td><td>Estructura del catálogo</td></tr>
-                    <tr><td><code>schema://customers</code></td><td>Modelo de clientes</td></tr>
-                    <tr><td><code>config://business_rules</code></td><td>Reglas de negocio activas</td></tr>
-                    <tr><td><code>context://current_user</code></td><td>Permisos del usuario activo</td></tr>
-                    <tr><td><code>context://active_view</code></td><td>Vista actual y sus columnas</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<h3 class="mb-3">Cómo funciona nuestro servidor MCP</h3>
+<div class="p-4 rounded mb-4" style="background:#f8fafe; border:1px solid #e0eaf5;">
+    <p>
+        El servidor MCP de Core no expone operaciones unitarias predefinidas (como podría ser
+        <em>"buscar_producto"</em> o <em>"crear_pedido"</em>). En su lugar, funciona de una forma más dinámica:
+        dado el texto de la petición del usuario, el servidor intenta <strong>determinar qué endpoint
+        de la API de Core es el más adecuado</strong> para resolverla, y permite al agente llamarlo
+        con los parámetros correspondientes.
+    </p>
+    <p class="mb-0">
+        Esto es necesario porque la API de Core es extremadamente extensa, y predefinir manualmente
+        una herramienta MCP por cada operación disponible no es un enfoque viable.
+    </p>
 </div>
 
 <hr class="my-4">
 
-<h3 class="mb-3">Seguridad del protocolo</h3>
-<div class="row g-3">
-    <div class="col-md-6 col-lg-3">
-        <div class="topic-card p-3 text-center h-100">
-            <i class="bi bi-shield-lock fs-2 text-primary"></i>
-            <h6 class="mt-2">Autenticación</h6>
-            <p class="small mb-0">El agente hereda los permisos del usuario que lo invoca.</p>
+<h3 class="mb-3">El reto: una API muy grande</h3>
+<div class="p-4 rounded" style="background:#fff3f3; border:1px solid #f5c2c2;">
+    <div class="d-flex gap-3">
+        <div class="flex-shrink-0">
+            <i class="bi bi-exclamation-diamond-fill fs-2 text-danger"></i>
         </div>
-    </div>
-    <div class="col-md-6 col-lg-3">
-        <div class="topic-card p-3 text-center h-100">
-            <i class="bi bi-funnel fs-2 text-success"></i>
-            <h6 class="mt-2">Scope limitado</h6>
-            <p class="small mb-0">Solo puede acceder a tools/resources autorizados para ese rol.</p>
-        </div>
-    </div>
-    <div class="col-md-6 col-lg-3">
-        <div class="topic-card p-3 text-center h-100">
-            <i class="bi bi-journal-check fs-2 text-warning"></i>
-            <h6 class="mt-2">Auditoría</h6>
-            <p class="small mb-0">Cada invocación MCP queda registrada con parámetros y resultado.</p>
-        </div>
-    </div>
-    <div class="col-md-6 col-lg-3">
-        <div class="topic-card p-3 text-center h-100">
-            <i class="bi bi-x-octagon fs-2 text-danger"></i>
-            <h6 class="mt-2">Sandboxing</h6>
-            <p class="small mb-0">Ejecución aislada: el agente no puede saltarse validaciones del sistema.</p>
+        <div>
+            <h5 class="text-danger mb-2">La superficie de la API es enorme</h5>
+            <p class="mb-2">
+                La API de Core cubre la práctica totalidad de la lógica de negocio del ERP: artículos,
+                clientes, pedidos, albaranes, facturas, stocks, documentos, configuraciones...
+                El número de endpoints es muy elevado.
+            </p>
+            <p class="mb-2">
+                Los modelos de lenguaje actuales no son suficientemente precisos como para identificar
+                de forma fiable el endpoint correcto ante cualquier petición del usuario. El resultado
+                es que las respuestas pueden ser incorrectas, incompletas o referirse a un recurso
+                equivocado.
+            </p>
+            <p class="mb-0">
+                En el estado actual de la tecnología, es <strong>bastante incierto que este enfoque
+                pueda funcionar con la consistencia necesaria</strong> para ser una herramienta
+                útil en el día a día. Seguimos investigando, pero no tenemos una solución clara
+                en este momento.
+            </p>
         </div>
     </div>
 </div>
-
-<hr class="my-4">
-
-<h3 class="mb-3">Ventajas de MCP</h3>
-<table class="table table-bordered">
-    <thead class="table-light">
-        <tr><th>Ventaja</th><th>Descripción</th></tr>
-    </thead>
-    <tbody>
-        <tr><td><strong>Estándar abierto</strong></td><td>No depende de un proveedor de IA concreto. Compatible con Claude, GPT, Gemini, Llama, etc.</td></tr>
-        <tr><td><strong>Extensible</strong></td><td>Añadir nuevas capacidades al agente = añadir un nuevo tool al servidor MCP.</td></tr>
-        <tr><td><strong>Seguro por diseño</strong></td><td>El modelo nunca tiene acceso directo a la base de datos; pasa siempre por el servidor MCP.</td></tr>
-        <tr><td><strong>Tipado y validado</strong></td><td>Cada tool define su schema JSON: parámetros obligatorios, tipos, validaciones.</td></tr>
-        <tr><td><strong>Composable</strong></td><td>El agente puede encadenar múltiples tools en una sola conversación para tareas complejas.</td></tr>
-    </tbody>
-</table>

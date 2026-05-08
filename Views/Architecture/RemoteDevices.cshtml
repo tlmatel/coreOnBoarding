@@ -1,0 +1,227 @@
+@{
+    ViewData["Title"] = "Dispositivos remotos";
+}
+
+<h1 class="mb-3">Dispositivos <span class="text-primary">remotos</span></h1>
+<p class="lead">
+    Core es una aplicación en la nube, pero muchas instalaciones necesitan interactuar con dispositivos
+    físicos que están en las oficinas del cliente: impresoras, certificados digitales, capturadores de
+    firma… El reto es conseguirlo de forma segura y sin fricciones para el usuario.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">El problema: la nube no puede llegar a tu red local</h3>
+
+<div class="p-4 rounded mb-4" style="background:#fff3f3; border:1px solid #f5c2c2;">
+    <div class="d-flex gap-3">
+        <div class="flex-shrink-0">
+            <i class="bi bi-shield-x fs-2 text-danger"></i>
+        </div>
+        <div>
+            <p class="mb-2">
+                Una aplicación en la nube no puede conectarse directamente a dispositivos de la red local
+                de un cliente. Los cortafuegos corporativos bloquean las conexiones entrantes, y abrir
+                puertos de entrada en el firewall supone un riesgo de seguridad inaceptable además de
+                una complejidad de configuración considerable.
+            </p>
+            <p class="mb-0">
+                Esto convierte algo tan cotidiano como <em>«imprimir un albarán en la impresora de almacén»</em>
+                en un problema real cuando la aplicación vive en la nube y la impresora está en las
+                instalaciones del cliente.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100" style="border-left: 4px solid #dc3545;">
+            <h6 class="text-danger mb-3"><i class="bi bi-x-circle me-1"></i> Sin solución (conexión directa)</h6>
+            <div class="small" style="font-family: monospace; background: #f8f8f8; padding: 1rem; border-radius: 6px;">
+                <div class="text-muted">☁️ Core (nube)</div>
+                <div class="ps-3 text-danger">→ intenta conectar a impresora...</div>
+                <div class="ps-3 text-danger">✗ bloqueado por firewall</div>
+                <div class="ps-3 text-danger">✗ puerto cerrado</div>
+                <div class="mt-2 text-muted">🖨️ Impresora (red local)</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100" style="border-left: 4px solid #198754;">
+            <h6 class="text-success mb-3"><i class="bi bi-check-circle me-1"></i> Con Core Remote Service</h6>
+            <div class="small" style="font-family: monospace; background: #f8f8f8; padding: 1rem; border-radius: 6px;">
+                <div class="text-muted">🖥️ Core Remote (red local)</div>
+                <div class="ps-3 text-success">→ conexión saliente segura ✓</div>
+                <div class="ps-3 text-success">→ sin abrir puertos ✓</div>
+                <div class="mt-2 text-muted">☁️ Core (nube) ↔ Bridge</div>
+                <div class="mt-2 text-muted">🖨️ Impresora (red local) ✓</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>
+    La solución es invertir el sentido de la conexión: en lugar de que la nube intente conectar a los
+    dispositivos locales, es el <strong>agente instalado en la red del cliente</strong> el que establece
+    la conexión hacia la nube. Una vez establecido ese canal, Core puede enviar órdenes al agente
+    (como «imprime este documento») y el agente las ejecuta localmente. <strong>No es necesario abrir
+    ningún puerto de entrada en el firewall.</strong>
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Dispositivos y recursos compatibles</h3>
+
+<div class="row g-3 mb-2">
+    <div class="col-sm-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-printer fs-2 text-primary mb-2 d-block"></i>
+            <h6>Impresoras</h6>
+            <p class="small mb-0">Cualquier impresora instalada en el sistema: de red, USB, etiquetas, tickets, etc.</p>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-patch-check fs-2 text-warning mb-2 d-block"></i>
+            <h6>Certificados digitales</h6>
+            <p class="small mb-0">Certificados del almacén del sistema o del usuario para firma de documentos.</p>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-folder2-open fs-2 text-success mb-2 d-block"></i>
+            <h6>Carpetas locales</h6>
+            <p class="small mb-0">Rutas del sistema de archivos para leer o escribir documentos desde el ERP.</p>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-pen fs-2 mb-2 d-block" style="color:#8e44ad;"></i>
+            <h6>Capturadores de firma</h6>
+            <p class="small mb-0 text-muted"><em>Próximamente</em> — firma biométrica en documentos directamente desde la app.</p>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-cash-coin fs-2 text-danger mb-2 d-block"></i>
+            <h6>Cashkeeper</h6>
+            <p class="small mb-0 text-muted"><em>Próximamente</em> — gestión de caja con dispositivos de custodia de efectivo.</p>
+        </div>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <div class="topic-card p-3 text-center h-100">
+            <i class="bi bi-plus-circle-dotted fs-2 text-secondary mb-2 d-block"></i>
+            <h6>Más dispositivos</h6>
+            <p class="small mb-0 text-muted">La arquitectura está diseñada para incorporar nuevos tipos de dispositivo de forma incremental.</p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Dos aplicaciones para dos necesidades</h3>
+<p>
+    Dependiendo de qué recursos se quieran compartir, existen dos aplicaciones distintas que pueden
+    coexistir en la misma instalación:
+</p>
+
+<div class="row g-4">
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100" style="border-top: 4px solid #0d6efd;">
+            <div class="d-flex align-items-center gap-3 mb-3">
+                <div style="background:#e8f0fe; border-radius:10px; padding:0.6rem 0.8rem;">
+                    <i class="bi bi-hdd-network fs-3 text-primary"></i>
+                </div>
+                <div>
+                    <h5 class="mb-0">Core Remote Service</h5>
+                    <span class="badge bg-primary bg-opacity-10 text-primary" style="font-size:0.75rem;">Windows · Linux · macOS</span>
+                </div>
+            </div>
+            <p class="small mb-3">
+                Servicio en segundo plano (sin ventanas, sin intervención del usuario) pensado para
+                <strong>recursos compartidos de toda la instalación o tenant</strong>. Se instala una
+                vez en un servidor o equipo centralizado y queda disponible para todos los usuarios.
+            </p>
+            <ul class="small mb-3">
+                <li>Impresoras de red del almacén o la oficina</li>
+                <li>Certificados digitales del servidor</li>
+                <li>Carpetas compartidas en la red local</li>
+            </ul>
+            <div class="p-2 rounded small" style="background:#f0f4ff;">
+                <i class="bi bi-info-circle text-primary me-1"></i>
+                Multiplataforma: funciona en Windows, Linux y macOS. Ideal para servidores de empresa
+                o equipos siempre encendidos.
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100" style="border-top: 4px solid #8e44ad;">
+            <div class="d-flex align-items-center gap-3 mb-3">
+                <div style="background:#f5eeff; border-radius:10px; padding:0.6rem 0.8rem;">
+                    <i class="bi bi-display fs-3" style="color:#8e44ad;"></i>
+                </div>
+                <div>
+                    <h5 class="mb-0">Core Remote Desktop</h5>
+                    <span class="badge" style="background:#f5eeff; color:#8e44ad; font-size:0.75rem;">Windows · Próximamente</span>
+                </div>
+            </div>
+            <p class="small mb-3">
+                Aplicación de escritorio Windows orientada a los <strong>dispositivos locales del
+                puesto de trabajo del usuario</strong>. A diferencia del servicio, esta aplicación
+                tiene interfaz gráfica y gestiona periféricos que dependen del usuario concreto
+                que está trabajando.
+            </p>
+            <ul class="small mb-3">
+                <li>Impresoras locales del puesto</li>
+                <li>Capturadores de firma biométrica</li>
+                <li>Dispositivos Cashkeeper</li>
+                <li>Otros periféricos de escritorio</li>
+            </ul>
+            <div class="p-2 rounded small" style="background:#f5eeff;">
+                <i class="bi bi-stars me-1" style="color:#8e44ad;"></i>
+                Diseñada para extenderse fácilmente a nuevos tipos de dispositivo según las
+                necesidades de cada implantación.
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<div class="p-4 rounded" style="background:#f8f9fa; border:1px solid #e0e0e0;">
+    <h5 class="mb-3"><i class="bi bi-diagram-3 text-primary me-1"></i> ¿Cómo encaja todo?</h5>
+    <div class="row g-3 align-items-center">
+        <div class="col-md-3 text-center">
+            <div class="p-3 rounded" style="background:#e8f0fe;">
+                <i class="bi bi-globe2 fs-2 text-primary"></i>
+                <div class="small fw-bold mt-1">Core (nube)</div>
+                <div class="small text-muted">Solicita operación</div>
+            </div>
+        </div>
+        <div class="col-md-1 text-center d-none d-md-block">
+            <i class="bi bi-arrow-right fs-3 text-secondary"></i>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="p-3 rounded" style="background:#fff3cd;">
+                <i class="bi bi-arrow-left-right fs-2 text-warning"></i>
+                <div class="small fw-bold mt-1">Bridge seguro</div>
+                <div class="small text-muted">Canal cifrado, sin puertos abiertos</div>
+            </div>
+        </div>
+        <div class="col-md-1 text-center d-none d-md-block">
+            <i class="bi bi-arrow-right fs-3 text-secondary"></i>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="p-3 rounded" style="background:#e8f5e9;">
+                <i class="bi bi-hdd-network fs-2 text-success"></i>
+                <div class="small fw-bold mt-1">Agente local</div>
+                <div class="small text-muted">Ejecuta en red del cliente</div>
+            </div>
+        </div>
+    </div>
+    <p class="small text-muted mb-0 mt-3">
+        El agente es quien inicia y mantiene la conexión con la nube. Core nunca necesita «entrar» en
+        la red del cliente, lo que garantiza que la seguridad perimetral del cliente permanece intacta.
+    </p>
+</div>
