@@ -2242,19 +2242,179 @@ Fegime, ABM Rexel, Cealco, Sonepar, AÚNA Distribución, Saltoki, Grupo Cobber, 
 
 ## 12.0 Visión general
 
-*(Contenido pendiente de desarrollo)*
+Core OnBoarding utiliza una estrategia de despliegue **Blue / Green** con dos entornos de producción permanentes que alojan versiones alternas de la plataforma. Este modelo garantiza actualizaciones sin downtime, rollback inmediato y un control total sobre qué versión ejecuta cada cliente.
 
-## 12.1 Entornos compartidos
+### Principios del modelo
 
-*(Contenido pendiente de desarrollo)*
+- **Dos entornos de producción** — Blue y Green funcionan simultáneamente, cada uno con una versión distinta de la plataforma.
+- **Versiones alternas** — Las dos últimas versiones publicadas siempre están desplegadas: una en Blue y otra en Green.
+- **Actualización controlada** — Cada cliente decide cuándo migrar a la siguiente versión desde el Panel de Control.
+- **Zero downtime** — La actualización del cliente es un cambio de DNS + migración de BD, sin parada de servicio.
 
-## 12.2 De Beta a Stable
+### Flujo general
 
-*(Contenido pendiente de desarrollo)*
+```
+Versión N   → desplegada en Blue
+Versión N+1 → desplegada en Green
 
-## 12.3 Hotfixes
+Cliente en v.N (Blue) → actualiza → migra BD + DNS → pasa a v.N+1 (Green)
 
-*(Contenido pendiente de desarrollo)*
+Cuando llega v.N+2:
+  - Se despliega en Blue (reemplazando v.N)
+  - Green sigue con v.N+1
+  - Los clientes en v.N+1 pueden actualizar a v.N+2
+```
+
+### Ventajas del modelo
+
+| Ventaja | Descripción |
+|---------|-------------|
+| **Zero downtime** | El entorno destino ya está en marcha; el cliente solo cambia de destino |
+| **Rollback inmediato** | Si algo falla, basta con revertir el DNS al entorno anterior |
+| **Coexistencia de versiones** | Clientes en distintas versiones conviven sin conflicto |
+| **Validación previa** | El nuevo entorno se puede verificar antes de mover clientes |
+| **Simplicidad operativa** | Solo dos entornos fijos; no se crean ni destruyen dinámicamente |
+
+---
+
+## 12.1 Entornos Blue / Green
+
+Los dos entornos de producción son clusters independientes con su propia infraestructura, configuración y versión desplegada.
+
+### Características de cada entorno
+
+| Aspecto | Blue | Green |
+|---------|------|-------|
+| **Infraestructura** | Cluster Kubernetes dedicado | Cluster Kubernetes dedicado |
+| **Versión** | Versión N o N+2 (alterno) | Versión N+1 o N+3 (alterno) |
+| **Bases de datos** | Instancias PostgreSQL propias | Instancias PostgreSQL propias |
+| **DNS** | `*.blue.core.com` (interno) | `*.green.core.com` (interno) |
+| **Estado** | Siempre activo | Siempre activo |
+
+### Ciclo de vida de los entornos
+
+1. **Estado inicial** — Blue ejecuta la versión N, Green ejecuta la versión N+1.
+2. **Nueva versión disponible (N+2)** — Se despliega en Blue, reemplazando la versión N. Los clientes que aún estuvieran en v.N ya habrán sido migrados previamente a v.N+1.
+3. **Siguiente versión (N+3)** — Se despliega en Green, reemplazando v.N+1. Y así sucesivamente.
+
+Los entornos se van alternando: Blue recibe las versiones pares del ciclo, Green las impares (o viceversa, según el punto de partida).
+
+### Aislamiento
+
+- Cada entorno tiene su propio cluster de Kubernetes, servicios, ingress y certificados.
+- Las bases de datos de los tenants están asociadas al entorno donde se ejecutan; al migrar un tenant se mueve o conecta su BD al entorno destino.
+- Los buckets de almacenamiento (Gestión Documental) son compartidos y no cambian con la versión.
+
+---
+
+## 12.2 Gestión de versiones
+
+Desde el **Panel de Control** (BackOffice), el equipo de operaciones mantiene un registro de versiones disponibles y controla qué versión está desplegada en cada entorno.
+
+### Mantenimiento de versiones
+
+El panel incluye una sección de **mantenimiento de versiones** donde se registran las releases de la plataforma:
+
+| Campo | Descripción |
+|-------|-------------|
+| **Número de versión** | Identificador de la release (ej: `2026.3.0`) |
+| **Entorno asignado** | Blue o Green |
+| **Estado** | Preparada, Desplegada, Retirada |
+| **Fecha de despliegue** | Cuándo se desplegó en el entorno |
+| **Changelog** | Resumen de cambios, mejoras y correcciones |
+| **Migraciones de BD** | Scripts de migración incluidos en esta versión |
+
+### Reglas del sistema
+
+- Las **dos últimas versiones** siempre están desplegadas: una en Blue y otra en Green.
+- Cuando se registra una nueva versión, se despliega en el entorno que tiene la versión **más antigua**, liberándolo.
+- No se puede retirar una versión si aún hay tenants ejecutándola.
+- El panel muestra en todo momento cuántos tenants hay en cada versión/entorno.
+
+### Visibilidad
+
+Desde el panel se puede consultar:
+
+- Qué versión ejecuta cada entorno
+- Cuántos tenants hay en cada versión
+- Qué tenants tienen actualización disponible
+- Historial de versiones desplegadas
+
+---
+
+## 12.3 Proceso de actualización de clientes
+
+La actualización de un cliente (tenant) a una nueva versión se inicia desde el **mantenimiento de bases de datos** en el Panel de Control.
+
+### Campo de versión en bases de datos
+
+En la ficha de cada base de datos / tenant existe un campo **Versión** que indica en qué versión está operando actualmente. Cuando existe una versión superior disponible, aparece un **botón "Actualizar a la siguiente versión"**.
+
+### Flujo de actualización
+
+Al pulsar el botón de actualización se ejecuta el siguiente proceso automatizado:
+
+**1. Validación previa**
+- Comprobar que la versión destino está desplegada y operativa en su entorno
+- Verificar que no hay procesos críticos en curso en el tenant (cierres contables, facturaciones masivas, etc.)
+- Confirmar que las migraciones de BD para esa versión están disponibles
+
+**2. Migración de base de datos**
+- Ejecutar los scripts de migración de esquema correspondientes a la nueva versión
+- Aplicar transformaciones de datos si las hubiera
+- Verificar la integridad de la migración
+
+**3. Redirección DNS**
+- Modificar los registros DNS de todos los subdominios del tenant para que apunten al nuevo entorno (de Blue a Green o viceversa)
+- El cambio de DNS es transparente para el usuario; al recargar la página ya está en la nueva versión
+
+**4. Verificación post-migración**
+- Comprobar que el tenant responde correctamente en el nuevo entorno
+- Validar acceso a datos, configuración y servicios
+- Registrar la actualización en el log de auditoría
+
+### Diagrama del proceso
+
+```
+Tenant "ABC" en v.2026.2 (Blue)
+         │
+         ▼
+  [Botón: Actualizar a v.2026.3]
+         │
+         ▼
+  ┌─ Validación previa ─┐
+  │  • Entorno Green OK  │
+  │  • Sin procesos bloq.│
+  │  • Migraciones listas│
+  └──────────┬───────────┘
+             ▼
+  ┌─ Migración de BD ───┐
+  │  • Ejecutar scripts  │
+  │  • Transformar datos │
+  │  • Verificar integr. │
+  └──────────┬───────────┘
+             ▼
+  ┌─ Cambio de DNS ─────┐
+  │  abc.core.com ──────►│
+  │  Blue → Green        │
+  └──────────┬───────────┘
+             ▼
+  ┌─ Verificación ──────┐
+  │  • Respuesta OK      │
+  │  • Datos accesibles  │
+  │  • Log de auditoría  │
+  └──────────────────────┘
+         │
+         ▼
+Tenant "ABC" en v.2026.3 (Green) ✓
+```
+
+### Consideraciones
+
+- **Reversibilidad** — Si la verificación falla, el proceso revierte automáticamente: restaura la BD y devuelve el DNS al entorno original.
+- **Ventana de mantenimiento** — La migración se puede programar para ejecutarse en horario de bajo uso, aunque el proceso típico dura menos de 5 minutos.
+- **Notificación al cliente** — El sistema puede enviar un aviso previo al administrador del tenant informando de la actualización planificada.
+- **Actualización por lotes** — El panel permite seleccionar múltiples tenants y actualizar en lote, ejecutando el proceso secuencialmente para cada uno.
 
 ---
 
