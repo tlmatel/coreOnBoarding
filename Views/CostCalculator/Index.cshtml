@@ -1,0 +1,427 @@
+@{
+    ViewData["Title"] = "Calculadora de Costes";
+}
+
+<h1 class="mb-3">Calculadora de <span class="text-primary">Costes</span></h1>
+<p class="lead">
+    Herramienta de simulación para estimar el coste mensual de infraestructura por cliente
+    y calcular el precio de venta según dos modelos de facturación.
+</p>
+
+<hr class="my-4">
+
+<!-- ── PARÁMETROS DE ENTRADA ──────────────────────────────────────────────── -->
+<div class="row g-4 mb-4">
+
+    <!-- Columna izquierda: Recursos de instancia -->
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100">
+            <h5 class="fw-bold mb-3"><i class="bi bi-hdd-rack text-primary"></i> Recursos de instancia (referencia)</h5>
+            <div class="table-responsive">
+                <table class="table table-sm table-bordered align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Configuración</th>
+                            <th>Sin CUD</th>
+                            <th>CUD 1 año</th>
+                            <th>CUD 3 años</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>4 CPUs / 32 GB RAM</td>
+                            <td>987,83 €</td>
+                            <td>775,41 €</td>
+                            <td>546,00 €</td>
+                        </tr>
+                        <tr class="table-primary">
+                            <td>8 CPUs / 64 GB RAM</td>
+                            <td>1.837,51 €</td>
+                            <td>1.412,67 €</td>
+                            <td>953,85 €</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-muted small mt-2 mb-0">
+                <i class="bi bi-info-circle"></i> Los cálculos usan la instancia de 8 CPUs con CUD a 3 años (953,85 €/mes).
+            </p>
+        </div>
+    </div>
+
+    <!-- Columna derecha: Parámetros del cliente -->
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100">
+            <h5 class="fw-bold mb-3"><i class="bi bi-sliders text-success"></i> Parámetros del cliente</h5>
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    <label class="form-label fw-semibold">
+                        <i class="bi bi-people text-primary"></i> Usuarios
+                    </label>
+                    <input type="number" class="form-control" id="inputUsers" value="100" min="1">
+                </div>
+                <div class="col-sm-6">
+                    <label class="form-label fw-semibold">
+                        <i class="bi bi-database text-primary"></i> Disco BD (GB)
+                    </label>
+                    <input type="number" class="form-control" id="inputDisk" value="100" min="1">
+                </div>
+                <div class="col-sm-6">
+                    <label class="form-label fw-semibold">
+                        <i class="bi bi-arrow-repeat text-primary"></i> Copias de backup
+                    </label>
+                    <input type="number" class="form-control" id="inputBackups" value="3" min="0">
+                </div>
+                <div class="col-sm-6">
+                    <label class="form-label fw-semibold">
+                        <i class="bi bi-folder2-open text-primary"></i> Bucket (GB)
+                    </label>
+                    <input type="number" class="form-control" id="inputBucket" value="200" min="0">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── PARÁMETROS DE PRICING ─────────────────────────────────────────────── -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100">
+            <h5 class="fw-bold mb-3"><i class="bi bi-tag text-warning"></i> Precio software</h5>
+            <div class="row g-3">
+                <div class="col-sm-6">
+                    <label class="form-label fw-semibold">Coste por usuario/mes (€)</label>
+                    <input type="number" class="form-control" id="inputSoftwareCost" value="3" min="0" step="0.5">
+                </div>
+                <div class="col-sm-6">
+                    <label class="form-label fw-semibold">Precio cliente por usuario/mes (€)</label>
+                    <input type="number" class="form-control" id="inputSoftwarePrice" value="50" min="0" step="1">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100">
+            <h5 class="fw-bold mb-3"><i class="bi bi-percent text-danger"></i> Márgenes y reparto</h5>
+            <div class="row g-3">
+                <div class="col-sm-4">
+                    <label class="form-label fw-semibold">% Instancia BD</label>
+                    <input type="number" class="form-control" id="inputDbPercent" value="10" min="1" max="100">
+                </div>
+                <div class="col-sm-4">
+                    <label class="form-label fw-semibold">Margen disco (%)</label>
+                    <input type="number" class="form-control" id="inputMarginDisk" value="75" min="0" max="500">
+                </div>
+                <div class="col-sm-4">
+                    <label class="form-label fw-semibold">Margen bucket (%)</label>
+                    <input type="number" class="form-control" id="inputMarginBucket" value="75" min="0" max="500">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<!-- ── COSTES CALCULADOS ─────────────────────────────────────────────────── -->
+<h3 class="mb-3"><i class="bi bi-calculator text-primary"></i> Costes calculados</h3>
+<div class="row g-4 mb-4">
+    <div class="col-md-4">
+        <div class="topic-card p-4 text-center h-100">
+            <i class="bi bi-database fs-2 text-primary"></i>
+            <h6 class="fw-bold mt-2">Disco BD</h6>
+            <h4 class="text-primary" id="costDisk">—</h4>
+            <span class="text-muted small">€/mes</span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="topic-card p-4 text-center h-100">
+            <i class="bi bi-folder2-open fs-2 text-success"></i>
+            <h6 class="fw-bold mt-2">Bucket</h6>
+            <h4 class="text-success" id="costBucket">—</h4>
+            <span class="text-muted small">€/mes</span>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="topic-card p-4 text-center h-100">
+            <i class="bi bi-hdd-stack fs-2 text-warning"></i>
+            <h6 class="fw-bold mt-2">Instancia BD</h6>
+            <h4 class="text-warning" id="costInstance">—</h4>
+            <span class="text-muted small">€/mes (% de 953,85 €)</span>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<!-- ── MODELO 1 ───────────────────────────────────────────────────────────── -->
+<div class="row g-4 mb-4">
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100">
+            <h4 class="fw-bold mb-2">
+                <span class="badge bg-primary me-2">Modelo 1</span>
+                Tarifa plana por usuario
+            </h4>
+            <p class="text-muted mb-3">
+                Software por usuario/mes. El almacenamiento (disco BD y bucket) se incluye en el coste
+                interno pero <strong>no se cobra aparte</strong> al cliente.
+            </p>
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Concepto</th>
+                            <th class="text-end">Coste</th>
+                            <th class="text-end">Precio cliente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Software (× <span id="m1Users">100</span> usuarios)</td>
+                            <td class="text-end" id="m1SoftwareCost">—</td>
+                            <td class="text-end" id="m1SoftwarePrice">—</td>
+                        </tr>
+                        <tr>
+                            <td>Disco BD</td>
+                            <td class="text-end" id="m1DiskCost">—</td>
+                            <td class="text-end text-muted">Incluido</td>
+                        </tr>
+                        <tr>
+                            <td>Bucket</td>
+                            <td class="text-end" id="m1BucketCost">—</td>
+                            <td class="text-end text-muted">Incluido</td>
+                        </tr>
+                        <tr>
+                            <td>Instancia BD</td>
+                            <td class="text-end" id="m1InstanceCost">—</td>
+                            <td class="text-end text-muted">Incluido</td>
+                        </tr>
+                    </tbody>
+                    <tfoot class="table-light fw-bold">
+                        <tr>
+                            <td>Total mensual</td>
+                            <td class="text-end" id="m1TotalCost">—</td>
+                            <td class="text-end" id="m1TotalPrice">—</td>
+                        </tr>
+                        <tr>
+                            <td>Margen</td>
+                            <td colspan="2" class="text-end">
+                                <span class="badge bg-success fs-6" id="m1Margin">—</span>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── MODELO 2 ───────────────────────────────────────────────────────── -->
+    <div class="col-lg-6">
+        <div class="topic-card p-4 h-100">
+            <h4 class="fw-bold mb-2">
+                <span class="badge bg-success me-2">Modelo 2</span>
+                Tarifa por usuario + almacenamiento
+            </h4>
+            <p class="text-muted mb-3">
+                Software por usuario/mes <strong>más un cargo por almacenamiento</strong>
+                (disco BD y bucket) con margen aplicado.
+            </p>
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Concepto</th>
+                            <th class="text-end">Coste</th>
+                            <th class="text-end">Precio cliente</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Software (× <span id="m2Users">100</span> usuarios)</td>
+                            <td class="text-end" id="m2SoftwareCost">—</td>
+                            <td class="text-end" id="m2SoftwarePrice">—</td>
+                        </tr>
+                        <tr>
+                            <td>Disco BD <small class="text-muted">(+ <span id="m2DiskMargin">75</span>%)</small></td>
+                            <td class="text-end" id="m2DiskCost">—</td>
+                            <td class="text-end" id="m2DiskPrice">—</td>
+                        </tr>
+                        <tr>
+                            <td>Bucket <small class="text-muted">(+ <span id="m2BucketMargin">75</span>%)</small></td>
+                            <td class="text-end" id="m2BucketCost">—</td>
+                            <td class="text-end" id="m2BucketPrice">—</td>
+                        </tr>
+                        <tr>
+                            <td>Instancia BD</td>
+                            <td class="text-end" id="m2InstanceCost">—</td>
+                            <td class="text-end text-muted">Incluido</td>
+                        </tr>
+                    </tbody>
+                    <tfoot class="table-light fw-bold">
+                        <tr>
+                            <td>Total mensual</td>
+                            <td class="text-end" id="m2TotalCost">—</td>
+                            <td class="text-end" id="m2TotalPrice">—</td>
+                        </tr>
+                        <tr>
+                            <td>Margen</td>
+                            <td colspan="2" class="text-end">
+                                <span class="badge bg-success fs-6" id="m2Margin">—</span>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── FÓRMULAS DE REFERENCIA ─────────────────────────────────────────────── -->
+<hr class="my-4">
+<details class="mb-4">
+    <summary class="fw-bold"><i class="bi bi-code-slash text-muted"></i> Fórmulas de cálculo</summary>
+    <div class="topic-card p-4 mt-3">
+        <div class="table-responsive">
+            <table class="table table-sm table-bordered mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Concepto</th>
+                        <th>Fórmula</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Disco BD</td>
+                        <td><code>(disco_gb / 10 × 3,915) + (backups × disco_gb / 10 × 0,921)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Bucket</td>
+                        <td><code>bucket_gb × 0,022</code></td>
+                    </tr>
+                    <tr>
+                        <td>Instancia BD</td>
+                        <td><code>953,85 × % instancia / 100</code></td>
+                    </tr>
+                    <tr>
+                        <td>Total coste (M1)</td>
+                        <td><code>(disco + bucket + instancia) + coste_sw × usuarios</code></td>
+                    </tr>
+                    <tr>
+                        <td>Total precio (M1)</td>
+                        <td><code>precio_sw × usuarios</code></td>
+                    </tr>
+                    <tr>
+                        <td>Total coste (M2)</td>
+                        <td><code>(disco + bucket + instancia) + coste_sw × usuarios</code></td>
+                    </tr>
+                    <tr>
+                        <td>Total precio (M2)</td>
+                        <td><code>precio_sw × usuarios + disco × (1 + margen_disco/100) + bucket × (1 + margen_bucket/100)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Margen</td>
+                        <td><code>(precio - coste) / precio × 100</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</details>
+
+@section Scripts {
+<script>
+    (function () {
+        const CUD3_8CPU = 953.85;
+        const DISK_BASE_RATE = 3.915;
+        const DISK_BACKUP_RATE = 0.921;
+        const BUCKET_RATE = 0.022;
+
+        const ids = {
+            users: 'inputUsers',
+            disk: 'inputDisk',
+            backups: 'inputBackups',
+            bucket: 'inputBucket',
+            swCost: 'inputSoftwareCost',
+            swPrice: 'inputSoftwarePrice',
+            dbPct: 'inputDbPercent',
+            marginDisk: 'inputMarginDisk',
+            marginBucket: 'inputMarginBucket',
+        };
+
+        function val(id) { return parseFloat(document.getElementById(id).value) || 0; }
+        function fmt(n) { return n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €'; }
+        function pct(n) { return n.toLocaleString('es-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' %'; }
+
+        function calculate() {
+            const users = val(ids.users);
+            const diskGb = val(ids.disk);
+            const backups = val(ids.backups);
+            const bucketGb = val(ids.bucket);
+            const swCost = val(ids.swCost);
+            const swPrice = val(ids.swPrice);
+            const dbPct = val(ids.dbPct);
+            const marginDisk = val(ids.marginDisk);
+            const marginBucket = val(ids.marginBucket);
+
+            // Computed costs
+            const costDisk = (diskGb / 10 * DISK_BASE_RATE) + (backups * (diskGb / 10 * DISK_BACKUP_RATE));
+            const costBucket = bucketGb * BUCKET_RATE;
+            const costInstance = CUD3_8CPU * dbPct / 100;
+
+            // Display computed costs
+            document.getElementById('costDisk').textContent = fmt(costDisk);
+            document.getElementById('costBucket').textContent = fmt(costBucket);
+            document.getElementById('costInstance').textContent = fmt(costInstance);
+
+            const infraCost = costDisk + costBucket + costInstance;
+            const totalSwCost = swCost * users;
+
+            // ── Model 1 ──
+            const m1Cost = infraCost + totalSwCost;
+            const m1Price = swPrice * users;
+            const m1Margin = m1Price > 0 ? (m1Price - m1Cost) / m1Price * 100 : 0;
+
+            document.getElementById('m1Users').textContent = users;
+            document.getElementById('m1SoftwareCost').textContent = fmt(totalSwCost);
+            document.getElementById('m1SoftwarePrice').textContent = fmt(m1Price);
+            document.getElementById('m1DiskCost').textContent = fmt(costDisk);
+            document.getElementById('m1BucketCost').textContent = fmt(costBucket);
+            document.getElementById('m1InstanceCost').textContent = fmt(costInstance);
+            document.getElementById('m1TotalCost').textContent = fmt(m1Cost);
+            document.getElementById('m1TotalPrice').textContent = fmt(m1Price);
+            document.getElementById('m1Margin').textContent = pct(m1Margin);
+            document.getElementById('m1Margin').className = 'badge fs-6 ' + (m1Margin >= 50 ? 'bg-success' : m1Margin >= 20 ? 'bg-warning text-dark' : 'bg-danger');
+
+            // ── Model 2 ──
+            const m2DiskPrice = costDisk + costDisk * marginDisk / 100;
+            const m2BucketPrice = costBucket + costBucket * marginBucket / 100;
+            const m2Cost = infraCost + totalSwCost;
+            const m2Price = swPrice * users + m2DiskPrice + m2BucketPrice;
+            const m2Margin = m2Price > 0 ? (m2Price - m2Cost) / m2Price * 100 : 0;
+
+            document.getElementById('m2Users').textContent = users;
+            document.getElementById('m2DiskMargin').textContent = marginDisk;
+            document.getElementById('m2BucketMargin').textContent = marginBucket;
+            document.getElementById('m2SoftwareCost').textContent = fmt(totalSwCost);
+            document.getElementById('m2SoftwarePrice').textContent = fmt(swPrice * users);
+            document.getElementById('m2DiskCost').textContent = fmt(costDisk);
+            document.getElementById('m2DiskPrice').textContent = fmt(m2DiskPrice);
+            document.getElementById('m2BucketCost').textContent = fmt(costBucket);
+            document.getElementById('m2BucketPrice').textContent = fmt(m2BucketPrice);
+            document.getElementById('m2InstanceCost').textContent = fmt(costInstance);
+            document.getElementById('m2TotalCost').textContent = fmt(m2Cost);
+            document.getElementById('m2TotalPrice').textContent = fmt(m2Price);
+            document.getElementById('m2Margin').textContent = pct(m2Margin);
+            document.getElementById('m2Margin').className = 'badge fs-6 ' + (m2Margin >= 50 ? 'bg-success' : m2Margin >= 20 ? 'bg-warning text-dark' : 'bg-danger');
+        }
+
+        // Attach event listeners to all inputs
+        Object.values(ids).forEach(function (id) {
+            document.getElementById(id).addEventListener('input', calculate);
+        });
+
+        // Initial calculation
+        calculate();
+    })();
+</script>
+}

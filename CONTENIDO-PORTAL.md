@@ -2701,3 +2701,72 @@ Requieren **mantenimiento programado**. Se programan por la noche.
 |---------|-----------|----------|-------------------------------|
 | **Producción Edge** | Validación con clientes reales | Conjunto predeterminado de early adopters | Inmediatamente después de QA |
 | **Producción LTS** | Entorno estable para el grueso de clientes | Todos los demás clientes | Tras validación exitosa en Edge |
+
+---
+
+# 15. Calculadora de Costes
+
+## 15.0 Calculadora de costes por cliente
+
+Herramienta de simulación para estimar el coste mensual de infraestructura por cliente y calcular el precio de venta según dos modelos de facturación.
+
+### Precios de referencia de instancia (GCP)
+
+| Configuración | Sin CUD | CUD 1 año | CUD 3 años |
+|---------------|---------|-----------|------------|
+| 4 CPUs / 32 GB RAM | 987,83 € | 775,41 € | 546,00 € |
+| 8 CPUs / 64 GB RAM | 1.837,51 € | 1.412,67 € | 953,85 € |
+
+Los cálculos usan la instancia de 8 CPUs con CUD a 3 años (953,85 €/mes) como referencia base.
+
+### Parámetros de entrada
+
+| Parámetro | Valor por defecto | Descripción |
+|-----------|-------------------|-------------|
+| **Usuarios** | 100 | Número de usuarios del cliente |
+| **Disco BD** | 100 GB | Espacio de disco para la base de datos |
+| **Copias de backup** | 3 | Número de copias de seguridad |
+| **Bucket** | 200 GB | Espacio para Gestión Documental |
+| **Coste software** | 3,00 €/usuario/mes | Coste interno por usuario |
+| **Precio software** | 50,00 €/usuario/mes | Precio de venta al cliente |
+| **% Instancia BD** | 10% | Porcentaje de la instancia asignado a este cliente |
+| **Margen disco** | 75% | Margen aplicado al disco BD (Modelo 2) |
+| **Margen bucket** | 75% | Margen aplicado al bucket (Modelo 2) |
+
+### Fórmulas de cálculo
+
+| Concepto | Fórmula |
+|----------|---------|
+| Disco BD | `(disco_gb / 10 × 3,915) + (backups × disco_gb / 10 × 0,921)` |
+| Bucket | `bucket_gb × 0,022` |
+| Instancia BD | `953,85 × % instancia / 100` |
+
+### Modelo 1: Tarifa plana por usuario
+
+El cliente paga una cuota fija por usuario/mes. El almacenamiento (disco BD y bucket) se incluye en el coste interno pero **no se cobra aparte**.
+
+| Concepto | Coste | Precio cliente |
+|----------|-------|----------------|
+| Software (× usuarios) | coste_sw × usuarios | precio_sw × usuarios |
+| Disco BD | coste calculado | Incluido |
+| Bucket | coste calculado | Incluido |
+| Instancia BD | coste calculado | Incluido |
+| **Total** | infraestructura + sw × usuarios | precio_sw × usuarios |
+| **Margen** | (precio - coste) / precio × 100 | |
+
+**Ejemplo con valores por defecto (100 usuarios):** Coste 466,57 € — Precio 5.000,00 € — Margen 90,7%
+
+### Modelo 2: Tarifa por usuario + almacenamiento
+
+El cliente paga una cuota por usuario/mes **más un cargo por almacenamiento** (disco BD y bucket) con margen aplicado.
+
+| Concepto | Coste | Precio cliente |
+|----------|-------|----------------|
+| Software (× usuarios) | coste_sw × usuarios | precio_sw × usuarios |
+| Disco BD | coste calculado | coste × (1 + margen_disco / 100) |
+| Bucket | coste calculado | coste × (1 + margen_bucket / 100) |
+| Instancia BD | coste calculado | Incluido |
+| **Total** | infraestructura + sw × usuarios | sw × usuarios + disco con margen + bucket con margen |
+| **Margen** | (precio - coste) / precio × 100 | |
+
+**Ejemplo con valores por defecto (100 usuarios):** Coste 469,57 € — Precio 5.124,57 € — Margen 90,8%
