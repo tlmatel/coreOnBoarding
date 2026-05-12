@@ -40,7 +40,7 @@
                 <li><strong>VPC</strong> — Red privada aislada</li>
                 <li><strong>Subnets</strong> — Segmentación por entorno</li>
                 <li><strong>Cloud NAT</strong> — Salida controlada</li>
-                <li><strong>Cloud DNS</strong> — Resolución privada</li>
+                <li><strong>Cloudflare</strong> — DNS, CDN y protección DDoS</li>
                 <li><strong>Firewall Rules</strong> — Zero-trust</li>
                 <li><strong>Private Google Access</strong> — APIs sin Internet</li>
             </ul>
@@ -96,9 +96,9 @@
         <div class="topic-card h-100">
             <h6><i class="bi bi-eye text-primary"></i> Observabilidad</h6>
             <ul class="small mb-0">
-                <li>Cloud Logging</li>
-                <li>Cloud Monitoring</li>
-                <li>Cloud Trace</li>
+                <li>Prometheus + Grafana</li>
+                <li>Loki + Promtail</li>
+                <li>Tempo + OpenTelemetry</li>
             </ul>
         </div>
     </div>
@@ -122,9 +122,8 @@
         <tr><th>Entorno</th><th>Proyecto GCP</th><th>Región</th><th>Propósito</th></tr>
     </thead>
     <tbody>
-        <tr><td><span class="badge bg-info">DEV</span></td><td>core-onboarding-dev</td><td>europe-west1</td><td>Desarrollo y pruebas internas</td></tr>
-        <tr><td><span class="badge bg-warning text-dark">STAGING</span></td><td>core-onboarding-stg</td><td>europe-west1</td><td>Pre-producción, validación cliente</td></tr>
-        <tr><td><span class="badge bg-success">PROD</span></td><td>core-onboarding-prod</td><td>europe-west1</td><td>Producción multi-tenant</td></tr>
-        <tr><td><span class="badge bg-danger">DR</span></td><td>core-onboarding-dr</td><td>europe-west3</td><td>Disaster Recovery (pasivo)</td></tr>
+        <tr><td><span class="badge bg-info">DEV</span></td><td>core-onboarding-dev</td><td>europe-southwest1</td><td>Desarrollo y pruebas internas</td></tr>
+        <tr><td><span class="badge bg-warning text-dark">STAGING</span></td><td>core-onboarding-stg</td><td>europe-southwest1</td><td>Pre-producción, validación cliente</td></tr>
+        <tr><td><span class="badge bg-success">PROD</span></td><td>core-onboarding-prod</td><td>europe-southwest1</td><td>Producción multi-tenant</td></tr>
     </tbody>
 </table>

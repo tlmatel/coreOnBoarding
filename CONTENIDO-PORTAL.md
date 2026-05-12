@@ -16,7 +16,7 @@
 | **Guía Funcional** | Detalle por módulo: funcionalidades, flujos, pantallas, KPIs y roadmap. |
 | **Argumentario Comercial** | Elevator pitch, argumentos, objeciones, competidores y casos de éxito. |
 | **Implantación** | Metodología, configuración inicial y migración de datos. |
-| **Stack Tecnológico** | Tecnologías, herramientas y decisiones técnicas de la plataforma. |
+| **DevOps** | Tecnologías, herramientas y decisiones técnicas de la plataforma. |
 | **Observabilidad y Soporte** | Trazabilidad, Grafana, monitorización por tenant y usuario, y diagnóstico. |
 | **Proveedor Cloud** | Google Cloud Platform: infraestructura, Kubernetes, redundancia, backups y seguridad. |
 | **Inteligencia Artificial** | Agentes IA con lenguaje natural: cambios masivos, widgets, reports, filtros y MCP. |
@@ -717,7 +717,7 @@ Respuestas preparadas para las objeciones más frecuentes que surgen en el proce
 
 **"La nube no es segura"**
 
-> "Google Cloud tiene más certificaciones de seguridad que cualquier CPD propio (ISO 27001, SOC 2, ENS Alta, GDPR). Los datos están cifrados en reposo y en tránsito, con backups automáticos y disaster recovery en otra región. Es objetivamente más seguro que un servidor en la trastienda con un antivirus."
+> "Google Cloud tiene más certificaciones de seguridad que cualquier CPD propio (ISO 27001, SOC 2, ENS Alta, GDPR). Los datos están cifrados en reposo y en tránsito, con backups automáticos y restauración point-in-time. Es objetivamente más seguro que un servidor en la trastienda con un antivirus."
 
 **"Es muy caro"**
 
@@ -897,7 +897,7 @@ Ejemplos representativos de implantaciones exitosas que demuestran el valor de C
 
 ---
 
-# 7. Stack Tecnológico
+# 7. DevOps
 
 ## 7.0 Visión general del pipeline
 
@@ -1501,9 +1501,7 @@ Toda la infraestructura de Core OnBoarding se aloja en **Google Cloud Platform (
 | Cumplimiento | ISO 27001, SOC 1/2/3, GDPR, ENS Alta |
 | Soporte | Premium support con SLA de respuesta < 15 min (P1) |
 
-**Región principal:** europe-west1 (Bélgica) — Baja latencia para clientes europeos.
-
-**Región DR:** europe-west3 (Frankfurt) — Disaster Recovery con replicación asíncrona.
+**Región principal:** europe-southwest1 (Madrid) — Baja latencia para clientes españoles y europeos.
 
 ---
 
@@ -1519,7 +1517,7 @@ Internet / Usuarios → Cloud Load Balancer (Global) → Cloud Armor (WAF + DDoS
 - **VPC** — Red privada aislada
 - **Subnets** — Segmentación por entorno
 - **Cloud NAT** — Salida controlada
-- **Cloud DNS** — Resolución privada
+- **Cloudflare** — DNS, CDN y protección DDoS
 - **Firewall Rules** — Zero-trust
 - **Private Google Access** — APIs sin Internet
 
@@ -1537,7 +1535,7 @@ Internet / Usuarios → Cloud Load Balancer (Global) → Cloud Armor (WAF + DDoS
 
 **Seguridad:**
 - Cloud Armor (WAF)
-- Secret Manager
+- HashiCorp Vault
 - Cloud KMS (cifrado)
 
 **Networking:**
@@ -1546,9 +1544,9 @@ Internet / Usuarios → Cloud Load Balancer (Global) → Cloud Armor (WAF + DDoS
 - Cloud Interconnect
 
 **Observabilidad:**
-- Cloud Logging
-- Cloud Monitoring
-- Cloud Trace
+- Prometheus + Grafana
+- Loki + Promtail
+- Tempo + OpenTelemetry
 
 **DevOps:**
 - Artifact Registry (imágenes)
@@ -1559,10 +1557,9 @@ Internet / Usuarios → Cloud Load Balancer (Global) → Cloud Armor (WAF + DDoS
 
 | Entorno | Proyecto GCP | Región | Propósito |
 |---------|-------------|--------|-----------|
-| DEV | core-onboarding-dev | europe-west1 | Desarrollo y pruebas internas |
-| STAGING | core-onboarding-stg | europe-west1 | Pre-producción, validación cliente |
-| PROD | core-onboarding-prod | europe-west1 | Producción multi-tenant |
-| DR | core-onboarding-dr | europe-west3 | Disaster Recovery (pasivo) |
+| DEV | core-onboarding-dev | europe-southwest1 | Desarrollo y pruebas internas |
+| STAGING | core-onboarding-stg | europe-southwest1 | Pre-producción, validación cliente |
+| PROD | core-onboarding-prod | europe-southwest1 | Producción multi-tenant |
 
 ---
 
@@ -1581,7 +1578,6 @@ Core OnBoarding se despliega sobre **GKE (Google Kubernetes Engine)**, el servic
 | Autoescalado | Cluster Autoscaler + HPA por deployment |
 | Networking | VPC-native (alias IP) |
 | Ingress | NGINX Ingress Controller + cert-manager |
-| Service Mesh | Istio (opcional, para mTLS inter-servicio) |
 
 **Namespaces:**
 
@@ -1629,7 +1625,6 @@ La arquitectura de Core OnBoarding está diseñada para tolerar fallos a nivel d
 
 - **Multi-zona** — El cluster GKE se despliega en **3 zonas** dentro de la misma región. Si una zona cae, los pods se redistribuyen automáticamente.
 - **Multi-nodo** — Cada servicio tiene mínimo **3 réplicas** distribuidas con `topologySpreadConstraints` para evitar concentración.
-- **Multi-región (DR)** — Región secundaria en **europe-west3** (Frankfurt) con cluster en standby y réplica de datos asíncrona.
 
 ### Componentes de HA
 
@@ -1641,25 +1636,11 @@ La arquitectura de Core OnBoarding está diseñada para tolerar fallos a nivel d
 | Base de datos | Cloud SQL HA (regional) | < 60 segundos (failover automático) |
 | Cache | Memorystore HA (Standard Tier) | < 30 segundos |
 | Storage | Cloud Storage (multi-regional) | Transparente |
-| DNS | Cloud DNS (100% SLA) | Anycast global |
+| DNS | Cloudflare (100% SLA) | Anycast global, CDN integrado |
 
 ### Disaster Recovery
 
-**Objetivos definidos:**
-
-| Métrica | Valor |
-|---------|-------|
-| **RPO** (Recovery Point Objective) | ≤ 1 hora |
-| **RTO** (Recovery Time Objective) | ≤ 4 horas |
-| **Frecuencia de pruebas DR** | Trimestral |
-
-**Procedimiento de failover:**
-1. Detección de caída en región primaria (alertas automáticas)
-2. Validación manual o automática del estado
-3. Promoción del cluster DR a producción
-4. Actualización de DNS global al nuevo endpoint
-5. Verificación de integridad de datos
-6. Notificación a clientes afectados
+> **Nota:** Actualmente no se dispone de una región DR secundaria. La estrategia de recuperación se basa en backups automatizados y restauración en la misma región (europe-southwest1). La incorporación de una región DR está en el roadmap.
 
 ---
 
@@ -1677,7 +1658,6 @@ Se implementan múltiples niveles de backup para garantizar la integridad de los
 | **Retención** | 30 días (automáticos) |
 | **Point-in-Time Recovery** | Últimos 7 días con WAL logs |
 | **Backups manuales** | Pre-release y pre-migración |
-| **Replicación** | Cross-region a europe-west3 |
 
 **Almacenamiento (Cloud Storage):**
 
@@ -1686,17 +1666,15 @@ Se implementan múltiples niveles de backup para garantizar la integridad de los
 | **Versionado** | Activado en todos los buckets |
 | **Retención** | 90 días (versiones anteriores) |
 | **Clase de storage** | Standard (activo) + Nearline (archivo) |
-| **Replicación** | Dual-region (europe-west1 + west3) |
 | **Object Lock** | Para backups críticos (inmutabilidad) |
 
 ### Backups de Kubernetes
 
-**Velero + GCS:**
+**PV Snapshots + GCS:**
 
-Se utiliza **Velero** para respaldar el estado del cluster:
-- Backup diario de todos los recursos (deployments, configmaps, secrets, etc.)
+Se utilizan snapshots nativos de Kubernetes para respaldar el estado del cluster:
+- Backup diario de Persistent Volumes vía snapshots incrementales
 - Almacenamiento en bucket dedicado con retención de 14 días
-- Backup incremental de Persistent Volumes vía snapshots
 - Restauración selectiva por namespace, recurso o label
 - Pruebas de restauración mensuales en entorno de staging
 
@@ -1707,17 +1685,15 @@ Se utiliza **Velero** para respaldar el estado del cluster:
 | Tipo | Frecuencia | Retención | Ubicación |
 |------|-----------|-----------|-----------|
 | DB — automático | Diario | 30 días | Misma región |
-| DB — cross-region | Diario | 14 días | europe-west3 |
 | DB — PITR (WAL) | Continuo | 7 días | Misma región |
-| Storage — versionado | Por cambio | 90 días | Dual-region |
-| K8s — Velero | Diario | 14 días | GCS bucket |
-| K8s — PV snapshots | Diario | 7 días | Misma región |
+| Storage — versionado | Por cambio | 90 días | Misma región |
+| K8s — PV snapshots | Diario | 14 días | GCS bucket |
 
 ### Pruebas de restauración
 
 **Frecuencia:**
 - **Mensual** — Restauración de DB en entorno aislado
-- **Trimestral** — Simulacro completo de DR
+- **Trimestral** — Simulacro completo de restauración
 - **Post-incidente** — Verificación tras cualquier fallo
 
 **Métricas monitorizadas:**
@@ -1767,7 +1743,7 @@ La seguridad en Google Cloud se aborda con un enfoque **Zero-Trust** y defensa e
 **Auditoría:**
 - Audit Logs habilitados al 100%
 - Data Access Logs activados
-- Retención 400 días (Cloud Logging)
+- Retención configurable (Loki)
 - Exportación a SIEM externo
 
 ### Cumplimiento normativo
@@ -1782,10 +1758,10 @@ La seguridad en Google Cloud se aborda con un enfoque **Zero-Trust** y defensa e
 
 ### Gestión de secretos
 
-**Secret Manager + External Secrets Operator:**
+**HashiCorp Vault + External Secrets Operator:**
 
 Los secretos se gestionan centralizadamente:
-1. Se almacenan en **Google Secret Manager** (cifrado con CMEK)
+1. Se almacenan en **HashiCorp Vault** (cifrado en reposo y en tránsito)
 2. **External Secrets Operator** los sincroniza como K8s Secrets
 3. Los pods acceden vía volúmenes montados o variables de entorno
 4. Rotación automática sin reinicio de pods (watch mode)
@@ -2770,3 +2746,97 @@ El cliente paga una cuota por usuario/mes **más un cargo por almacenamiento** (
 | **Margen** | (precio - coste) / precio × 100 | |
 
 **Ejemplo con valores por defecto (100 usuarios):** Coste 469,57 € — Precio 5.124,57 € — Margen 90,8%
+
+---
+
+# 16. Stack Tecnológico
+
+Resumen de todas las tecnologías, herramientas, plataformas y servicios que componen la plataforma CORE.
+
+## Cloud e infraestructura
+
+| Tecnología | Descripción |
+|-----------|-------------|
+| **Google Cloud Platform (GCP)** | Proveedor cloud principal. Red global, certificaciones ISO 27001, SOC 2, ENS. |
+| **GKE (Google Kubernetes Engine)** | Clusters gestionados multi-zona con autoescalado y HA. |
+| **Cloud SQL** | PostgreSQL gestionado con HA y backups automáticos. |
+| **Cloud Storage** | Almacenamiento de objetos con versionado para Gestión Documental. |
+| **Memorystore (Redis)** | Caché gestionado Standard Tier HA para sesiones y datos de aplicación. |
+| **VPC, Cloudflare, Cloud NAT** | Red privada, DNS con Cloudflare (anycast global), NAT para salida controlada. |
+| **Cloud CDN, Cloud Load Balancer** | CDN para estáticos, balanceo HTTP(S) global. |
+
+## Contenedores y orquestación
+
+| Tecnología | Descripción |
+|-----------|-------------|
+| **Docker** | Runtime de contenedores. Empaquetado de microservicios. |
+| **Kubernetes (K8s)** | Orquestación: HPA, namespaces por tenant, ResourceQuota, NetworkPolicy. |
+| **Helm** | Gestor de paquetes para K8s. Charts, templating, versionado semántico. |
+| **ArgoCD** | Despliegue continuo GitOps. Sincronización automática, drift detection, rollback. |
+| **cert-manager** | Gestión automática de certificados TLS en Kubernetes. |
+| **OCI Registry** | Registro de artefactos: contenedores y Helm charts. |
+
+## Backend y API
+
+| Tecnología | Versión | Descripción |
+|-----------|---------|-------------|
+| **.NET** | 10.0 LTS | Framework principal del backend. Microservicios. |
+| **ASP.NET Core** | 10.0 | Framework web para APIs REST (API-First) y MVC. |
+| **Entity Framework Core** | 10.0.3 | ORM con migraciones automatizadas. |
+| **Npgsql** | 10.0.0 | Driver nativo de PostgreSQL para .NET. |
+| **PostgreSQL** | 16+ | Motor de BD relacional. BD segregada por tenant. |
+
+## Frontend
+
+| Tecnología | Descripción |
+|-----------|-------------|
+| **HTML5 + CSS3** | Estándares web modernos. Responsive design. |
+| **Bootstrap 5** | Framework CSS + Bootstrap Icons 1.11.3. |
+| **PWA** | Progressive Web App. Caché offline, acceso multiplataforma. |
+
+## CI/CD y DevOps
+
+| Tecnología | Descripción |
+|-----------|-------------|
+| **Jira** | Planificación y gestión de proyectos. Sprints y backlog. |
+| **GitHub** | Repositorios de código, pull requests, code review. |
+| **GitHub Actions** | Automatización CI/CD y construcción de imágenes Docker. |
+| **ArgoCD** | Despliegue continuo GitOps hacia Kubernetes. |
+
+## Observabilidad y monitorización
+
+| Tecnología | Función |
+|-----------|---------|
+| **Prometheus** | Recolección de métricas y series temporales. Alertas. |
+| **Grafana** | Dashboards y visualización. Paneles por tenant. |
+| **Loki + Promtail** | Agregación de logs estructurados. Filtrado por tenant/usuario. |
+| **Tempo + OpenTelemetry** | Tracing distribuido entre microservicios. |
+
+## Seguridad
+
+| Tecnología | Función |
+|-----------|---------|
+| **Auth0** | IAM: SSO, MFA, OpenID Connect, SAML 2.0. |
+| **JWT** | Tokens de autenticación con expiración y rotación. |
+| **Cloud Armor** | Protección DDoS y WAF. |
+| **Cloud KMS** | Cifrado AES-256 en reposo, TLS 1.3 en tránsito. |
+| **HashiCorp Vault** | Almacenamiento centralizado de secretos con cifrado y auditoría. |
+| **External Secrets Operator** | Sincronización de secretos Vault ↔ Kubernetes. |
+| **Binary Authorization** | Verificación de imágenes antes de desplegar. |
+| **Workload Identity** | Autenticación pod-to-GCP sin claves estáticas. |
+
+## Inteligencia Artificial
+
+| Tecnología | Descripción |
+|-----------|-------------|
+| **Agentes IA generativos (LLMs)** | Interacción en lenguaje natural: cambios masivos, widgets, reports, filtros. |
+| **MCP (Model Context Protocol)** | Estándar para conectar modelos IA con herramientas del ERP. |
+
+## Integraciones y estándares
+
+| Categoría | Tecnologías |
+|----------|-------------|
+| **Bancos de datos** | eDam / Electronet, GO!Catalog, ETIM, BMEcat |
+| **Facturación electrónica** | SII, Verifactu, Batuz |
+| **Sistemas externos** | CRM / eCommerce vía API REST, CLC, PTL, SGA / IntraDAM / GSGESTIÓN |
+| **Formatos** | CSV, JSON, SQL, Excel/XLSX, PDF |

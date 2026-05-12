@@ -172,11 +172,11 @@
                     </div>
                 </div>
 
-                <!-- 7. STACK TECNOLÓGICO -->
+                <!-- 7. DEVOPS -->
                 <div class="sidebar-section">
                     <button class="section-header" data-bs-toggle="collapse" data-bs-target="#sec7"
                             aria-expanded="@Expanded("TechStack")">
-                        <i class="bi bi-stack"></i> 7. Stack Tecnológico
+                        <i class="bi bi-infinity"></i> 7. DevOps
                         <i class="bi bi-chevron-right chevron"></i>
                     </button>
                     <div class="collapse @Show("TechStack")" id="sec7">
@@ -316,6 +316,14 @@
                     <a asp-controller="CostCalculator" asp-action="Index"
                        class="section-header text-decoration-none @(ctrl == "CostCalculator" ? "text-primary" : "")">
                         <i class="bi bi-calculator"></i> 15. Calculadora de Costes
+                    </a>
+                </div>
+
+                <!-- 16. STACK TECNOLÓGICO -->
+                <div class="sidebar-section">
+                    <a asp-controller="Stack" asp-action="Index"
+                       class="section-header text-decoration-none @(ctrl == "Stack" ? "text-primary" : "")">
+                        <i class="bi bi-stack"></i> 16. Stack Tecnológico
                     </a>
                 </div>
             </nav>

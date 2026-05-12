@@ -73,7 +73,7 @@
             <ul class="small mb-0">
                 <li>Audit Logs habilitados al 100%</li>
                 <li>Data Access Logs activados</li>
-                <li>Retención 400 días (Cloud Logging)</li>
+                <li>Retención configurable (Loki)</li>
                 <li>Exportación a SIEM externo</li>
             </ul>
         </div>
@@ -102,10 +102,10 @@
 <div class="row g-4">
     <div class="col-lg-8">
         <div class="topic-card">
-            <h5><i class="bi bi-safe text-primary"></i> Secret Manager + External Secrets Operator</h5>
+            <h5><i class="bi bi-safe text-primary"></i> HashiCorp Vault + External Secrets Operator</h5>
             <p>Los secretos se gestionan centralizadamente:</p>
             <ol class="small mb-0">
-                <li>Se almacenan en <strong>Google Secret Manager</strong> (cifrado con CMEK)</li>
+                <li>Se almacenan en <strong>HashiCorp Vault</strong> (cifrado en reposo y en tránsito)</li>
                 <li><strong>External Secrets Operator</strong> los sincroniza como K8s Secrets</li>
                 <li>Los pods acceden vía volúmenes montados o variables de entorno</li>
                 <li>Rotación automática sin reinicio de pods (watch mode)</li>

@@ -21,7 +21,6 @@
                     <tr><td><strong>Retención</strong></td><td>30 días (automáticos)</td></tr>
                     <tr><td><strong>Point-in-Time Recovery</strong></td><td>Últimos 7 días con WAL logs</td></tr>
                     <tr><td><strong>Backups manuales</strong></td><td>Pre-release y pre-migración</td></tr>
-                    <tr><td><strong>Replicación</strong></td><td>Cross-region a europe-west3</td></tr>
                 </tbody>
             </table>
         </div>
@@ -34,7 +33,6 @@
                     <tr><td><strong>Versionado</strong></td><td>Activado en todos los buckets</td></tr>
                     <tr><td><strong>Retención</strong></td><td>90 días (versiones anteriores)</td></tr>
                     <tr><td><strong>Clase de storage</strong></td><td>Standard (activo) + Nearline (archivo)</td></tr>
-                    <tr><td><strong>Replicación</strong></td><td>Dual-region (europe-west1 + west3)</td></tr>
                     <tr><td><strong>Object Lock</strong></td><td>Para backups críticos (inmutabilidad)</td></tr>
                 </tbody>
             </table>
@@ -48,12 +46,11 @@
 <div class="row g-4">
     <div class="col-lg-8">
         <div class="topic-card">
-            <h5><i class="bi bi-box text-primary"></i> Velero + GCS</h5>
-            <p>Se utiliza <strong>Velero</strong> para respaldar el estado del cluster:</p>
+            <h5><i class="bi bi-box text-primary"></i> PV Snapshots + GCS</h5>
+            <p>Se utilizan snapshots nativos de Kubernetes para respaldar el estado del cluster:</p>
             <ul class="small">
-                <li>Backup diario de todos los recursos (deployments, configmaps, secrets, etc.)</li>
+                <li>Backup diario de Persistent Volumes vía snapshots incrementales</li>
                 <li>Almacenamiento en bucket dedicado con retención de 14 días</li>
-                <li>Backup incremental de Persistent Volumes vía snapshots</li>
                 <li>Restauración selectiva por namespace, recurso o label</li>
                 <li>Pruebas de restauración mensuales en entorno de staging</li>
             </ul>
@@ -79,11 +76,9 @@
     </thead>
     <tbody>
         <tr><td>DB — automático</td><td>Diario</td><td>30 días</td><td>Misma región</td></tr>
-        <tr><td>DB — cross-region</td><td>Diario</td><td>14 días</td><td>europe-west3</td></tr>
         <tr><td>DB — PITR (WAL)</td><td>Continuo</td><td>7 días</td><td>Misma región</td></tr>
-        <tr><td>Storage — versionado</td><td>Por cambio</td><td>90 días</td><td>Dual-region</td></tr>
-        <tr><td>K8s — Velero</td><td>Diario</td><td>14 días</td><td>GCS bucket</td></tr>
-        <tr><td>K8s — PV snapshots</td><td>Diario</td><td>7 días</td><td>Misma región</td></tr>
+        <tr><td>Storage — versionado</td><td>Por cambio</td><td>90 días</td><td>Misma región</td></tr>
+        <tr><td>K8s — PV snapshots</td><td>Diario</td><td>14 días</td><td>GCS bucket</td></tr>
     </tbody>
 </table>
 

@@ -32,16 +32,6 @@
             </p>
         </div>
     </div>
-    <div class="col-lg-4">
-        <div class="topic-card h-100 text-center">
-            <i class="bi bi-globe fs-1 text-success"></i>
-            <h5 class="mt-2">Multi-región (DR)</h5>
-            <p class="small">
-                Región secundaria en <strong>europe-west3</strong> (Frankfurt) con cluster
-                en standby y réplica de datos asíncrona.
-            </p>
-        </div>
-    </div>
 </div>
 
 <hr class="my-4">
@@ -58,7 +48,7 @@
         <tr><td>Base de datos</td><td>Cloud SQL HA (regional)</td><td>&lt; 60 segundos (failover automático)</td></tr>
         <tr><td>Cache</td><td>Memorystore HA (Standard Tier)</td><td>&lt; 30 segundos</td></tr>
         <tr><td>Storage</td><td>Cloud Storage (multi-regional)</td><td>Transparente</td></tr>
-        <tr><td>DNS</td><td>Cloud DNS (100% SLA)</td><td>Anycast global</td></tr>
+        <tr><td>DNS</td><td>Cloudflare (100% SLA)</td><td>Anycast global, CDN integrado</td></tr>
     </tbody>
 </table>
 
@@ -66,29 +56,14 @@
 
 <h3 class="mb-3">Disaster Recovery</h3>
 <div class="row g-4">
-    <div class="col-lg-6">
-        <div class="topic-card">
-            <h5><i class="bi bi-clock text-danger"></i> Objetivos definidos</h5>
-            <table class="table table-sm table-bordered mb-0">
-                <tbody>
-                    <tr><td><strong>RPO</strong> (Recovery Point Objective)</td><td>≤ 1 hora</td></tr>
-                    <tr><td><strong>RTO</strong> (Recovery Time Objective)</td><td>≤ 4 horas</td></tr>
-                    <tr><td><strong>Frecuencia de pruebas DR</strong></td><td>Trimestral</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="topic-card">
-            <h5><i class="bi bi-list-check text-success"></i> Procedimiento de failover</h5>
-            <ol class="small mb-0">
-                <li>Detección de caída en región primaria (alertas automáticas)</li>
-                <li>Validación manual o automática del estado</li>
-                <li>Promoción del cluster DR a producción</li>
-                <li>Actualización de DNS global al nuevo endpoint</li>
-                <li>Verificación de integridad de datos</li>
-                <li>Notificación a clientes afectados</li>
-            </ol>
+    <div class="col-lg-12">
+        <div class="topic-card p-4">
+            <p class="mb-0">
+                <i class="bi bi-info-circle text-info"></i>
+                Actualmente no se dispone de una región DR secundaria. La estrategia de recuperación se basa
+                en backups automatizados y restauración en la misma región (<strong>europe-southwest1</strong>).
+                La incorporación de una región DR está en el roadmap.
+            </p>
         </div>
     </div>
 </div>
