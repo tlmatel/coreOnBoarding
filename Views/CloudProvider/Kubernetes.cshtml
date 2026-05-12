@@ -123,3 +123,32 @@
         </div>
     </div>
 </div>
+
+<hr class="my-5">
+
+<h3 class="mb-3"><i class="bi bi-book text-secondary"></i> Glosario</h3>
+<div class="table-responsive">
+    <table class="table table-bordered table-sm">
+        <thead class="table-light">
+            <tr><th style="width:22%">Término</th><th>Definición</th></tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Kubernetes (K8s)</strong></td><td>Plataforma de orquestación de contenedores que automatiza el despliegue, escalado y gestión de aplicaciones.</td></tr>
+            <tr><td><strong>GKE</strong></td><td>Google Kubernetes Engine — servicio gestionado de Kubernetes en GCP que administra el plano de control.</td></tr>
+            <tr><td><strong>Cluster</strong></td><td>Conjunto de máquinas (nodos) que ejecutan aplicaciones en contenedores gestionados por Kubernetes.</td></tr>
+            <tr><td><strong>Namespace</strong></td><td>Partición lógica dentro de un cluster que permite aislar recursos entre equipos o tenants.</td></tr>
+            <tr><td><strong>Pod</strong></td><td>Unidad mínima de ejecución en Kubernetes; contiene uno o más contenedores que comparten red y almacenamiento.</td></tr>
+            <tr><td><strong>Deployment</strong></td><td>Recurso de K8s que gestiona el ciclo de vida de un conjunto de pods idénticos (réplicas, actualizaciones, rollbacks).</td></tr>
+            <tr><td><strong>Node Pool</strong></td><td>Grupo de nodos (máquinas) con la misma configuración de hardware dentro de un cluster GKE.</td></tr>
+            <tr><td><strong>HPA</strong></td><td>Horizontal Pod Autoscaler — escala automáticamente el número de pods según métricas como CPU o memoria.</td></tr>
+            <tr><td><strong>Ingress</strong></td><td>Recurso de K8s que gestiona el acceso HTTP/HTTPS externo hacia los servicios del cluster.</td></tr>
+            <tr><td><strong>CronJob</strong></td><td>Recurso de K8s que ejecuta tareas de forma programada según una expresión cron.</td></tr>
+            <tr><td><strong>StatefulSet</strong></td><td>Recurso de K8s para aplicaciones con estado que necesitan identidad estable y almacenamiento persistente.</td></tr>
+            <tr><td><strong>DaemonSet</strong></td><td>Recurso de K8s que garantiza que un pod se ejecute en cada nodo del cluster (p.ej. agentes de monitorización).</td></tr>
+            <tr><td><strong>Rolling Update</strong></td><td>Estrategia de despliegue que actualiza pods de forma progresiva sin interrumpir el servicio.</td></tr>
+            <tr><td><strong>Readiness Probe</strong></td><td>Comprobación periódica que verifica si un pod está listo para recibir tráfico.</td></tr>
+            <tr><td><strong>ResourceQuota</strong></td><td>Límite de recursos (CPU, memoria) asignado a un namespace para evitar el consumo excesivo.</td></tr>
+            <tr><td><strong>NetworkPolicy</strong></td><td>Regla de K8s que controla qué pods pueden comunicarse entre sí dentro del cluster.</td></tr>
+        </tbody>
+    </table>
+</div>
