@@ -1,0 +1,167 @@
+@{
+    ViewData["Title"] = "Proceso de Actualización";
+}
+
+<h1 class="mb-3">Proceso de <span class="text-primary">Actualización</span></h1>
+<p class="lead">
+    La actualización de un cliente (tenant) a una nueva versión se inicia desde el
+    <strong>mantenimiento de bases de datos</strong> en el Panel de Control, donde cada tenant
+    tiene un campo <strong>Versión</strong> y un botón para pasar a la siguiente.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Campo de versión</h3>
+<div class="topic-card p-4 mb-4">
+    <p>
+        En la ficha de cada base de datos / tenant existe un campo <strong>Versión</strong> que indica
+        en qué versión está operando actualmente. Cuando existe una versión superior disponible en el
+        otro entorno, aparece un botón <strong>"Actualizar a la siguiente versión"</strong>.
+    </p>
+    <div class="d-flex align-items-center gap-3 mt-3">
+        <span class="badge bg-secondary px-3 py-2 fs-6">v.2026.2</span>
+        <i class="bi bi-arrow-right text-muted"></i>
+        <button class="btn btn-primary" disabled>
+            <i class="bi bi-arrow-up-circle me-1"></i> Actualizar a v.2026.3
+        </button>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Flujo de actualización</h3>
+<p>Al pulsar el botón de actualización se ejecuta el siguiente proceso automatizado:</p>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <div class="d-flex align-items-center mb-3">
+                <span class="badge bg-primary rounded-circle me-2" style="width:32px;height:32px;line-height:32px;text-align:center;font-size:1rem;">1</span>
+                <h5 class="mb-0">Validación previa</h5>
+            </div>
+            <ul class="mb-0">
+                <li>Comprobar que la versión destino está desplegada y operativa en su entorno</li>
+                <li>Verificar que no hay procesos críticos en curso (cierres contables, facturaciones masivas, etc.)</li>
+                <li>Confirmar que las migraciones de BD para esa versión están disponibles</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <div class="d-flex align-items-center mb-3">
+                <span class="badge bg-primary rounded-circle me-2" style="width:32px;height:32px;line-height:32px;text-align:center;font-size:1rem;">2</span>
+                <h5 class="mb-0">Migración de base de datos</h5>
+            </div>
+            <ul class="mb-0">
+                <li>Ejecutar los scripts de migración de esquema correspondientes a la nueva versión</li>
+                <li>Aplicar transformaciones de datos si las hubiera</li>
+                <li>Verificar la integridad de la migración</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <div class="d-flex align-items-center mb-3">
+                <span class="badge bg-primary rounded-circle me-2" style="width:32px;height:32px;line-height:32px;text-align:center;font-size:1rem;">3</span>
+                <h5 class="mb-0">Redirección DNS</h5>
+            </div>
+            <ul class="mb-0">
+                <li>Modificar los registros DNS de todos los subdominios del tenant</li>
+                <li>Redirigir de <span class="badge bg-primary">Blue</span> a <span class="badge bg-success">Green</span> (o viceversa)</li>
+                <li>Cambio transparente para el usuario — al recargar ya está en la nueva versión</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <div class="d-flex align-items-center mb-3">
+                <span class="badge bg-primary rounded-circle me-2" style="width:32px;height:32px;line-height:32px;text-align:center;font-size:1rem;">4</span>
+                <h5 class="mb-0">Verificación post-migración</h5>
+            </div>
+            <ul class="mb-0">
+                <li>Comprobar que el tenant responde correctamente en el nuevo entorno</li>
+                <li>Validar acceso a datos, configuración y servicios</li>
+                <li>Registrar la actualización en el log de auditoría</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Diagrama del proceso</h3>
+<div class="topic-card p-4">
+    <pre class="mb-0" style="font-size: 0.85rem; line-height: 1.7;"><code>Tenant "ABC" en v.2026.2 (Blue)
+         │
+         ▼
+  [Botón: Actualizar a v.2026.3]
+         │
+         ▼
+  ┌─ Validación previa ─┐
+  │  • Entorno Green OK  │
+  │  • Sin procesos bloq.│
+  │  • Migraciones listas│
+  └──────────┬───────────┘
+             ▼
+  ┌─ Migración de BD ───┐
+  │  • Ejecutar scripts  │
+  │  • Transformar datos │
+  │  • Verificar integr. │
+  └──────────┬───────────┘
+             ▼
+  ┌─ Cambio de DNS ─────┐
+  │  abc.core.com ──────►│
+  │  Blue → Green        │
+  └──────────┬───────────┘
+             ▼
+  ┌─ Verificación ──────┐
+  │  • Respuesta OK      │
+  │  • Datos accesibles  │
+  │  • Log de auditoría  │
+  └──────────────────────┘
+         │
+         ▼
+Tenant "ABC" en v.2026.3 (Green) ✓</code></pre>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Consideraciones</h3>
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-arrow-counterclockwise text-primary"></i> Reversibilidad</h5>
+            <p class="mb-0">
+                Si la verificación falla, el proceso <strong>revierte automáticamente</strong>:
+                restaura la BD y devuelve el DNS al entorno original.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-clock text-warning"></i> Ventana de mantenimiento</h5>
+            <p class="mb-0">
+                La migración se puede programar para horario de bajo uso, aunque el proceso
+                típico dura <strong>menos de 5 minutos</strong>.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-bell text-info"></i> Notificación al cliente</h5>
+            <p class="mb-0">
+                El sistema puede enviar un aviso previo al administrador del tenant
+                informando de la actualización planificada.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-collection text-success"></i> Actualización por lotes</h5>
+            <p class="mb-0">
+                El panel permite seleccionar múltiples tenants y actualizar en lote,
+                ejecutando el proceso <strong>secuencialmente</strong> para cada uno.
+            </p>
+        </div>
+    </div>
+</div>

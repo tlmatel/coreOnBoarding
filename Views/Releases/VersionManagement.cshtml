@@ -1,0 +1,113 @@
+@{
+    ViewData["Title"] = "Gestión de Versiones";
+}
+
+<h1 class="mb-3">Gestión de <span class="text-primary">Versiones</span></h1>
+<p class="lead">
+    Desde el <strong>Panel de Control</strong> (BackOffice), el equipo de operaciones mantiene un registro
+    de versiones disponibles y controla qué versión está desplegada en cada entorno.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Mantenimiento de versiones</h3>
+<p>
+    El panel incluye una sección de mantenimiento de versiones donde se registran las releases de la plataforma
+    con toda la información necesaria para su despliegue y trazabilidad.
+</p>
+
+<div class="table-responsive">
+    <table class="table table-bordered align-middle">
+        <thead class="table-light">
+            <tr>
+                <th style="width:25%">Campo</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong><i class="bi bi-tag text-primary"></i> Número de versión</strong></td>
+                <td>Identificador de la release (ej: <code>2026.3.0</code>)</td>
+            </tr>
+            <tr>
+                <td><strong><i class="bi bi-circle-fill text-primary"></i> Entorno asignado</strong></td>
+                <td>Blue o Green</td>
+            </tr>
+            <tr>
+                <td><strong><i class="bi bi-flag text-success"></i> Estado</strong></td>
+                <td>
+                    <span class="badge bg-warning text-dark">Preparada</span>
+                    <span class="badge bg-success">Desplegada</span>
+                    <span class="badge bg-secondary">Retirada</span>
+                </td>
+            </tr>
+            <tr>
+                <td><strong><i class="bi bi-calendar-event text-info"></i> Fecha de despliegue</strong></td>
+                <td>Cuándo se desplegó en el entorno</td>
+            </tr>
+            <tr>
+                <td><strong><i class="bi bi-journal-text text-warning"></i> Changelog</strong></td>
+                <td>Resumen de cambios, mejoras y correcciones incluidas</td>
+            </tr>
+            <tr>
+                <td><strong><i class="bi bi-database-gear text-danger"></i> Migraciones de BD</strong></td>
+                <td>Scripts de migración incluidos en esta versión</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Reglas del sistema</h3>
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-check-circle text-success"></i> Dos versiones activas</h5>
+            <p class="mb-0">
+                Las <strong>dos últimas versiones</strong> siempre están desplegadas: una en
+                <span class="badge bg-primary">Blue</span> y otra en
+                <span class="badge bg-success">Green</span>.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-arrow-repeat text-primary"></i> Rotación automática</h5>
+            <p class="mb-0">
+                Cuando se registra una nueva versión, se despliega en el entorno que tiene
+                la versión <strong>más antigua</strong>, liberándolo.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-shield-exclamation text-danger"></i> Protección de retirada</h5>
+            <p class="mb-0">
+                No se puede retirar una versión si aún hay <strong>tenants ejecutándola</strong>.
+                Todos los clientes deben migrar antes.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-bar-chart text-info"></i> Visibilidad completa</h5>
+            <p class="mb-0">
+                El panel muestra en todo momento cuántos tenants hay en cada versión y entorno,
+                y cuáles tienen actualización disponible.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Información disponible en el panel</h3>
+<div class="topic-card p-4">
+    <ul class="mb-0">
+        <li><strong>Estado de entornos</strong> — Qué versión ejecuta Blue y qué versión ejecuta Green</li>
+        <li><strong>Distribución de tenants</strong> — Cuántos tenants hay en cada versión</li>
+        <li><strong>Tenants actualizables</strong> — Qué tenants tienen una versión superior disponible</li>
+        <li><strong>Historial</strong> — Registro cronológico de versiones desplegadas y retiradas</li>
+    </ul>
+</div>

@@ -1,0 +1,126 @@
+@{
+    ViewData["Title"] = "Entornos Blue / Green";
+}
+
+<h1 class="mb-3">Entornos <span class="text-primary">Blue</span> / <span class="text-success">Green</span></h1>
+<p class="lead">
+    Los dos entornos de producción son clusters independientes con su propia infraestructura,
+    configuración y versión desplegada. Ambos están <strong>siempre activos</strong> y sirven tráfico real.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Características de cada entorno</h3>
+<div class="table-responsive">
+    <table class="table table-bordered align-middle">
+        <thead class="table-light">
+            <tr>
+                <th style="width:25%">Aspecto</th>
+                <th><span class="badge bg-primary px-3 py-2">Blue</span></th>
+                <th><span class="badge bg-success px-3 py-2">Green</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Infraestructura</strong></td>
+                <td>Cluster Kubernetes dedicado</td>
+                <td>Cluster Kubernetes dedicado</td>
+            </tr>
+            <tr>
+                <td><strong>Versión</strong></td>
+                <td>Versión N o N+2 (alterno)</td>
+                <td>Versión N+1 o N+3 (alterno)</td>
+            </tr>
+            <tr>
+                <td><strong>Bases de datos</strong></td>
+                <td>Instancias PostgreSQL propias</td>
+                <td>Instancias PostgreSQL propias</td>
+            </tr>
+            <tr>
+                <td><strong>DNS</strong></td>
+                <td><code>*.blue.core.com</code> (interno)</td>
+                <td><code>*.green.core.com</code> (interno)</td>
+            </tr>
+            <tr>
+                <td><strong>Estado</strong></td>
+                <td>Siempre activo</td>
+                <td>Siempre activo</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Ciclo de vida de los entornos</h3>
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="topic-card h-100 p-4">
+            <div class="d-flex align-items-center mb-3">
+                <span class="badge bg-secondary rounded-circle me-2" style="width:28px;height:28px;line-height:28px;text-align:center;">1</span>
+                <h5 class="mb-0">Estado inicial</h5>
+            </div>
+            <p class="mb-0">
+                <span class="badge bg-primary">Blue</span> ejecuta la versión <strong>N</strong> y
+                <span class="badge bg-success">Green</span> ejecuta la versión <strong>N+1</strong>.
+                Ambos entornos sirven clientes simultáneamente.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="topic-card h-100 p-4">
+            <div class="d-flex align-items-center mb-3">
+                <span class="badge bg-secondary rounded-circle me-2" style="width:28px;height:28px;line-height:28px;text-align:center;">2</span>
+                <h5 class="mb-0">Nueva versión (N+2)</h5>
+            </div>
+            <p class="mb-0">
+                Se despliega en <span class="badge bg-primary">Blue</span>, reemplazando la versión N.
+                Los clientes que aún estaban en v.N ya habrán sido migrados previamente a v.N+1.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="topic-card h-100 p-4">
+            <div class="d-flex align-items-center mb-3">
+                <span class="badge bg-secondary rounded-circle me-2" style="width:28px;height:28px;line-height:28px;text-align:center;">3</span>
+                <h5 class="mb-0">Siguiente versión (N+3)</h5>
+            </div>
+            <p class="mb-0">
+                Se despliega en <span class="badge bg-success">Green</span>, reemplazando v.N+1.
+                Los entornos se van alternando cíclicamente con cada nueva release.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Aislamiento entre entornos</h3>
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-diagram-3 text-primary"></i> Kubernetes</h5>
+            <p class="mb-0">
+                Cada entorno tiene su propio cluster de Kubernetes, servicios, ingress y certificados TLS.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-database text-success"></i> Bases de datos</h5>
+            <p class="mb-0">
+                Las BD de los tenants están asociadas al entorno donde se ejecutan.
+                Al migrar un tenant, su BD se mueve o conecta al entorno destino.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-folder2-open text-warning"></i> Almacenamiento</h5>
+            <p class="mb-0">
+                Los buckets de almacenamiento (Gestión Documental) son compartidos
+                entre entornos y no cambian con la versión.
+            </p>
+        </div>
+    </div>
+</div>

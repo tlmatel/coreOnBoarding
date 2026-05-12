@@ -1,0 +1,139 @@
+@{
+    ViewData["Title"] = "Despliegue y Versiones";
+}
+
+<h1 class="mb-3">Despliegue y <span class="text-primary">Versiones</span></h1>
+<p class="lead">
+    Core OnBoarding utiliza una estrategia de despliegue <strong>Blue / Green</strong> con dos entornos
+    de producción permanentes que alojan versiones alternas de la plataforma, garantizando actualizaciones
+    sin downtime y rollback inmediato.
+</p>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Principios del modelo</h3>
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-toggles text-primary"></i> Dos entornos de producción</h5>
+            <p class="mb-0">
+                Blue y Green funcionan simultáneamente, cada uno con una versión distinta
+                de la plataforma. Siempre están activos y operativos.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-arrow-left-right text-success"></i> Versiones alternas</h5>
+            <p class="mb-0">
+                Las dos últimas versiones publicadas siempre están desplegadas:
+                una en Blue y otra en Green.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-sliders text-warning"></i> Actualización controlada</h5>
+            <p class="mb-0">
+                Cada cliente decide cuándo migrar a la siguiente versión desde
+                el Panel de Control de BackOffice.
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="topic-card h-100 p-4">
+            <h5><i class="bi bi-lightning-charge text-danger"></i> Zero downtime</h5>
+            <p class="mb-0">
+                La actualización es un cambio de DNS + migración de BD.
+                El entorno destino ya está en marcha; sin parada de servicio.
+            </p>
+        </div>
+    </div>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Flujo general</h3>
+<div class="topic-card p-4">
+    <pre class="mb-0" style="font-size: 0.9rem; line-height: 1.6;"><code>Versión N   → desplegada en Blue
+Versión N+1 → desplegada en Green
+
+Cliente en v.N (Blue) → actualiza → migra BD + DNS → pasa a v.N+1 (Green)
+
+Cuando llega v.N+2:
+  • Se despliega en Blue (reemplazando v.N)
+  • Green sigue con v.N+1
+  • Los clientes en v.N+1 pueden actualizar a v.N+2</code></pre>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Ventajas del modelo</h3>
+<div class="table-responsive">
+    <table class="table table-bordered align-middle">
+        <thead class="table-light">
+            <tr>
+                <th style="width:30%">Ventaja</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong><i class="bi bi-lightning-charge text-success"></i> Zero downtime</strong></td>
+                <td>El entorno destino ya está en marcha; el cliente solo cambia de destino</td>
+            </tr>
+            <tr>
+                <td><strong><i class="bi bi-arrow-counterclockwise text-primary"></i> Rollback inmediato</strong></td>
+                <td>Si algo falla, basta con revertir el DNS al entorno anterior</td>
+            </tr>
+            <tr>
+                <td><strong><i class="bi bi-people text-warning"></i> Coexistencia</strong></td>
+                <td>Clientes en distintas versiones conviven sin conflicto</td>
+            </tr>
+            <tr>
+                <td><strong><i class="bi bi-check2-circle text-success"></i> Validación previa</strong></td>
+                <td>El nuevo entorno se puede verificar antes de mover clientes</td>
+            </tr>
+            <tr>
+                <td><strong><i class="bi bi-gear text-secondary"></i> Simplicidad operativa</strong></td>
+                <td>Solo dos entornos fijos; no se crean ni destruyen dinámicamente</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr class="my-4">
+
+<h3 class="mb-3">Secciones</h3>
+<div class="row g-4 mt-2">
+    <div class="col-md-4">
+        <div class="topic-card h-100">
+            <h5><i class="bi bi-circle-fill text-primary"></i><i class="bi bi-circle-fill text-success ms-1"></i> Entornos Blue / Green</h5>
+            <p>
+                Detalle de los dos entornos de producción: infraestructura, ciclo de vida
+                y aislamiento entre entornos.
+            </p>
+            <a asp-action="Environments" class="btn btn-sm btn-outline-primary">Ver más →</a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="topic-card h-100">
+            <h5><i class="bi bi-tags text-primary"></i> Gestión de versiones</h5>
+            <p>
+                Mantenimiento de versiones desde el Panel de Control: registro, despliegue
+                y control de qué versión ejecuta cada entorno.
+            </p>
+            <a asp-action="VersionManagement" class="btn btn-sm btn-outline-primary">Ver más →</a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="topic-card h-100">
+            <h5><i class="bi bi-arrow-up-circle text-primary"></i> Proceso de actualización</h5>
+            <p>
+                Cómo se actualiza un cliente: validación, migración de BD, cambio de DNS
+                y verificación post-migración.
+            </p>
+            <a asp-action="UpdateProcess" class="btn btn-sm btn-outline-primary">Ver más →</a>
+        </div>
+    </div>
+</div>
