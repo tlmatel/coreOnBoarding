@@ -59,24 +59,28 @@
                         <i class="bi bi-people text-primary"></i> Usuarios
                     </label>
                     <input type="number" class="form-control" id="inputUsers" value="100" min="1">
+                    <div class="form-text">Número de usuarios con licencia activa del cliente. Determina el coste y precio del software.</div>
                 </div>
                 <div class="col-sm-6">
                     <label class="form-label fw-semibold">
                         <i class="bi bi-database text-primary"></i> Disco BD (GB)
                     </label>
                     <input type="number" class="form-control" id="inputDisk" value="100" min="1">
+                    <div class="form-text">Espacio en disco de la base de datos Cloud SQL (PostgreSQL). Se factura por tramos de 10 GB.</div>
                 </div>
                 <div class="col-sm-6">
                     <label class="form-label fw-semibold">
                         <i class="bi bi-arrow-repeat text-primary"></i> Copias de backup
                     </label>
                     <input type="number" class="form-control" id="inputBackups" value="3" min="0">
+                    <div class="form-text">Número de copias de seguridad completas retenidas. Cada copia añade coste proporcional al tamaño del disco.</div>
                 </div>
                 <div class="col-sm-6">
                     <label class="form-label fw-semibold">
                         <i class="bi bi-folder2-open text-primary"></i> Bucket (GB)
                     </label>
                     <input type="number" class="form-control" id="inputBucket" value="200" min="0">
+                    <div class="form-text">Almacenamiento de ficheros en Cloud Storage (documentos, imágenes, adjuntos del cliente).</div>
                 </div>
             </div>
         </div>
@@ -92,10 +96,12 @@
                 <div class="col-sm-6">
                     <label class="form-label fw-semibold">Coste por usuario/mes (€)</label>
                     <input type="number" class="form-control" id="inputSoftwareCost" value="3" min="0" step="0.5">
+                    <div class="form-text">Coste interno de licencia de software que Telematel paga por cada usuario activo al mes.</div>
                 </div>
                 <div class="col-sm-6">
                     <label class="form-label fw-semibold">Precio cliente por usuario/mes (€)</label>
                     <input type="number" class="form-control" id="inputSoftwarePrice" value="50" min="0" step="1">
+                    <div class="form-text">Precio que se cobra al cliente final por cada usuario al mes (PVP).</div>
                 </div>
             </div>
         </div>
@@ -107,14 +113,17 @@
                 <div class="col-sm-4">
                     <label class="form-label fw-semibold">% Instancia BD</label>
                     <input type="number" class="form-control" id="inputDbPercent" value="10" min="1" max="100">
+                    <div class="form-text">Porcentaje de la instancia Cloud SQL compartida que se asigna a este cliente (de 953,85 €/mes total).</div>
                 </div>
                 <div class="col-sm-4">
                     <label class="form-label fw-semibold">Margen disco (%)</label>
                     <input type="number" class="form-control" id="inputMarginDisk" value="75" min="0" max="500">
+                    <div class="form-text">Margen comercial aplicado sobre el coste del disco para obtener el precio de venta (solo Modelo 2).</div>
                 </div>
                 <div class="col-sm-4">
                     <label class="form-label fw-semibold">Margen bucket (%)</label>
                     <input type="number" class="form-control" id="inputMarginBucket" value="75" min="0" max="500">
+                    <div class="form-text">Margen comercial aplicado sobre el coste del bucket para obtener el precio de venta (solo Modelo 2).</div>
                 </div>
             </div>
         </div>
